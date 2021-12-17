@@ -1,0 +1,16 @@
+{% macro category(page) %}
+    {% for term in page.taxonomies['category'] %}
+        <a href="{{ get_taxonomy_url(kind='category', name=term) }}">
+            {{- term -}}
+        </a>
+    {%- endfor %}
+{%- endmacro category %}
+
+
+{% macro tags(page) %}
+    {% for term in page.taxonomies['tags'] %}
+        <a href="{{ get_taxonomy_url(kind='tags', name=term) }}" rel="tag">{{ term }}</a>{% if loop.last %}{% else %}, {% endif %}
+    {%endfor%}
+{% endmacro category %}
+
+

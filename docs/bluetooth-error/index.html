@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon"  href="https://wonkodv.github.io/favicon.png">
+        <link rel="stylesheet" type="text/css" href="https://wonkodv.github.io/style.css">
+        
+        <link rel="canonical" type="text/css" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;bluetooth-error&#x2F;">
+        
+
+        
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://wonkodv.github.io/atom.xml">
+        
+
+        
+    <title> Fixing the Bluetooth Error `br-connection-unknown` - Zettelkasten</title>
+    <link rel="prev" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;presenting-with-vim&#x2F;" />
+    <link rel="next" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;video-on-performance&#x2F;" />
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Fixing the Bluetooth Error `br-connection-unknown`",
+        "alternativeHeadline": "Fix `Failed to connect: org.bluez.Error.Failed br-connection-unknown` by pairing again",
+        
+        "datePublished": "2021-12-14",
+        
+
+        "keywords": [
+        
+            "Bluetooth"
+        
+        ],
+        "articleSection": "Using Unix"
+    }
+    </script>
+
+    <meta property="og:title" content="Fixing the Bluetooth Error `br-connection-unknown`">
+    <meta property="og:site_name" content="Zettelkasten">
+    <meta property="og:url" content="https://wonkodv.github.io/bluetooth-error/">
+    <meta name="description" content="Fix `Failed to connect: org.bluez.Error.Failed br-connection-unknown` by pairing again">
+    <meta name="og:description" content="Fix `Failed to connect: org.bluez.Error.Failed br-connection-unknown` by pairing again">
+
+        
+    </head>
+
+    <body>
+        
+        <header>
+            <div class="big"><a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;" title="Home">Zettelkasten</a></div>
+            Wonko&#x27;s collection of notes
+            <nav>
+                <a href="https://wonkodv.github.io/first/">About</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;category&#x2F;">Categories</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;tags&#x2F;">Tags</a>
+
+                
+                
+            </nav>
+
+        </header>
+        
+
+        <main>
+            
+
+<article>
+
+    <p class="date">
+    Posted on <time datetime="2021-12-14T00:00:00+00:00">2021-12-14</time>
+    in 
+    
+        <a href="https://wonkodv.github.io/category/using-unix/">Using Unix</a>,
+    tagged with 
+    
+        <a href="https://wonkodv.github.io/tags/bluetooth/" rel="tag">Bluetooth</a>
+    
+
+    
+    </p>
+
+    <h1 id="fixing-the-bluetooth-error-br-connection-unknown">Fixing the Bluetooth Error <code>br-connection-unknown</code></h1>
+<h2 id="the-problem">The Problem</h2>
+<p>After not using a bluetooth headset for some time, I got the following error
+when I tried to connect it to my computer:</p>
+<pre style="background-color:#fdf6e3;color:#657b83;"><code><span>Failed to connect: org.bluez.Error.Failed br-connection-unknown
+</span></code></pre>
+<p>I used the following commands in <code>bluetoothctl</code>:</p>
+<pre style="background-color:#fdf6e3;color:#657b83;"><code><span>[bluetooth]# power on
+</span><span>[CHG] Controller XX:XX:XX:XX:XX:XX Class: 0x00XXXXXX
+</span><span>Changing power on succeeded
+</span><span>[CHG] Controller XX:XX:XX:XX:XX:XX Powered: yes
+</span><span>[bluetooth]# connect YY:YY:YY:YY:YY:YY
+</span><span>Attempting to connect to YY:YY:YY:YY:YY:YY
+</span><span>[CHG] Device YY:YY:YY:YY:YY:YY Connected: yes
+</span><span>Failed to connect: org.bluez.Error.Failed br-connection-unknown
+</span><span>[CHG] Device YY:YY:YY:YY:YY:YY Connected: no
+</span></code></pre>
+<h2 id="the-solution">The Solution</h2>
+<p>Searching the net gave no quick solution,
+but after playing around with it a bit,
+I tried to unpair and pair again,
+which solved the problem:</p>
+<pre style="background-color:#fdf6e3;color:#657b83;"><code><mark style="background-color:#3f3d3812;"><span>[bluetooth]# remove YY:YY:YY:YY:YY:YY
+</span></mark><span>[DEL] Device YY:YY:YY:YY:YY:YY btheadphone
+</span><span>Device has been removed
+</span><span>[NEW] Device YY:YY:YY:YY:YY:YY WH-CH510
+</span><mark style="background-color:#3f3d3812;"><span>[bluetooth]# pair YY:YY:YY:YY:YY:YY
+</span></mark><span>Attempting to pair with YY:YY:YY:YY:YY:YY
+</span><span>[CHG] Device YY:YY:YY:YY:YY:YY Connected: yes
+</span><span>[CHG] ...
+</span><span>[CHG] Device YY:YY:YY:YY:YY:YY ServicesResolved: yes
+</span><span>[CHG] Device YY:YY:YY:YY:YY:YY Paired: yes
+</span><span>Pairing successful
+</span><span>[CHG] Device YY:YY:YY:YY:YY:YY ServicesResolved: no
+</span><span>[CHG] Device YY:YY:YY:YY:YY:YY Connected: no
+</span><mark style="background-color:#3f3d3812;"><span>[bluetooth]# connect YY:YY:YY:YY:YY:YY
+</span></mark><span>Attempting to connect to YY:YY:YY:YY:YY:YY
+</span><span>[CHG] Device YY:YY:YY:YY:YY:YY Connected: yes
+</span><span>Connection successful
+</span></code></pre>
+<p>I then remembered, that I had used the headphone last on a different machine,
+from which I copied the entire home folder over to the current one.</p>
+<p>I imagine the problem was the following:</p>
+<p>Bluetooth uses some encryption with keys derived from secrets,
+exchanged while pairing, and the mac addresses of both devices.
+Since I changed computer, my MAC changed,
+but I copied my entire home folder to the new machine,
+so <code>bluetoothctl</code> used a cached intermediate key that was only valid on the old computer.
+When both devices use different crypto keys they can not understand each other.
+In such cases it is hard for the tool to give a more helpful error message than &quot;doesn't work&quot;.
+If this explanation is wrong, please point me at the right resources to read up on it,
+I kind of stopped digging when things worked again.</p>
+
+
+</article>
+
+        </main>
+
+        
+        <footer>
+            <nav>
+                
+    <a style="float:left;" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;presenting-with-vim&#x2F;" rel="prev"> Older Post</a>
+
+    <a style="float:right;" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;video-on-performance&#x2F;" rel="next"> Newer Post</a>
+
+
+                <a href="https://github.com/wonkodv">Github</a>
+                    &middot;
+                
+                <a href="https://github.com/wonkodv/wonkodv.github.io/blob/main/content/bluetooth_error.md">Source</a> /
+                <a href="https://github.com/wonkodv/wonkodv.github.io/edit/main/content/bluetooth_error.md">Change</a>
+                    &middot;
+                    <a href="https://github.com/wonkodv/wonkodv.github.io/discussions/new?category=general&title=About%20%22Fixing%20the%20Bluetooth%20Error%20%60br-connection-unknown%60%22&body=%0A%0A%0A%0A%0A%3C%21--%20please%20keep%20this%20footer%20--%3E%0A-----%0ALink%20to%20Post%0a%3Chttps%3A&#x2F;&#x2F;wonkodv.github.io&#x2F;bluetooth-error&#x2F;%3E">Discuss</a>
+                
+            </nav>
+        </footer>
+        
+    </body>
+</html>
+

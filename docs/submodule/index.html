@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon"  href="https://wonkodv.github.io/favicon.png">
+        <link rel="stylesheet" type="text/css" href="https://wonkodv.github.io/style.css">
+        
+        <link rel="canonical" type="text/css" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;submodule&#x2F;">
+        
+
+        
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://wonkodv.github.io/atom.xml">
+        
+
+        
+    <title> Submodules in Git - Zettelkasten</title>
+    <link rel="prev" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;git-extract-submodule&#x2F;" />
+    <link rel="next" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;shell-scripts&#x2F;" />
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Submodules in Git",
+        "alternativeHeadline": "When to use submodules in git",
+        
+        "datePublished": "2021-01-05",
+        
+
+        "keywords": [
+        
+            "Git"
+        
+        ],
+        "articleSection": "Programming"
+    }
+    </script>
+
+    <meta property="og:title" content="Submodules in Git">
+    <meta property="og:site_name" content="Zettelkasten">
+    <meta property="og:url" content="https://wonkodv.github.io/submodule/">
+    <meta name="description" content="When to use submodules in git">
+    <meta name="og:description" content="When to use submodules in git">
+
+        
+    </head>
+
+    <body>
+        
+        <header>
+            <div class="big"><a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;" title="Home">Zettelkasten</a></div>
+            Wonko&#x27;s collection of notes
+            <nav>
+                <a href="https://wonkodv.github.io/first/">About</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;category&#x2F;">Categories</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;tags&#x2F;">Tags</a>
+
+                
+                
+            </nav>
+
+        </header>
+        
+
+        <main>
+            
+
+<article>
+
+    <p class="date">
+    Posted on <time datetime="2021-01-05T00:00:00+00:00">2021-01-05</time>
+    in 
+    
+        <a href="https://wonkodv.github.io/category/programming/">Programming</a>,
+    tagged with 
+    
+        <a href="https://wonkodv.github.io/tags/git/" rel="tag">Git</a>
+    
+
+    
+    </p>
+
+    <h1 id="should-you-use-submodules-in-git">Should you use submodules in Git?</h1>
+<p>When starting a larger project, there is the question of how to partition code and if submodules could help.
+With git, you can either put all your code in one repository or use submodules.</p>
+<h2 id="benefits-of-a-single-repository">Benefits of a single repository</h2>
+<ul>
+<li>Simple</li>
+<li>Basic git knowledge suffices for the developers</li>
+<li>related commits to different components can be tracked under 1 feature branch and pull request</li>
+<li>Tools work faster if they do not have to recourse through submodules</li>
+</ul>
+<h2 id="benefits-of-submodules">Benefits of Submodules</h2>
+<ul>
+<li>Keep unrelated commits out of a component's repository.
+Git resolves conflicts very well, but a merge without conflicts can still break the repository. That is why <code>git merge</code> prepares a commit for you whenever the merge is not linear (fast forwardable). For example
+<ul>
+<li>A removes an &quot;unused&quot; function from <code>util</code></li>
+<li>B starts to use that function in <code>app</code></li>
+</ul>
+</li>
+<li>Reusing a component is as simple as including the components repository as submodule in another project. The entire history will be there, bugs fixed in that new project will be fixed for all uses of that component.</li>
+<li>Each repository is very small, which makes working with the repository faster. (But work on the entire project of multiple submodules becomes slower)</li>
+<li>Enforces good architecture</li>
+</ul>
+<h2 id="requirements-to-use-submodules">Requirements to use submodules</h2>
+<p>Using submodules will work well for:</p>
+<ul>
+<li>
+<p>Third Party code</p>
+</li>
+<li>
+<p>Non Code (Requirements documentation, test logs, build tools, ...)</p>
+</li>
+<li>
+<p>well encapsulated components which:</p>
+<ul>
+<li>deal with 1 well defined responsibility</li>
+<li>contain documentation: a README.md file which tells what this submodule represents,
+how the file tree is structured, <strong>How to build it</strong>, external dependencies,  ...</li>
+<li>contain tests: The tests serve both as verification to create trust in the component as well as the most precise documentation by giving functional examples which are never out of date / unmaintained.</li>
+<li>have a clear interface towards:
+<ul>
+<li>Software: A set of well documented functions that are usable by dependant code.</li>
+<li>Tooling: A configuration for the build/bundle tool (<code>Makefile</code>, <code>CMakeLists.txt</code>, <code>setup.py</code>, ...)</li>
+</ul>
+</li>
+</ul>
+<p>All of these can be expected of a well designed software component anyway.</p>
+</li>
+<li>
+<p>Changes to multiple submodules must be rare.</p>
+<ul>
+<li>Touching 2 submodules will happen, when new functionality is added to a library L and later used by a dependant library or application D. When functionality is added, new L is a drop in replacement for old L.</li>
+</ul>
+</li>
+<li>
+<p>Is released in versions. When the submodule changes, the commit message should
+be <code>Bump BSP to v2.3.9</code> instead of <code>use newest BSP</code>.</p>
+</li>
+</ul>
+<h2 id="indicators-when-not-to-use-submodules">Indicators when not to use submodules</h2>
+<ul>
+<li>your architecture will likely change</li>
+<li>your project is not that large</li>
+<li>The components are not that useful outside of that project.</li>
+<li>The code of the submodule can not be compiled into a library easily.</li>
+</ul>
+<h2 id="so">So . . .</h2>
+<p>It must be mentioned, that the Linux kernel developers created <code>git</code> based on
+their experience creating the kernel and they do not use submodules. They manage
+twenty different architectures and hundreds of drivers and modules in one
+single repository. But then,
+the kernel is a very different kind of project, compared with whatever you are
+planning.</p>
+<p>If the use of submodules seems to create extra work this can be viewed to some
+extend as effort that would be needed later, when untangling a component for
+reuse in a different project.
+If your pull requests in one repository stall because of other pull requests in
+other repositories, those two components should probably be developed in the
+same repository (for a while?).</p>
+<p>My recommendation is to start with 1 repository and whenever a component appears
+as a good submodule candidate, <a href="https://wonkodv.github.io/git-extract-submodule/">extract it into one</a>.</p>
+
+
+</article>
+
+        </main>
+
+        
+        <footer>
+            <nav>
+                
+    <a style="float:left;" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;git-extract-submodule&#x2F;" rel="prev"> Older Post</a>
+
+    <a style="float:right;" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;shell-scripts&#x2F;" rel="next"> Newer Post</a>
+
+
+                <a href="https://github.com/wonkodv">Github</a>
+                    &middot;
+                
+                <a href="https://github.com/wonkodv/wonkodv.github.io/blob/main/content/submodule.md">Source</a> /
+                <a href="https://github.com/wonkodv/wonkodv.github.io/edit/main/content/submodule.md">Change</a>
+                    &middot;
+                    <a href="https://github.com/wonkodv/wonkodv.github.io/discussions/new?category=general&title=About%20%22Submodules%20in%20Git%22&body=%0A%0A%0A%0A%0A%3C%21--%20please%20keep%20this%20footer%20--%3E%0A-----%0ALink%20to%20Post%0a%3Chttps%3A&#x2F;&#x2F;wonkodv.github.io&#x2F;submodule&#x2F;%3E">Discuss</a>
+                
+            </nav>
+        </footer>
+        
+    </body>
+</html>
+

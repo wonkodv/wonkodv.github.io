@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon"  href="https://wonkodv.github.io/favicon.png">
+        <link rel="stylesheet" type="text/css" href="https://wonkodv.github.io/style.css">
+        
+        <link rel="canonical" type="text/css" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;zola-shortcode-factorio&#x2F;">
+        
+
+        
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://wonkodv.github.io/atom.xml">
+        
+
+        
+    <title> A Short Code for Factorio Rich Text in Zola - Zettelkasten</title>
+    <link rel="prev" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;factorio&#x2F;automate-personal-transport-with-handy-car&#x2F;" />
+    <link rel="next" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;videos-of-a-youtube-channel&#x2F;" />
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "A Short Code for Factorio Rich Text in Zola",
+        "alternativeHeadline": "Adding a shortcode that shows in-game rich text in my blog",
+        
+        "datePublished": "2022-01-04",
+        
+
+        "keywords": [
+        
+            "Factorio",  
+        
+            "Rust",  
+        
+            "Zola",  
+        
+            "Tera"
+        
+        ],
+        "articleSection": "Programming"
+    }
+    </script>
+
+    <meta property="og:title" content="A Short Code for Factorio Rich Text in Zola">
+    <meta property="og:site_name" content="Zettelkasten">
+    <meta property="og:url" content="https://wonkodv.github.io/zola-shortcode-factorio/">
+    <meta name="description" content="Adding a shortcode that shows in-game rich text in my blog">
+    <meta name="og:description" content="Adding a shortcode that shows in-game rich text in my blog">
+
+        
+    </head>
+
+    <body>
+        
+        <header>
+            <div class="big"><a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;" title="Home">Zettelkasten</a></div>
+            Wonko&#x27;s collection of notes
+            <nav>
+                <a href="https://wonkodv.github.io/first/">About</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;category&#x2F;">Categories</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;tags&#x2F;">Tags</a>
+
+                
+                
+            </nav>
+
+        </header>
+        
+
+        <main>
+            
+
+<article>
+
+    <p class="date">
+    Posted on <time datetime="2022-01-04T00:00:00+00:00">2022-01-04</time>
+    in 
+    
+        <a href="https://wonkodv.github.io/category/programming/">Programming</a>,
+    tagged with 
+    
+        <a href="https://wonkodv.github.io/tags/factorio/" rel="tag">Factorio</a>, 
+    
+        <a href="https://wonkodv.github.io/tags/rust/" rel="tag">Rust</a>, 
+    
+        <a href="https://wonkodv.github.io/tags/zola/" rel="tag">Zola</a>, 
+    
+        <a href="https://wonkodv.github.io/tags/tera/" rel="tag">Tera</a>
+    
+
+    
+    </p>
+
+    <h1 id="a-short-code-for-factorio-rich-text-in-zola">A Short Code for Factorio Rich Text in Zola</h1>
+<p>Yesterday I wanted to write a <a href="https://wonkodv.github.io/factorio/automate-personal-transport-with-handy-car/">quick post</a> about a neat little blueprint I made in factorio.</p>
+<p>I typed it out, took some screenshots, and decided that I should just polish it
+a little and put it online. 
+Factorio has Rich Text which turns <code>[item=iron-plate]</code> into
+<span style="background-color: #444344; color: #f1f1f1; padding:0.2rem 0.5rem;" title="[item=iron-plate]"><img 
+            src='/factorio/transparent.gif'
+            style='
+                background-image:url(&quot;/factorio/iron-plate.png&quot;);
+                background-position: -95px 2px;
+                height:1.3em;
+                width:1em;
+                margin:-4px 0;
+                '
+            alt='[item=iron-plate]'></span>
+. I thought I'd add a little
+<a rel="noopener" target="_blank" href="https://www.getzola.org/documentation/content/shortcodes/">short code</a> and
+continue playing.</p>
+<p>At the start of every little project is a thought like</p>
+<blockquote>
+<p>That shouldn't take any time at all.<br />
+It's just a little Regex to replace <code>[X=Y]</code>
+with <code>&lt;img src=&quot;factorio.com/images/X/Y.png&quot;&gt;</code></p>
+</blockquote>
+<p>And I wasn't entirely wrong.</p>
+<h2 id="adding-regex-to-zola">Adding Regex to Zola</h2>
+<p><a rel="noopener" target="_blank" href="https://www.getzola.org/">Zola</a>
+uses
+<a rel="noopener" target="_blank" href="https://tera.netlify.app/">Tera</a> as template engine,
+and Tera does not have a regex-replace.
+Zola didn't add one either.
+But it's open source and I know a little rust so this should be easy right?</p>
+<p>I modified Zola a little to have a <code>regex_replace</code> filter.
+This is registered with <code>tera.register_filter</code> in <code>tpls.rs</code> (that name tho).</p>
+<p>After maybe an hour, I could use <code>regex_replace</code> in Zola templates (and thereby shortcodes). (Could have been closer to 2 hours?).
+It's useful enough that I thought it might even be added to Zola.</p>
+<h2 id="writing-the-short-code">Writing the Short Code</h2>
+<p>10 minutes later I had the short code working using a regex that replaced the
+rich text elements with <code>&lt;img&gt;</code> tags that did not resolve yet, everything else
+was good.</p>
+<pre data-lang="jinja" style="background-color:#fdf6e3;color:#657b83;" class="language-jinja "><code class="language-jinja" data-lang="jinja"><span>&lt;span style=&quot;background-color: #444344; color: #f1f1f1;&quot; title=&quot;{{ </span><span style="color:#268bd2;">body </span><span>}}&quot;&gt;
+</span><span>    {{- </span><span style="color:#268bd2;">body </span><span>| </span><span style="color:#268bd2;">escape </span><span>| </span><span style="color:#268bd2;">regex_replace</span><span>(
+</span><span>        </span><span style="color:#268bd2;">pattern</span><span>=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">\[(?P&lt;type&gt;[^\]=]+)=(?P&lt;name&gt;[^\]=]+)]</span><span style="color:#839496;">&quot;</span><span>,
+</span><span>        </span><span style="color:#268bd2;">replace</span><span>=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">&lt;img src=&#39;example.com/factorio/$1/$2.png&#39; alt=&#39;$0&#39;&gt;</span><span style="color:#839496;">&quot;
+</span><span>    ) | </span><span style="color:#268bd2;">safe </span><span>-}}
+</span><span>&lt;/span&gt;
+</span></code></pre>
+<p>The entire text is put into a span with dark background and the unmodified text
+as title.</p>
+<p>The Regex does:</p>
+<ul>
+<li>Match <code>[</code></li>
+<li>Capture Group with name <code>type</code>
+<ul>
+<li>Match 1 or more characters that are not <code>]</code> or <code>=</code></li>
+</ul>
+</li>
+<li>Match <code>=</code></li>
+<li>Capture Group with name <code>name</code>
+<ul>
+<li>Match 1 or more characters that are not <code>]</code></li>
+</ul>
+</li>
+<li>Match <code>]</code></li>
+</ul>
+<h2 id="finding-the-icons">Finding the Icons</h2>
+<p>Ok. Hard part done, now to the easy part.
+Finding a URL that hosts <code>/item/iron-ore.png</code> should be easy cause there is
+this great wiki and 100 fan sites, blueprint editors, ...</p>
+<p>Spoiler: finding icons is hard, you can skip this section.</p>
+<p>No, nothing is ever easy. I Closed the game and browsed through all the factorio
+links I keep around.</p>
+<p>The wiki does this media wiki thing of using capitalized names and have a
+<a rel="noopener" target="_blank" href="https://wiki.factorio.com/Template:Icon/doc">wiki-syntax template</a>
+to deal with it.
+(It has 467 characters, 186 of which are <code>! &quot; # . / : ; &lt; = &gt; [ ] { | }</code>)</p>
+<p>The blueprint editor I looked at does some canvas magic and
+the resources are hidden in some javascript thing.</p>
+<p>2 fan sites have the image base64 encoded in a css style sheet.</p>
+<p>There is <a rel="noopener" target="_blank" href="https://www.factorioiconselect.com/">factorioiconselect.com</a> that has
+sane URLs but they made up there own schema (steam is in <code>fluid/misc/steam.png</code>)
+and don't have the character icon.</p>
+<p><a rel="noopener" target="_blank" href="https://factoriolab.github.io/">Factorio Lab</a> has all the icons in one png:
+
+
+
+    
+
+
+
+    
+
+
+
+
+
+<center>
+
+
+
+    
+    
+
+<a href="zola-shortcode-factorio&#x2F;sprites.png" target="_blank"><img width="400" height="375" src="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;processed_images&#x2F;c297a447c7baf37e00.png" alt="all icons in one file" title="all icons in one file"></a>
+
+</center>
+
+</p>
+<p>It is worth mentioning at this point, that templates in Zola/Tera have some scripting
+support but not a full programming languages like python or lua with a huge string
+manipulation library (because those projects do NOT WANT one).
+Templates are supposed to be templates not programs.</p>
+<p>I realized I probably have all the files on my local machine anyway, most likely
+even with good file names because why would the devs make their own life harder?</p>
+<p>I did the easy thing and put a symlink to the graphics directory of my factorio
+install (<code>/base/graphics/icons/</code>) into the blog's static directory.
+There is an <code>icons/</code> directory with all the items and fluids.</p>
+<p>Feeling good, I spent an hour writing a first draft of this post.</p>
+<p>Going back to the rich text short code I realized <code>character.png</code> was missing
+(for when you have  <code>[entity=character]</code>).
+That is <strong>the only one</strong> which I wanted to use in the post I was actually trying to write.
+I did find <code>entity/bigass-explosion/</code> which made me smile but did not help.</p>
+<p>I later found the character icon in <code>/core/graphics/icons/entity/</code> (core not base).</p>
+<p>Placing the symlink to graphics in <code>static</code> ensures that all graphics end up in
+my public directory, so I removed the symlink and only copied the images I need.</p>
+<p>I then noticed, that those &quot;icons&quot; are not icons as I understand them, but icons as a game
+engine understands them. 4 images of different resolution inside the same png.
+But, I can use the trick with css <code>background-position</code> I picked up on the way
+and make an <code>&lt;img&gt;</code> with a transparent pixel as <code>src</code> and the &quot;icon&quot; as
+background, using a constant offset. It somehow worked out that the second
+resolution fits nicely in my line.
+As soon as I change anything about the line size this will probably break and
+future me will have to write a script that crops the image instead and places
+<em>normal</em> icons in my static folder.</p>
+<h2 id="the-final-short-code">The Final Short Code</h2>
+<p><code>templates/shortcodes/factorio_string.html</code> now looks like this:</p>
+<pre data-lang="jinja" style="background-color:#fdf6e3;color:#657b83;" class="language-jinja "><code class="language-jinja" data-lang="jinja"><span>&lt;span style=&quot;background-color: #444344; color: #f1f1f1; padding-x:0 2px;&quot; title=&quot;{{ </span><span style="color:#268bd2;">body </span><span>}}&quot;&gt;
+</span><span>    {{- </span><span style="color:#268bd2;">body </span><span>| </span><span style="color:#268bd2;">escape </span><span>| </span><span style="color:#268bd2;">regex_replace</span><span>(
+</span><span>        </span><span style="color:#268bd2;">pattern</span><span>=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">\[(?P&lt;type&gt;[^\]=]+)=(?P&lt;name&gt;[^\]=]+)]</span><span style="color:#839496;">&quot;</span><span>,
+</span><span>        </span><span style="color:#268bd2;">replace</span><span>=</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">&lt;img
+</span><span style="color:#2aa198;">            src=&#39;/factorio/transparent.gif&#39;
+</span><span style="color:#2aa198;">            style=&#39;
+</span><span style="color:#2aa198;">                background-image:url(&amp;quot;/factorio/${name}.png&amp;quot;);
+</span><span style="color:#2aa198;">                background-position: -95px 2px;
+</span><span style="color:#2aa198;">                height:1.3em;
+</span><span style="color:#2aa198;">                width:1em;
+</span><span style="color:#2aa198;">                margin:-4px 0;&#39;
+</span><span style="color:#2aa198;">            alt=&#39;$0&#39;&gt;</span><span style="color:#839496;">&quot;
+</span><span>    ) | </span><span style="color:#268bd2;">safe </span><span>-}}
+</span><span>&lt;/span&gt;
+</span></code></pre>
+
+
+</article>
+
+        </main>
+
+        
+        <footer>
+            <nav>
+                
+    <a style="float:left;" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;factorio&#x2F;automate-personal-transport-with-handy-car&#x2F;" rel="prev"> Older Post</a>
+
+    <a style="float:right;" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;videos-of-a-youtube-channel&#x2F;" rel="next"> Newer Post</a>
+
+
+                <a href="https://github.com/wonkodv">Github</a>
+                    &middot;
+                
+                <a href="https://github.com/wonkodv/wonkodv.github.io/blob/main/content/zola-shortcode-factorio.md">Source</a> /
+                <a href="https://github.com/wonkodv/wonkodv.github.io/edit/main/content/zola-shortcode-factorio.md">Change</a>
+                    &middot;
+                    <a href="https://github.com/wonkodv/wonkodv.github.io/discussions/new?category=general&title=About%20%22A%20Short%20Code%20for%20Factorio%20Rich%20Text%20in%20Zola%22&body=%0A%0A%0A%0A%0A%3C%21--%20please%20keep%20this%20footer%20--%3E%0A-----%0ALink%20to%20Post%0a%3Chttps%3A&#x2F;&#x2F;wonkodv.github.io&#x2F;zola-shortcode-factorio&#x2F;%3E">Discuss</a>
+                
+            </nav>
+        </footer>
+        
+    </body>
+</html>
+

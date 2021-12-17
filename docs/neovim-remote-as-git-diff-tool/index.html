@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon"  href="https://wonkodv.github.io/favicon.png">
+        <link rel="stylesheet" type="text/css" href="https://wonkodv.github.io/style.css">
+        
+        <link rel="canonical" type="text/css" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;neovim-remote-as-git-diff-tool&#x2F;">
+        
+
+        
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://wonkodv.github.io/atom.xml">
+        
+
+        
+    <title> NeoVim Remote as git diff tool - Zettelkasten</title>
+    <link rel="prev" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;zola-pre-push-hook&#x2F;" />
+    <link rel="next" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;gta-vc-radio-stations-converter&#x2F;" />
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "NeoVim Remote as git diff tool",
+        "alternativeHeadline": "use `neovim-remote` as git diff tool, for using git in nvim&#x27;s `:terminal`",
+        
+        "datePublished": "2022-11-21",
+        
+
+        "keywords": [
+        
+            "git",  
+        
+            "vim"
+        
+        ],
+        "articleSection": "Using Unix"
+    }
+    </script>
+
+    <meta property="og:title" content="NeoVim Remote as git diff tool">
+    <meta property="og:site_name" content="Zettelkasten">
+    <meta property="og:url" content="https://wonkodv.github.io/neovim-remote-as-git-diff-tool/">
+    <meta name="description" content="use `neovim-remote` as git diff tool, for using git in nvim&#x27;s `:terminal`">
+    <meta name="og:description" content="use `neovim-remote` as git diff tool, for using git in nvim&#x27;s `:terminal`">
+
+        
+    </head>
+
+    <body>
+        
+        <header>
+            <div class="big"><a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;" title="Home">Zettelkasten</a></div>
+            Wonko&#x27;s collection of notes
+            <nav>
+                <a href="https://wonkodv.github.io/first/">About</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;category&#x2F;">Categories</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;tags&#x2F;">Tags</a>
+
+                
+                
+            </nav>
+
+        </header>
+        
+
+        <main>
+            
+
+<article>
+
+    <p class="date">
+    Posted on <time datetime="2022-11-21T00:00:00+00:00">2022-11-21</time>
+    in 
+    
+        <a href="https://wonkodv.github.io/category/using-unix/">Using Unix</a>,
+    tagged with 
+    
+        <a href="https://wonkodv.github.io/tags/git/" rel="tag">git</a>, 
+    
+        <a href="https://wonkodv.github.io/tags/vim/" rel="tag">vim</a>
+    
+
+    
+    </p>
+
+    <h1 id="neovim-remote-as-git-diff-tool">NeoVim Remote as git diff tool</h1>
+<p>In Neovim you can open a terminal and use git.
+This git should not open another neovim when editing commit messages or rebase commands.
+Instead, you want those files to open in a new tab. This can be accomplished with
+<a rel="noopener" target="_blank" href="https://pypi.org/project/neovim-remote/">neovim-remote</a> and the following line in your vimrc:</p>
+<pre data-lang="vim" style="background-color:#fdf6e3;color:#657b83;" class="language-vim "><code class="language-vim" data-lang="vim"><span style="color:#859900;">let</span><span> $EDITOR=</span><span style="color:#2aa198;">&quot;nvr --remote-tab-wait&quot;
+</span></code></pre>
+<p>For diff and merge, you can configure git to call <code>nvr</code>, in <code>git config --global --edit</code>:</p>
+<pre data-lang="ini" style="background-color:#fdf6e3;color:#657b83;" class="language-ini "><code class="language-ini" data-lang="ini"><span style="color:#268bd2;">[diff]
+</span><span>	</span><span style="color:#268bd2;">tool </span><span style="color:#859900;">=</span><span> nvimdiff
+</span><span style="color:#268bd2;">[merge]
+</span><span>	</span><span style="color:#268bd2;">tool </span><span style="color:#859900;">=</span><span> nvimmerge
+</span><span style="color:#268bd2;">[difftool &quot;nvimdiff&quot;]
+</span><span>	</span><span style="color:#268bd2;">cmd </span><span style="color:#859900;">=</span><span> nvr </span><span style="color:#859900;">-</span><span>s </span><span style="color:#859900;">-</span><span>d </span><span style="color:#2aa198;">\&quot;$LOCAL\&quot; \&quot;$REMOTE\&quot;
+</span><span style="color:#268bd2;">[mergetool &quot;nvimmerge&quot;]
+</span><span>	</span><span style="color:#268bd2;">cmd </span><span style="color:#859900;">=</span><span> nvr </span><span style="color:#859900;">-</span><span>s </span><span style="color:#859900;">-</span><span>d </span><span style="color:#2aa198;">\&quot;$LOCAL\&quot; \&quot;$BASE\&quot; \&quot;$REMOTE\&quot; \&quot;$MERGED\&quot; </span><span style="color:#859900;">-</span><span>c </span><span style="color:#2aa198;">&#39;wincmd J | wincmd =&#39;
+</span></code></pre>
+
+
+</article>
+
+        </main>
+
+        
+        <footer>
+            <nav>
+                
+    <a style="float:left;" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;zola-pre-push-hook&#x2F;" rel="prev"> Older Post</a>
+
+    <a style="float:right;" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;gta-vc-radio-stations-converter&#x2F;" rel="next"> Newer Post</a>
+
+
+                <a href="https://github.com/wonkodv">Github</a>
+                    &middot;
+                
+                <a href="https://github.com/wonkodv/wonkodv.github.io/blob/main/content/neovim-remote-as-git-diff-tool.md">Source</a> /
+                <a href="https://github.com/wonkodv/wonkodv.github.io/edit/main/content/neovim-remote-as-git-diff-tool.md">Change</a>
+                    &middot;
+                    <a href="https://github.com/wonkodv/wonkodv.github.io/discussions/new?category=general&title=About%20%22NeoVim%20Remote%20as%20git%20diff%20tool%22&body=%0A%0A%0A%0A%0A%3C%21--%20please%20keep%20this%20footer%20--%3E%0A-----%0ALink%20to%20Post%0a%3Chttps%3A&#x2F;&#x2F;wonkodv.github.io&#x2F;neovim-remote-as-git-diff-tool&#x2F;%3E">Discuss</a>
+                
+            </nav>
+        </footer>
+        
+    </body>
+</html>
+

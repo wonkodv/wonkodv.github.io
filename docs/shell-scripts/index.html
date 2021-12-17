@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon"  href="https://wonkodv.github.io/favicon.png">
+        <link rel="stylesheet" type="text/css" href="https://wonkodv.github.io/style.css">
+        
+        <link rel="canonical" type="text/css" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;shell-scripts&#x2F;">
+        
+
+        
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://wonkodv.github.io/atom.xml">
+        
+
+        
+    <title> Writing good shell scripts - Zettelkasten</title>
+    <link rel="prev" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;submodule&#x2F;" />
+    <link rel="next" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;gnu-linker-assert-all-sections-placed&#x2F;" />
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Writing good shell scripts",
+        "alternativeHeadline": "How to write less ugly shell scripts",
+        
+        "datePublished": "2021-01-19",
+        
+        "dateModified": "2021-12-17",
+        
+
+        "keywords": [
+        
+            "Shell"
+        
+        ],
+        "articleSection": "Programming"
+    }
+    </script>
+
+    <meta property="og:title" content="Writing good shell scripts">
+    <meta property="og:site_name" content="Zettelkasten">
+    <meta property="og:url" content="https://wonkodv.github.io/shell-scripts/">
+    <meta name="description" content="How to write less ugly shell scripts">
+    <meta name="og:description" content="How to write less ugly shell scripts">
+
+        
+    </head>
+
+    <body>
+        
+        <header>
+            <div class="big"><a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;" title="Home">Zettelkasten</a></div>
+            Wonko&#x27;s collection of notes
+            <nav>
+                <a href="https://wonkodv.github.io/first/">About</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;category&#x2F;">Categories</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;tags&#x2F;">Tags</a>
+
+                
+                
+            </nav>
+
+        </header>
+        
+
+        <main>
+            
+
+<article>
+
+    <p class="date">
+    Posted on <time datetime="2021-01-19T00:00:00+00:00">2021-01-19</time>
+    in 
+    
+        <a href="https://wonkodv.github.io/category/programming/">Programming</a>,
+    tagged with 
+    
+        <a href="https://wonkodv.github.io/tags/shell/" rel="tag">Shell</a>
+    
+
+    
+            Updated on <time datetime="2021-12-17T00:00:00+00:00">2021-12-17</time>.
+    
+    </p>
+
+    <h1 id="how-to-write-good-shell-scripts">How to write good shell scripts</h1>
+<p>I encounter (and have written) a lot of shell scripts which are horrible, so
+here I want to present some ideas that would make me like your script more:</p>
+<h2 id="don-t">Don't</h2>
+<p><strong>Don't write shell scrips!</strong> The language a shell implements is optimized to be as powerful as possible
+in 1 line, while staying backwards compatible to the Bourne Shell (<code>sh</code>) release in 1978.
+This goal is completely contrary to being readable.</p>
+<p>Writing a shell script, because you find yourself executing the same line again and again,
+comes naturally (not to everyone I guess) and makes sense.
+But soon you add arguments.
+Then argument verification.
+Then Error messages.
+Then you have 50 lines of spaghetti code with that one overly complicated one-liner at its center.
+3 months later you have no clue how anything works and you rewrite the script.</p>
+<p>Before you start on this path, stop.
+Think about the tool you want to have and then write it in 150 lines of beautiful readable rust.
+You will need more or less the same time, but now, maintenance of the tool is possible (easy).
+You have probably already written 1 or 2 unit tests
+for the complicated parts and <code>clap</code> gives you <code>--help</code> for free.</p>
+<h2 id="but-i-have-to">But I have to</h2>
+<p>If you have to use shell or batch (e.g. no python, no binaries allowed, obscure security measures),
+then you should still stop,
+think about the tool you need and then write it in a proper fashion.
+Every shell script should include:</p>
+<ul>
+<li>Feedback on errors.</li>
+<li>In bash, put <code>set -e</code> at the top so that the script aborts on failed
+commands.</li>
+<li>Usage instructions, at least a good comment at the top, better yet that
+comment being printed when you call the script with <code>-h</code>.</li>
+<li>Write <code>cd $(dirname $0)</code> in <code>sh</code> or <code>cd /D %~dp0</code> in <code>.bat</code> to change to
+the directory that the script lives in, so that your relative paths do not
+break when the script is invoked fom somewhere unexpected.</li>
+<li>Do not source other scripts, execute them in a separate shell unless they
+are explicitly written to be sourced.</li>
+<li>Comments when using the more obscure syntax (do you know what <code>${s%%*/}</code> is? Are you aware that the
+value of <code>${SECONDS}</code> changes once per second?)</li>
+</ul>
+
+
+</article>
+
+        </main>
+
+        
+        <footer>
+            <nav>
+                
+    <a style="float:left;" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;submodule&#x2F;" rel="prev"> Older Post</a>
+
+    <a style="float:right;" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;gnu-linker-assert-all-sections-placed&#x2F;" rel="next"> Newer Post</a>
+
+
+                <a href="https://github.com/wonkodv">Github</a>
+                    &middot;
+                
+                <a href="https://github.com/wonkodv/wonkodv.github.io/blob/main/content/shell_scripts.md">Source</a> /
+                <a href="https://github.com/wonkodv/wonkodv.github.io/edit/main/content/shell_scripts.md">Change</a>
+                    &middot;
+                    <a href="https://github.com/wonkodv/wonkodv.github.io/discussions/new?category=general&title=About%20%22Writing%20good%20shell%20scripts%22&body=%0A%0A%0A%0A%0A%3C%21--%20please%20keep%20this%20footer%20--%3E%0A-----%0ALink%20to%20Post%0a%3Chttps%3A&#x2F;&#x2F;wonkodv.github.io&#x2F;shell-scripts&#x2F;%3E">Discuss</a>
+                
+            </nav>
+        </footer>
+        
+    </body>
+</html>
+

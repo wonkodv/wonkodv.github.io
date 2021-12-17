@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon"  href="https://wonkodv.github.io/favicon.png">
+        <link rel="stylesheet" type="text/css" href="https://wonkodv.github.io/style.css">
+        
+        <link rel="canonical" type="text/css" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;open-files-on-windows-from-wsl&#x2F;">
+        
+
+        
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://wonkodv.github.io/atom.xml">
+        
+
+        
+    <title> Open Files on Windows from WSL - Zettelkasten</title>
+    <link rel="prev" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;videos-of-a-youtube-channel&#x2F;" />
+    <link rel="next" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;modern-terminal&#x2F;" />
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Open Files on Windows from WSL",
+        "alternativeHeadline": "Use the Windows default application to open files from the Windows Subsystem for Windows bash",
+        
+        "datePublished": "2022-03-19",
+        
+        "dateModified": "2024-03-08",
+        
+
+        "keywords": [
+        
+            "WSL",  
+        
+            "shell"
+        
+        ],
+        "articleSection": "Using Windows"
+    }
+    </script>
+
+    <meta property="og:title" content="Open Files on Windows from WSL">
+    <meta property="og:site_name" content="Zettelkasten">
+    <meta property="og:url" content="https://wonkodv.github.io/open-files-on-windows-from-wsl/">
+    <meta name="description" content="Use the Windows default application to open files from the Windows Subsystem for Windows bash">
+    <meta name="og:description" content="Use the Windows default application to open files from the Windows Subsystem for Windows bash">
+
+        
+    </head>
+
+    <body>
+        
+        <header>
+            <div class="big"><a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;" title="Home">Zettelkasten</a></div>
+            Wonko&#x27;s collection of notes
+            <nav>
+                <a href="https://wonkodv.github.io/first/">About</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;category&#x2F;">Categories</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;tags&#x2F;">Tags</a>
+
+                
+                
+            </nav>
+
+        </header>
+        
+
+        <main>
+            
+
+<article>
+
+    <p class="date">
+    Posted on <time datetime="2022-03-19T00:00:00+00:00">2022-03-19</time>
+    in 
+    
+        <a href="https://wonkodv.github.io/category/using-windows/">Using Windows</a>,
+    tagged with 
+    
+        <a href="https://wonkodv.github.io/tags/wsl/" rel="tag">WSL</a>, 
+    
+        <a href="https://wonkodv.github.io/tags/shell/" rel="tag">shell</a>
+    
+
+    
+            Updated on <time datetime="2024-03-08T00:00:00+00:00">2024-03-08</time>.
+    
+    </p>
+
+    <h1 id="open-files-on-windows-from-wsl">Open Files on Windows from WSL</h1>
+<p>When you are in a WSL-bash and maybe generated an <code>svg</code> file and want to look at it, you can use the following bash function:</p>
+<pre data-lang="bash" style="background-color:#fdf6e3;color:#657b83;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#268bd2;">function </span><span style="color:#b58900;">o</span><span>() {
+</span><span>    </span><span style="color:#268bd2;">w</span><span>=</span><span style="color:#859900;">$</span><span>(</span><span style="color:#b58900;">wslpath</span><span style="color:#268bd2;"> -wa </span><span style="color:#839496;">&quot;</span><span style="color:#859900;">$</span><span style="color:#268bd2;">1</span><span style="color:#839496;">&quot; </span><span style="color:#859900;">| </span><span style="color:#b58900;">sed </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">s/&#39;/&#39;&#39;/g)
+</span><span style="color:#2aa198;">    /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command Start-Process </span><span style="color:#839496;">&quot;&#39;</span><span style="color:#2aa198;">${w}</span><span style="color:#839496;">&#39;&quot;
+</span><span style="color:#2aa198;">}
+</span></code></pre>
+<p>What this does:</p>
+<ul>
+<li>use <code>wslpath</code> to translate the argument into an absolute windows path. This will be something like <code>\\wsl.localhost\Ubuntu-20.04\home\wonko\tmp\file.svg</code></li>
+<li>Open <strong>Windows Powershell</strong> (which is not the same as <strong>Powershell</strong>, see below)</li>
+<li>Tell that to open the file with <code>Start-Process</code>.</li>
+</ul>
+<p>Another nice tool is to open an explorer window with the file selected:</p>
+<pre data-lang="bash" style="background-color:#fdf6e3;color:#657b83;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#268bd2;">function </span><span style="color:#b58900;">x</span><span>() {
+</span><span>    </span><span style="color:#268bd2;">w</span><span>=</span><span style="color:#859900;">$</span><span>(</span><span style="color:#b58900;">wslpath</span><span style="color:#268bd2;"> -wa </span><span style="color:#839496;">&quot;</span><span style="color:#859900;">$</span><span style="color:#268bd2;">1</span><span style="color:#839496;">&quot;</span><span>)
+</span><span>    </span><span style="color:#b58900;">/mnt/c/Windows/SysWOW64/explorer.exe</span><span> /select, </span><span style="color:#839496;">&quot;</span><span style="color:#859900;">$</span><span style="color:#268bd2;">w</span><span style="color:#839496;">&quot;
+</span><span>    </span><span style="color:#b58900;">true </span><span style="color:#93a1a1;"># because explorer.exe has the weirdest return codes :/
+</span><span>}
+</span></code></pre>
+<h2 id="earlier-attempts">Earlier Attempts</h2>
+<p>The rest of this post is a deep dive into why <code>cmd.exe start</code> and
+<code>explorer.exe</code> are weird, don't follow the windows best practices, and how
+I managed to get it working anyways, until it broke in the spring of 2023.</p>
+<h3 id="using-cmd-exe-start">Using <code>cmd.exe start</code></h3>
+<p>In 2022 I had never touched powershell, so I naturally used <code>cmd.exe</code> which has been around since I started with computers.
+This no longer works, which I will address at the end of this article, but in 2022 it did work.
+The function I came up with at the time was this:</p>
+<pre data-lang="bash" style="background-color:#fdf6e3;color:#657b83;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#268bd2;">function </span><span style="color:#b58900;">o</span><span>() {
+</span><span>    </span><span style="color:#268bd2;">w</span><span>=</span><span style="color:#859900;">$</span><span>(</span><span style="color:#b58900;">wslpath</span><span style="color:#268bd2;"> -wa </span><span style="color:#839496;">&quot;</span><span style="color:#859900;">$</span><span style="color:#268bd2;">1</span><span style="color:#839496;">&quot;</span><span>)
+</span><span>    (
+</span><span>        </span><span style="color:#859900;">builtin</span><span> cd /mnt/c/Windows/System32
+</span><span>        </span><span style="color:#859900;">exec</span><span> cmd.exe /c start </span><span style="color:#839496;">&#39;</span><span style="color:#2aa198;">&quot;Foo&quot;</span><span style="color:#839496;">&#39; &quot;</span><span style="color:#859900;">$</span><span style="color:#268bd2;">w</span><span style="color:#839496;">&quot;
+</span><span>    )
+</span><span>}
+</span></code></pre>
+<p>The Windows command interpreter <code>cmd.exe</code> has many quirks. For example, it can not <code>cd</code> into <code>UNC</code> Paths (e.g. <code>\\server\path</code>) so you'd get a weird error message if you execute
+<code>cmd.exe</code> on a path in the Linux file system.
+(If you even have Windows exes in your PATH).
+That is why we <code>cd</code> first, to the director that contains <code>cmd.exe</code>. And that is done in a sub shell, so we do not have to <code>cd</code> back.</p>
+<p>You have to resolve the path with <code>wslpath</code> before <code>cd</code> so relative paths resolve correctly.</p>
+<p>I use <code>builtin cd</code> because <code>cd</code> is an alias that records where I'm at so I can quickly jump there later with <a rel="noopener" target="_blank" href="https://github.com/wonkodv/bashjump">bashjump</a>.</p>
+<p><code>start</code> is a builtin of the <code>cmd.exe</code> that does the same as double clicking on a file in the explorer.
+If the <code>'&quot;Foo&quot;'</code> bothers you, then you are correct. It bothers me too. I'll get to that next.</p>
+<h3 id="argument-parsing-on-windows-is-not-like-you-expect">Argument Parsing on Windows is Not Like You Expect</h3>
+<p>Getting the above commands (using <code>explorer.exe</code> and <code>cmd.exe</code>) to work for files without spaces was trivial.
+Maybe 3 minutes.
+Getting them to work for files with spaces was hard.
+Maybe 4 hours.</p>
+<p>Because Windows command line parsing is special and <code>cmd.exe start</code> and <code>explorer.exe</code> are most very special.</p>
+<p>On Unix, a process receives an array of strings as arguments.
+It is the job of the calling process to supply that array.
+A shell will typically split a string on whitespace unless those whitespace are surrounded by quotes or escaped with backslashes.
+Other tools will either supply the array or ask the shell for help with splitting (see pythons <code>subprocess.Popen</code>).</p>
+<p>A Windows process only gets 1 String.
+The OS sometimes does some rather cursed<sup class="footnote-reference"><a href="#1">1</a></sup> interpretation
+of double quotes and whitespace in order to get the right executable,
+but the executable will always get the unmodified string, just as the caller supplied it.
+Then all applications call <a rel="noopener" target="_blank" href="https://docs.microsoft.com/en-us/windows/win32/api/shellapi/nf-shellapi-commandlinetoargvw">CommandLineToArgvW()</a>
+which splits like a Unix shell (but cursed<sup class="footnote-reference"><a href="#2">2</a></sup>).
+All Applications? No. One small group of tools knows better, and of course <code>start</code> and <code>explorer</code> are among the rebellious.</p>
+<p>The initial versions of the commands above had the following relevant lines:</p>
+<ul>
+<li><code>cmd.exe /c start &quot;$w&quot;</code></li>
+<li><code>explorer.exe /select,&quot;$w&quot;</code></li>
+</ul>
+<p>With proper filenames that don't contain spaces, everything worked. With spaces, it didn't. I therefor tried to escape the spaces in bash so the exes would like
+them better: among the this I tried were: <code>&quot;$w&quot;</code>, <code>'&quot;'$w'&quot;'</code>, <code>'&quot;'&quot;$w&quot;'&quot;'</code> and finally something like &quot;${w// /^ }&quot; because
+someone suggested you can escape space with carets.</p>
+<p>I finally did the sensible thing and tried to get it working from cmd.exe, circumventing bash and the WSL-Windows bridge<sup class="footnote-reference"><a href="#3">3</a></sup>.
+Here are some samples of <code>cmd.exe start</code> executed from another <code>cmd.exe</code></p>
+<ul>
+<li><code>cmd.exe /c start \\wsl$\Ubuntu-20.04\home\wonko\tmp\file.svg</code> works</li>
+<li><code>cmd.exe /c start \\wsl$\Ubuntu-20.04\home\wonko\tmp\file with space.svg</code> works</li>
+<li><code>cmd.exe /c start &quot;\\wsl$\Ubuntu-20.04\home\wonko\tmp\file with space.svg&quot;</code> opens a new terminal window,
+waiting on your input.
+If you look real close,
+you will notice this window has the title
+<code>\\wsl$\Ubuntu-20.04\home\wonko\tmp\file with space.svg</code> 🤔</li>
+<li><code>cmd.exe /c start &quot;Foo&quot; &quot;\\wsl$\Ubuntu-20.04\home\wonko\tmp\file with space.svg&quot;</code> works.</li>
+</ul>
+<p>Getting information about <code>start</code> is simple,
+you open <code>cmd.exe</code> and type <code>help start</code> and then very carefully note,
+that the synopsis begins with <code>START [&quot;Title&quot;] ... [PROGRAMM|FILE] [ARGUMENTS...]</code>.
+After you already know whats going on, the following questions become obvious:</p>
+<ul>
+<li>how can the first positional argument be optional?</li>
+<li>No single argument has quotes, why does title?
+Yes. They really did. If the first argument is surrounded by quotes, it is Title, otherwise it is File.
+Passing in a <code>&quot;Title&quot;</code> with quotes means even more quotes in bash <code>'&quot;Foo&quot;'</code> and things worked (Until an update in 2023, see below).</li>
+</ul>
+<p>Getting information about what arguments you can pass to <code>explorer.exe</code> is surprisingly difficult.
+Typing <code>help explorer</code> into <code>cmd.exe</code> can not help you but suggests you try <code>explorer /?</code> which only opens &quot;My Documents&quot;.
+Searching the web gives you FAQs, 3rd party sites which don't mention whitespace at all,
+and one poor soul on stackexchange who, in their quest for answers, looked at explorer.exe in a hex editor.
+I even tried with bing, hoping that they would know the way around msdn, but I did not find any vaguely official looking source of information.</p>
+<p>Consensus is, that you call <code>explorer.exe /select,OBJECT</code> or <code>explorer.exe /select, OBJECT</code> to open <code>OBJECT</code>.
+The comma is important, the whitespace after it isn't.</p>
+<p>Here are some samples for <code>explorer.exe</code> again from a windows <code>cmd.exe</code>:</p>
+<ul>
+<li><code>explorer.exe /select,\\wsl$\Ubuntu-20.04\home\wonko\tmp\file.svg</code> works</li>
+<li><code>explorer.exe /select,\\wsl$\Ubuntu-20.04\home\wonko\tmp\file with space.svg</code> works</li>
+<li><code>explorer.exe /select,&quot;\\wsl$\Ubuntu-20.04\home\wonko\tmp\file with space.svg&quot;</code> works</li>
+<li><code>explorer.exe &quot;/select,\\wsl$\Ubuntu-20.04\home\wonko\tmp\file with space.svg&quot;</code> opens &quot;My Documents&quot;, thank you very much</li>
+<li><code>explorer.exe /select, &quot;\\wsl$\Ubuntu-20.04\home\wonko\tmp\file with space.svg&quot;</code> works</li>
+</ul>
+<p>The culprit is again, special treatment of quotes in the arguments.
+Here, it is important that <code>/select</code> is not inside quotes.
+The synopsis in a man page would be something like <code>explorer.exe /select,&quot;PATH&quot;</code>
+The way to achieve this, when the WSL-Windows bridge adds double quotes,
+is to use the <code>/select, PATH</code> syntax that includes a space not because <code>explorer.exe</code> needs
+this space, but to put <code>/select</code> into a different slot in the argument array than the path,
+preventing double quotes around the <code>/select</code>.</p>
+<p>Conclusion: Don't try to deal with windows argument parsing and whitespace in paths at the same time.
+And if you do, don't add WSL and bash to the mix.</p>
+<h3 id="windows-is-constantly-improving">Windows is Constantly Improving</h3>
+<p>After a very optimistic, later regretted <code>wsl --update</code> in the spring of 2023,
+the <code>cmd.exe start</code> no longer worked.
+All I got when using <code>o FILE</code> was &quot;Syntaxerror&quot; on the terminal, nothing more.
+After procrastinating for 3 Months and not having a working <code>o</code> function, I finally investigated.</p>
+<p>Executing in a WSL Bash <code>cmd.exe /c start '&quot;Foo&quot;' &quot;File&quot;</code> now leads to a process on windows,
+which has the command line <code>cmd.exe /c start &quot;\&quot;Foo\&quot;&quot; &quot;File&quot;</code>.
+That is not something hat <code>cmd.exe</code> can deal with.
+The folks at Microsoft did something to the &quot;WSL-Windows Bridge&quot;<sup class="footnote-reference"><a href="#3">3</a></sup>, probably in an effort to
+make anything better, and now quotes are escaped. For processes that use <code>CommandLineToArgvW()</code>,
+this is  probably an improvement, since they now get the amount of quotes, that the caller intended.
+The new behavior is probably better, but this makes it impossible to call <code>cmd.exe start</code> correctly.</p>
+<p>I finally acknowledged, that <code>cmd.exe</code> is old and crappy, and informed myself about Powershell.</p>
+<h3 id="powershell">Powershell</h3>
+<p>The first thing I learned about Powershell is, that Powershell is not Windows Powershell.
+The first is new, cross platform, and typically installed in <code>C:\Program Files\Powershell\7\pwsh.exe</code>
+while the second is old, Windows only, more powerful,
+and installed in <code>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</code>.
+The second option seemed a more stable Path that might be the same everywhere, so I'm using that.
+Getting the windows powershell based version of <code>o</code> to work took 5 or 10 Minutes.
+Information about <code>-Command</code> and <code>Start-Process</code> is easy to get, although they do try to confuse you,
+by also providing <code>Invoke-Item</code> which has the same effect in my case.</p>
+<h3 id="improving-the-powershell-version">Improving the Powershell version</h3>
+<p>In the first pwsh version, I forgot to test with multiple whitespaces. This was pointed out to me on the discussions page on github, so I added
+the <code>sed</code> part. I can now successfully <code>o &quot;foo'bar    ba\z.txt&quot;</code>. Windows translates the backslash to something weird, but it can be opened.</p>
+<hr />
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>Excerpt from <a rel="noopener" target="_blank" href="https://docs.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessw">CreateProcessW</a> ig you pass <code>lpCommandLine</code> but not <code>lpApplicationName</code>:</p>
+<blockquote>
+<p>... consider the string &quot;c:\program files\sub dir\program name&quot;. This string can be interpreted in a number of ways. The system tries to interpret the possibilities in the following order:</p>
+<ol>
+<li>c:\program.exe</li>
+<li>c:\program files\sub.exe</li>
+<li>c:\program files\sub dir\program.exe</li>
+<li>c:\program files\sub dir\program name.exe</li>
+</ol>
+</blockquote>
+</div>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p>Excerpt from  <a rel="noopener" target="_blank" href="https://docs.microsoft.com/en-us/windows/win32/api/shellapi/nf-shellapi-commandlinetoargvw">CommandLineToArgvW()</a></p>
+<blockquote>
+<p>... has a special interpretation of backslash characters when they are followed by a quotation mark character (&quot;). This interpretation assumes that any preceding argument is a valid file system path, <strong>or else it may behave unpredictably</strong>.</p>
+</blockquote>
+</div>
+<div class="footnote-definition" id="3"><sup class="footnote-definition-label">3</sup>
+<p>WSL-Windows Bridge is my placeholder name for whatever happens between the syscall into the linux kernel that bash does with its array of arguments and the
+process creation by the windows kernel with its single string.</p>
+</div>
+
+
+</article>
+
+        </main>
+
+        
+        <footer>
+            <nav>
+                
+    <a style="float:left;" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;videos-of-a-youtube-channel&#x2F;" rel="prev"> Older Post</a>
+
+    <a style="float:right;" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;modern-terminal&#x2F;" rel="next"> Newer Post</a>
+
+
+                <a href="https://github.com/wonkodv">Github</a>
+                    &middot;
+                
+                <a href="https://github.com/wonkodv/wonkodv.github.io/blob/main/content/open-files-on-windows-from-wsl.md">Source</a> /
+                <a href="https://github.com/wonkodv/wonkodv.github.io/edit/main/content/open-files-on-windows-from-wsl.md">Change</a>
+                    &middot;
+                    <a href="https://github.com/wonkodv/wonkodv.github.io/discussions/new?category=general&title=About%20%22Open%20Files%20on%20Windows%20from%20WSL%22&body=%0A%0A%0A%0A%0A%3C%21--%20please%20keep%20this%20footer%20--%3E%0A-----%0ALink%20to%20Post%0a%3Chttps%3A&#x2F;&#x2F;wonkodv.github.io&#x2F;open-files-on-windows-from-wsl&#x2F;%3E">Discuss</a>
+                
+            </nav>
+        </footer>
+        
+    </body>
+</html>
+

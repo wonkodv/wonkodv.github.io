@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+
+{% block content %}
+    {{ section.content }}
+    {{ macros::list_pages(pages=section.pages) }}
+{% endblock content %}

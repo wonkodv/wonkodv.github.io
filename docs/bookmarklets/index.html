@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon"  href="https://wonkodv.github.io/favicon.png">
+        <link rel="stylesheet" type="text/css" href="https://wonkodv.github.io/style.css">
+        
+        <link rel="canonical" type="text/css" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;bookmarklets&#x2F;">
+        
+
+        
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://wonkodv.github.io/atom.xml">
+        
+
+        
+    <title> Bookmarklets are Cool - Zettelkasten</title>
+    <link rel="prev" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;recommended-reading&#x2F;" />
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Bookmarklets are Cool",
+        "alternativeHeadline": "Use `javascript:` bookmarks to enhance website functionality (but be careful where you get them from)",
+        
+        "datePublished": "2024-03-07",
+        
+
+        "keywords": [
+        
+            "Javascript",  
+        
+            "Web"
+        
+        ],
+        "articleSection": "Security"
+    }
+    </script>
+
+    <meta property="og:title" content="Bookmarklets are Cool">
+    <meta property="og:site_name" content="Zettelkasten">
+    <meta property="og:url" content="https://wonkodv.github.io/bookmarklets/">
+    <meta name="description" content="Use `javascript:` bookmarks to enhance website functionality (but be careful where you get them from)">
+    <meta name="og:description" content="Use `javascript:` bookmarks to enhance website functionality (but be careful where you get them from)">
+
+        
+    </head>
+
+    <body>
+        
+        <header>
+            <div class="big"><a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;" title="Home">Zettelkasten</a></div>
+            Wonko&#x27;s collection of notes
+            <nav>
+                <a href="https://wonkodv.github.io/first/">About</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;category&#x2F;">Categories</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;tags&#x2F;">Tags</a>
+
+                
+                
+            </nav>
+
+        </header>
+        
+
+        <main>
+            
+
+<article>
+
+    <p class="date">
+    Posted on <time datetime="2024-03-07T00:00:00+00:00">2024-03-07</time>
+    in 
+    
+        <a href="https://wonkodv.github.io/category/security/">Security</a>,
+    tagged with 
+    
+        <a href="https://wonkodv.github.io/tags/javascript/" rel="tag">Javascript</a>, 
+    
+        <a href="https://wonkodv.github.io/tags/web/" rel="tag">Web</a>
+    
+
+    
+    </p>
+
+    <h1 id="bookmarklets-are-cool">Bookmarklets Are Cool</h1>
+<p>Bookmarklets are bookmarks that start with <code>javascript:</code>.
+Power users like them, to add functionality to a site.</p>
+<p>Here, I'm listing the ones that I usually have with me.
+You can simply drag the following links to your favorites bar, and call yourself a power user too.</p>
+<ul>
+<li>
+<p><a href= "javascript:window.open('http://chart.apis.google.com/chart?cht=qr&chs=500x500&chl='+encodeURIComponent(document.location.href), '_blank', 'innerHeight=550,innerWidth=550,menubar=no,scrollbars=no,status=no'); void(0);">Qr Code</a> Open a window with the QR Code of the current url (sends the url to google)</p>
+</li>
+<li>
+<p><a href="javascript:scroll(0,0);void(0);">Scroll Top</a> Scroll to the top of the page.</p>
+</li>
+<li>
+<p><a href="javascript:document.location.href+=&quot;&list=ULcxqQ59vzyTk&quot; ;" onmousedown="this.href='javascript:document.location.href+=&quot;&list=ULcxqQ59vzyTk&quot;;                                                            if(document.location.host.search(&quot;youtube&quot;)>0)console.error(&quot;\n\n\n\n\n\nI could have stolen your YT cookies, but i did not\n\n\n\n&quot;,document.cookie);'" onclick=" this.href='javascript:document.location.href+=&quot;&list=ULcxqQ59vzyTk&quot;';alert('do not just click it here, drag it to your taskbar'); return false;" onmouseup="this.href='javascript:document.location.href+=&quot;&list=ULcxqQ59vzyTk&quot;'" ondragstart="this.href='javascript:document.location.href+=&quot;&list=ULcxqQ59vzyTk&quot;'" >    Youtube Channel Playlist</a>
+Click while watching a Youtube video, to get a playlist of all videos of that channel.
+I wrote a little more about the basic version <a href="https://wonkodv.github.io/videos-of-a-youtube-channel/">here</a>.
+But this is the enhanced version.</p>
+</li>
+</ul>
+<h2 id="is-dragging-links-dangerous">Is dragging Links dangerous</h2>
+<p>When you use the last one, you get the desired effect. Plus an error entry in your debugging console with your YT cookies. How did that happen?
+The url changes in the <code>onmosedown</code> event. The changed url is put in the Bookmark. To keep up appearances, it changes back in <code>ondragstart</code>, <code>onclick</code> and <code>onmouseup</code>.
+The changed url has some additional javascript, where I could do all kinds of shenanigans.</p>
+<p>Chromium (v122) will just accept this.</p>
+<p>Firefox (v123) will show you the &quot;Add Bookmark&quot; dialog for javascript urls, but by being so honest about it all, this doesn't surprise you.
+The evil part comes after enough whitespaces, that you don't see it.</p>
+<h2 id="is-this-a-bug">Is this a Bug ?</h2>
+<p>I actually stumbled over this while <a href="https://wonkodv.github.io/videos-of-a-youtube-channel/">writing about the YT Playlist button</a>.
+I opened security bugs for firefox and chromium.</p>
+<h3 id="chromium">Chromium</h3>
+<p><a rel="noopener" target="_blank" href="https://issues.chromium.org/issues/40059144?pli=1">https://issues.chromium.org/issues/40059144?pli=1</a>
+As this was filed as a security issue, the bug report is not publicly visible.</p>
+<p>The severity of the vulnerability was set to low, as this xss involves user interaction and users could be &quot;social engeneered&quot; into dragging a <code>javascript:</code> link directly.
+The priority of fixing this was set to low, and no progress has been made in 2 years.</p>
+<h3 id="firefox">Firefox</h3>
+<p><a rel="noopener" target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1760392">https://bugzilla.mozilla.org/show_bug.cgi?id=1760392</a>
+The bug is closed, and marked as a duplicate of &quot;Don't allow dragging javascript: links&quot;, where the gist is, that the &quot;Add Bookmark&quot; dialog is enough to make users aware of the javascript part.</p>
+<h2 id="so">So...</h2>
+<p>I recently though of this, and wanted to check up on what became of my reports. Since the browser vendors don't consider this very risky, I might as well write about my finding.</p>
+<p>Was I able to trick you?</p>
+
+
+</article>
+
+        </main>
+
+        
+        <footer>
+            <nav>
+                
+    <a style="float:left;" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;recommended-reading&#x2F;" rel="prev"> Older Post</a>
+
+    
+
+
+                <a href="https://github.com/wonkodv">Github</a>
+                    &middot;
+                
+                <a href="https://github.com/wonkodv/wonkodv.github.io/blob/main/content/bookmarklets.md">Source</a> /
+                <a href="https://github.com/wonkodv/wonkodv.github.io/edit/main/content/bookmarklets.md">Change</a>
+                    &middot;
+                    <a href="https://github.com/wonkodv/wonkodv.github.io/discussions/new?category=general&title=About%20%22Bookmarklets%20are%20Cool%22&body=%0A%0A%0A%0A%0A%3C%21--%20please%20keep%20this%20footer%20--%3E%0A-----%0ALink%20to%20Post%0a%3Chttps%3A&#x2F;&#x2F;wonkodv.github.io&#x2F;bookmarklets&#x2F;%3E">Discuss</a>
+                
+            </nav>
+        </footer>
+        
+    </body>
+</html>
+

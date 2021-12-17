@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon"  href="https://wonkodv.github.io/favicon.png">
+        <link rel="stylesheet" type="text/css" href="https://wonkodv.github.io/style.css">
+        
+        <link rel="canonical" type="text/css" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;git-extract-submodule&#x2F;">
+        
+
+        
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://wonkodv.github.io/atom.xml">
+        
+
+        
+    <title> Extract a Submodule from a Git Repository - Zettelkasten</title>
+    <link rel="prev" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;first&#x2F;" />
+    <link rel="next" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;submodule&#x2F;" />
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Extract a Submodule from a Git Repository",
+        "alternativeHeadline": "Extract a directory and its history into a new git repository",
+        
+        "datePublished": "2020-12-15",
+        
+
+        "keywords": [
+        
+            "Git"
+        
+        ],
+        "articleSection": "Programming"
+    }
+    </script>
+
+    <meta property="og:title" content="Extract a Submodule from a Git Repository">
+    <meta property="og:site_name" content="Zettelkasten">
+    <meta property="og:url" content="https://wonkodv.github.io/git-extract-submodule/">
+    <meta name="description" content="Extract a directory and its history into a new git repository">
+    <meta name="og:description" content="Extract a directory and its history into a new git repository">
+
+        
+    </head>
+
+    <body>
+        
+        <header>
+            <div class="big"><a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;" title="Home">Zettelkasten</a></div>
+            Wonko&#x27;s collection of notes
+            <nav>
+                <a href="https://wonkodv.github.io/first/">About</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;category&#x2F;">Categories</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;tags&#x2F;">Tags</a>
+
+                
+                
+            </nav>
+
+        </header>
+        
+
+        <main>
+            
+
+<article>
+
+    <p class="date">
+    Posted on <time datetime="2020-12-15T00:00:00+00:00">2020-12-15</time>
+    in 
+    
+        <a href="https://wonkodv.github.io/category/programming/">Programming</a>,
+    tagged with 
+    
+        <a href="https://wonkodv.github.io/tags/git/" rel="tag">Git</a>
+    
+
+    
+    </p>
+
+    <h1 id="extract-a-submodule-from-a-git-repository">Extract a Submodule from a Git Repository</h1>
+<p>Using several git commands, you can extract a directory and all of its commit
+history into a new git repository and include that as a submodule.</p>
+<p><code>git subtree split</code> filters the entire commit history, collecting those that touched a directory, and produces a new commit chain from it.</p>
+<h2 id="prepare-the-server">Prepare the server</h2>
+<p>A repository with submodules specifies the URL where to clone the sub repositories from. You must create a new repository on that server and fix access rights and stuff. It should be the same where everyone gets your project from.</p>
+<h2 id="extract-the-history">Extract the history</h2>
+<p>Extract the history of <code>component</code> and label it as the branch <code>split</code>. Prefix every commit message with <code>S!</code> to indicate that this commit happend before the split.</p>
+<p>Go to your repository and execute the following command. Then grab a coffee because git now checks every commit in your projects history and this can takes 0.1 to 1 second per commit.</p>
+<pre style="background-color:#fdf6e3;color:#657b83;"><code><span>project$ git subtree split --prefix=component --branch split --annotate &quot;S! &quot; master
+</span></code></pre>
+<p>Once this is done, you can inspect the new history with <code>git log --stat split</code>.</p>
+<h2 id="create-the-sub-repository">Create the sub repository</h2>
+<p>Delete the component from the project repository</p>
+<pre style="background-color:#fdf6e3;color:#657b83;"><code><span>project$ git rm -rf component
+</span></code></pre>
+<p>Create a dedicated repository</p>
+<pre style="background-color:#fdf6e3;color:#657b83;"><code><span>project$ mkdir component
+</span><span>project$ cd component
+</span><span>component$ git init
+</span><span>component$ cd ..
+</span><span>project$ 
+</span></code></pre>
+<p>Copy (push) the created history into the dedicated repo</p>
+<pre style="background-color:#fdf6e3;color:#657b83;"><code><span>project$ git push ./component split
+</span></code></pre>
+<p>There are no files in <code>component</code> yet, because <code>master</code> is the initial empty state and the branch<code>split</code> you just pushed is not checked out.</p>
+<p>Got to the component repository and switch to <code>master</code> and, also do some cleanup:</p>
+<ul>
+<li>remove the <code>split</code> branch</li>
+<li>create a <code>.gitignore</code></li>
+<li>create a commit that explains the extraction (use <code>--allow-empty</code> if you have no changed files to commit to add a note to the history)</li>
+<li>configure the <code>remote</code> and push</li>
+</ul>
+<pre style="background-color:#fdf6e3;color:#657b83;"><code><span>project$ cd component
+</span><span>component$ git -C master
+</span><span>component$ git branch -d split
+</span><span>component$ echo &quot;stuff to ignore&quot; &gt;&gt; .gitignore
+</span><span>component$ git add .gitignore
+</span><span>component$ git commit -m &quot;extract component from project&quot;
+</span><span>component$ git remote add server https://server/component
+</span><span>component$ git push server -u master master
+</span><span>component$ cd ..
+</span><span>project$ 
+</span></code></pre>
+<p>You now have a git repository for the component inside the project repository, but it is not a submodule yet. If you accidentally <code>git add</code> the component, there is a special warning message for you.</p>
+<h2 id="add-the-sub-repository-as-submodule">Add the sub repository as submodule</h2>
+<pre style="background-color:#fdf6e3;color:#657b83;"><code><span>project$ git submodule add https://server/component component
+</span></code></pre>
+<p>Note that <code>git submodule add</code> will not inspect or test the url when adding existing subrepositories. It will only write it into the <code>.gitmodules</code> file. Users who try to pull/clone your repository will notice any errors you make here before you do.</p>
+<p>In the project repository, add the <code>.gitmodules</code> file and the submodule</p>
+<pre style="background-color:#fdf6e3;color:#657b83;"><code><span>project$ git add .gitmodules
+</span><span>project$ git add component
+</span><span>project$ git commit -m &#39;component: extract into submodule&#39;
+</span></code></pre>
+<p>The last thing to do is to delete the <code>split</code> branch used to hold the artificial history in the project repository.</p>
+<pre style="background-color:#fdf6e3;color:#657b83;"><code><span>project$ git branch -D split
+</span></code></pre>
+<p>Test the entire project. If the component was successfully pushed to the server, you can now push the project.</p>
+<pre style="background-color:#fdf6e3;color:#657b83;"><code><span>project$ git push
+</span></code></pre>
+<p>Done. 5 Minutes + 1 coffee break.</p>
+
+
+</article>
+
+        </main>
+
+        
+        <footer>
+            <nav>
+                
+    <a style="float:left;" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;first&#x2F;" rel="prev"> Older Post</a>
+
+    <a style="float:right;" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;submodule&#x2F;" rel="next"> Newer Post</a>
+
+
+                <a href="https://github.com/wonkodv">Github</a>
+                    &middot;
+                
+                <a href="https://github.com/wonkodv/wonkodv.github.io/blob/main/content/git-extract-submodule.md">Source</a> /
+                <a href="https://github.com/wonkodv/wonkodv.github.io/edit/main/content/git-extract-submodule.md">Change</a>
+                    &middot;
+                    <a href="https://github.com/wonkodv/wonkodv.github.io/discussions/new?category=general&title=About%20%22Extract%20a%20Submodule%20from%20a%20Git%20Repository%22&body=%0A%0A%0A%0A%0A%3C%21--%20please%20keep%20this%20footer%20--%3E%0A-----%0ALink%20to%20Post%0a%3Chttps%3A&#x2F;&#x2F;wonkodv.github.io&#x2F;git-extract-submodule&#x2F;%3E">Discuss</a>
+                
+            </nav>
+        </footer>
+        
+    </body>
+</html>
+

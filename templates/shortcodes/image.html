@@ -1,0 +1,36 @@
+{# parameters
+    path
+    alt
+    [title]
+    [width]
+#}
+{% set image = get_image_metadata(path=path, allow_missing=true) %}
+{% if image %}
+    {% set image_path = path %}
+{% else %}
+    {% set image_path = "/" ~ page.relative_path|replace(from=".md", to="/"~path) %}
+    {% set image = get_image_metadata(path=image_path, allow_missing=false) %}
+{% endif %}
+
+{% if not title %}
+    {% set title = alt %}
+{% endif %}
+
+{% if not width %}
+    {% set width = 800 %}
+{% endif %}
+
+{% if center %}
+<center>
+{% endif %}
+
+{% if image.width > width %}
+    {% set image = resize_image(path=image_path, width=width, op="fit_width") %}
+    {% set image_url = image.url %}
+{% else %}
+    {% set image_url = image_path %}
+{% endif %}
+<a href="{{ image_path }}" target="_blank"><img width="{{image.width}}" height="{{image.height}}" src="{{ image_url }}" alt="{{ alt }}" title="{{ title }}"></a>
+{% if center %}
+</center>
+{% endif %}

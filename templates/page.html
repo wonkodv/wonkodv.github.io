@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% import "macros.html" as macros %}
+{% import "macro_tax.html" as macro_tax %}
+
+{% block head %}
+    <title> {{ page.title }} - {{ config.title }}</title>
+    {%- if page.earlier %}
+    <link rel="prev" href="{{ page.earlier.permalink }}" />
+    {%- endif -%}
+    {%- if page.later %}
+    <link rel="next" href="{{ page.later.permalink  }}" />
+    {%- endif %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "{{page.title}}",
+        "alternativeHeadline": "{{page.description}}",
+        {% if page.extra.image %}
+        {% set _meta = get_image_metadata(path=page.extra.image) %}
+        "image": [
+            "{{ get_url(path=page.extra.image) }}"
+        ],
+        "author": {
+            "@type": "Person",
+            "name": "Wonko",
+            "url": "{{config.base_url | safe}}"
+        },
+        {% endif %}
+        "datePublished": "{{page.date}}",
+        {% if page.updated %}
+        "dateModified": "{{page.updated}}",
+        {% endif %}
+
+        "keywords": [
+        {% for tag in page.taxonomies['tags'] %}
+            "{{tag}}" {%- if not loop.last -%} ,  {% endif %}
+        {% endfor %}
+        ],
+        "articleSection": "{{ page.taxonomies['category'][0] }}"
+    }
+    </script>
+
+    <meta property="og:title" content="{{page.title}}">
+    <meta property="og:site_name" content="{{config.title}}">
+    <meta property="og:url" content="{{ current_url | safe }}">
+    <meta name="description" content="{{page.description}}">
+    <meta name="og:description" content="{{page.description}}">
+    {%- if page.extra.image %}
+    <meta property="og:image" content="{{ get_url(path=page.extra.image) }}">
+    {%- endif -%}
+
+{% endblock head %}
+
+{% block content %}
+
+<article>
+
+    <p class="date">
+    Posted on <time datetime="{{ page.date | date(format="%+") }}">{{ page.date }}</time>
+    in {{ macro_tax::category(page=page)  -}},
+    tagged with {{ macro_tax::tags(page=page) }}
+    {% if page.updated %}
+            Updated on <time datetime="{{ page.updated | date(format="%+") }}">{{ page.updated }}</time>.
+    {% endif %}
+    </p>
+
+    {{ page.content | safe }}
+
+</article>
+{% endblock content %}
+
+{% block extra_footer_nav %}
+    {% if page.earlier -%}
+        <a style="float:left;" href="{{ page.earlier.permalink }}" rel="prev"> Older Post</a>
+    {%- endif %}
+
+    {% if page.later -%}
+    <a style="float:right;" href="{{ page.later.permalink }}" rel="next"> Newer Post</a>
+    {%- endif %}
+{% endblock extra_footer_nav %}

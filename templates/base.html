@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon"  href="{{ get_url(path="favicon.png") }}">
+        <link rel="stylesheet" type="text/css" href="{{ get_url(path="style.css") }}">
+        {% if current_url %}
+        <link rel="canonical" type="text/css" href="{{ current_url }}">
+        {% endif %}
+
+        {% if config.generate_feed %}
+        <link rel="alternate" type={% if config.feed_filename == "atom.xml" %}"application/atom+xml"{% else %}"application/rss+xml"{% endif %} title="RSS" href="{{ get_url(path=config.feed_filename)}}">
+        {% endif %}
+
+        {% block head %}
+        <title>{{config.title}}</title>
+        {% endblock head %}
+
+        {% if config.mode == "Serve" %}
+        <style>
+            html {
+                background-color:#FEF;
+            }
+        </style>
+        {% endif %}
+    </head>
+
+    <body>
+        {% block header %}
+        <header>
+            <div class="big"><a href="{{ config.base_url }}" title="Home">{{ config.title }}</a></div>
+            {{ config.description }}
+            <nav>
+                <a href="{{get_url(path="@/first.md")}}">About</a>
+                     &middot;
+                {% set tax = get_taxonomy(kind="category") %}
+                <a href="{{ tax.permalink }}">Categories</a>
+                     &middot;
+                {% set tax = get_taxonomy(kind="tags") %}
+                <a href="{{ tax.permalink }}">Tags</a>
+
+                {% block extra_header_nav %}
+                {% endblock extra_header_nav %}
+            </nav>
+
+        </header>
+        {% endblock header %}
+
+        <main>
+            {% block content %}
+            {% endblock content %}
+        </main>
+
+        {% block footer %}
+        <footer>
+            <nav>
+                {% block extra_footer_nav %}
+                {% endblock extra_footer_nav %}
+
+                <a href="https://github.com/wonkodv">Github</a>
+                    &middot;
+                {% if page %}
+                <a href="https://github.com/wonkodv/wonkodv.github.io/blob/main/content/{{page.relative_path}}">Source</a> /
+                <a href="https://github.com/wonkodv/wonkodv.github.io/edit/main/content/{{page.relative_path}}">Change</a>
+                    &middot;
+                    <a href="https://github.com/wonkodv/wonkodv.github.io/discussions/new?category=general&title=About%20%22{{ page.title | urlencode }}%22&body=%0A%0A%0A%0A%0A%3C%21--%20please%20keep%20this%20footer%20--%3E%0A-----%0ALink%20to%20Post%0a%3C{{ page.permalink | urlencode }}%3E">Discuss</a>
+                {% else %}
+                <a href="https://github.com/wonkodv/wonkodv.github.io/">Source</a>
+                    &middot;
+                <a href="https://github.com/wonkodv/wonkodv.github.io/discussions/">Discuss</a>
+                {% endif %}
+            </nav>
+        </footer>
+        {% endblock footer %}
+    </body>
+</html>
+

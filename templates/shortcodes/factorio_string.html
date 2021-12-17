@@ -1,0 +1,14 @@
+<span style="background-color: #444344; color: #f1f1f1; padding:0.2rem 0.5rem;" title="{{ body }}">
+    {{- body | escape | regex_replace(
+        pattern="\[(?P<type>[^\]=]+)=(?P<name>[^\]=]+)]",
+        replace="<img 
+            src='/factorio/transparent.gif'
+            style='
+                background-image:url(&quot;/factorio/${name}.png&quot;);
+                background-position: -95px 2px;
+                height:1.3em;
+                width:1em;
+                margin:-4px 0;
+                '
+            alt='$0'>"
+    ) | safe -}}</span>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon"  href="https://wonkodv.github.io/favicon.png">
+        <link rel="stylesheet" type="text/css" href="https://wonkodv.github.io/style.css">
+        
+        <link rel="canonical" type="text/css" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;gnu-linker-assert-all-sections-placed&#x2F;">
+        
+
+        
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://wonkodv.github.io/atom.xml">
+        
+
+        
+    <title> Explicitly Place All Sections When Linking With GNU LD - Zettelkasten</title>
+    <link rel="prev" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;shell-scripts&#x2F;" />
+    <link rel="next" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;dry-tests-in-c&#x2F;" />
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Explicitly Place All Sections When Linking With GNU LD",
+        "alternativeHeadline": "Use an assertion to detect sections that are not placed explicitly by a linker script",
+        
+        "datePublished": "2021-03-12",
+        
+        "dateModified": "2022-01-04",
+        
+
+        "keywords": [
+        
+            "C",  
+        
+            "Embedded"
+        
+        ],
+        "articleSection": "Programming"
+    }
+    </script>
+
+    <meta property="og:title" content="Explicitly Place All Sections When Linking With GNU LD">
+    <meta property="og:site_name" content="Zettelkasten">
+    <meta property="og:url" content="https://wonkodv.github.io/gnu-linker-assert-all-sections-placed/">
+    <meta name="description" content="Use an assertion to detect sections that are not placed explicitly by a linker script">
+    <meta name="og:description" content="Use an assertion to detect sections that are not placed explicitly by a linker script">
+
+        
+    </head>
+
+    <body>
+        
+        <header>
+            <div class="big"><a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;" title="Home">Zettelkasten</a></div>
+            Wonko&#x27;s collection of notes
+            <nav>
+                <a href="https://wonkodv.github.io/first/">About</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;category&#x2F;">Categories</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;tags&#x2F;">Tags</a>
+
+                
+                
+            </nav>
+
+        </header>
+        
+
+        <main>
+            
+
+<article>
+
+    <p class="date">
+    Posted on <time datetime="2021-03-12T00:00:00+00:00">2021-03-12</time>
+    in 
+    
+        <a href="https://wonkodv.github.io/category/programming/">Programming</a>,
+    tagged with 
+    
+        <a href="https://wonkodv.github.io/tags/c/" rel="tag">C</a>, 
+    
+        <a href="https://wonkodv.github.io/tags/embedded/" rel="tag">Embedded</a>
+    
+
+    
+            Updated on <time datetime="2022-01-04T00:00:00+00:00">2022-01-04</time>.
+    
+    </p>
+
+    <h1 id="explicitly-place-all-sections-when-linking-with-gnu-ld">Explicitly Place All Sections When Linking With GNU LD</h1>
+<h2 id="the-problem">The Problem</h2>
+<p>If you place your sections manually, you sometimes forget one and the gnu linker places it automatically.
+Having data or code linked in the wrong place often works for a while or when
+not doing in depth tests, but can cause your system to have very odd behavior
+that is hard to pinpoint.
+If you are writing a linker script, it is best to place everything explicitly and get notified about every unplaced section.</p>
+<h2 id="the-solution">The Solution</h2>
+<p>A way to produce such a warning, is to define a catch all section and using <code>ASSERT()</code> to test, that it is empty:</p>
+<pre data-linenos data-lang="ld" style="background-color:#fdf6e3;color:#657b83;" class="language-ld "><code class="language-ld" data-lang="ld"><table><tbody><tr><td>1</td><td><span style="color:#268bd2;">memories</span><span> {</span><span style="color:#268bd2;">...</span><span>}
+</span><tr><td>2</td><td><span style="color:#268bd2;">sections</span><span> {
+</span><tr><td>3</td><td><span>
+</span><tr><td>4</td><td><span>    </span><span style="color:#268bd2;">.text</span><span> : {
+</span><tr><td>5</td><td><span>        *(</span><span style="color:#268bd2;">.text</span><span>)
+</span><tr><td>6</td><td><span>    } &gt; </span><span style="color:#268bd2;">rom
+</span><tr><td>7</td><td><span>    </span><span style="color:#268bd2;">.data</span><span> : {
+</span><tr><td>8</td><td><span>        *(</span><span style="color:#268bd2;">.data</span><span>)
+</span><tr><td>9</td><td><span>    } &gt; </span><span style="color:#268bd2;">ram
+</span><tr><td>10</td><td><span>
+</span><tr><td>11</td><td><span>    </span><span style="color:#268bd2;">.debug_macro</span><span>   : { *(</span><span style="color:#268bd2;">.debug_macro</span><span>)   }
+</span><tr><td>12</td><td><span>    </span><span style="color:#268bd2;">.debug_line</span><span>    : { *(</span><span style="color:#268bd2;">.debug_line</span><span>)    }
+</span><tr><td>13</td><td><span>    </span><span style="color:#268bd2;">.debug_str</span><span>     : { *(</span><span style="color:#268bd2;">.debug_str</span><span>)     }
+</span><tr><td>14</td><td><span>    </span><span style="color:#268bd2;">.debug_frame</span><span>   : { *(</span><span style="color:#268bd2;">.debug_frame</span><span>)   }
+</span><tr><td>15</td><td><span>    </span><span style="color:#268bd2;">.debug_info</span><span>    : { *(</span><span style="color:#268bd2;">.debug_info</span><span>)    }
+</span><tr><td>16</td><td><span>    </span><span style="color:#268bd2;">.debug_abbrev</span><span>  : { *(</span><span style="color:#268bd2;">.debug_abbrev</span><span>)  }
+</span><tr><td>17</td><td><span>    </span><span style="color:#268bd2;">.debug_aranges</span><span> : { *(</span><span style="color:#268bd2;">.debug_aranges</span><span>) }
+</span><tr><td>18</td><td><span>    </span><span style="color:#268bd2;">.debug_ranges</span><span>  : { *(</span><span style="color:#268bd2;">.debug_ranges</span><span>)  }
+</span><tr><td>19</td><td><span>    </span><span style="color:#268bd2;">.debug_loc</span><span>     : { *(</span><span style="color:#268bd2;">.debug_loc</span><span>)     }
+</span><tr><td>20</td><td><span>    </span><span style="color:#268bd2;">.comment</span><span>       : { *(</span><span style="color:#268bd2;">.comment</span><span>)       }
+</span><tr><td>21</td><td><span>    </span><span style="color:#268bd2;">.version_info</span><span>  : { *(</span><span style="color:#268bd2;">.version_info</span><span>)  }
+</span><tr><td>22</td><td><span>
+</span><tr><td>23</td><td><span>    </span><span style="color:#268bd2;">.unplaced</span><span> : {
+</span><tr><td>24</td><td><span>        </span><span style="color:#268bd2;">__unplaced_start</span><span> = </span><span style="color:#d33682;">.</span><span> ;
+</span><tr><td>25</td><td><span>        *(*)
+</span><tr><td>26</td><td><span>        </span><span style="color:#268bd2;">__unplaced_end</span><span> = </span><span style="color:#d33682;">.</span><span> ;
+</span><tr><td>27</td><td><span>
+</span><tr><td><mark style="background-color:#3f3d3812;">28</mark></td><td><mark style="background-color:#3f3d3812;"><span>        </span><span style="color:#268bd2;">ASSERT</span><span>(</span><span style="color:#268bd2;">__unplaced_start</span><span> == </span><span style="color:#268bd2;">__unplaced_end</span><span>, </span><span style="color:#268bd2;">&quot;ASSERT(.unplaced empty) failed&quot;</span><span>);
+</span></mark><tr><td>29</td><td><span>        </span><span style="color:#93a1a1;">/*
+</span><tr><td>30</td><td><span style="color:#93a1a1;">        * If the assert failed, check the .unplaced section in map file and
+</span><tr><td>31</td><td><span style="color:#93a1a1;">        * manually place anything that was placed there.
+</span><tr><td>32</td><td><span style="color:#93a1a1;">        */
+</span><tr><td>33</td><td><span>    }
+</span><tr><td>34</td><td><span>}
+</span></tr></tbody></table></code></pre>
+<p>This part of the linker script places <code>.data</code> in ram, a bunch of debug stuff at its default location and anything else will end up in <code>.unplaced</code> and trigger an error like this:</p>
+<pre style="background-color:#fdf6e3;color:#657b83;"><code><span>ld: error: ASSERT(.unplaced empty) failed
+</span></code></pre>
+<p>If you look at the map file:</p>
+<pre style="background-color:#fdf6e3;color:#657b83;"><code><span>.unplaced       memory region -&gt; /DISCARD/
+</span><span>                0x00000000    0x1234
+</span><span>                0x00000000                __unplaced_start = .
+</span><span> *(*)
+</span><span> .text.hello_world
+</span><span>                0x00000000        0x32 ./lib/lib.a(test.o)
+</span><span>                0x00000034                __unplaced_end = .
+</span><span>                0x00000000                ASSERT ((__unplaced_start == __unplaced_end), ...)
+</span></code></pre>
+<p>This tells you, that there is a section <code>.text.hello_world</code> which the compiler created when compiling <code>test.o</code> which is part of <code>lib/lib.a</code> and you did not place it explicitly.
+The reason is, that we captured <code>.text</code> but not <code>.text.*</code>. The issue was
+introduced when adding <code>-ffunction-sections</code> to the compiler options in order to
+reduce ROM usage (by also passing <code>-gc-sections</code> to the linker). This changes
+the section where code is placed, so it ended up in the wrong place.</p>
+<p>Depending on your compilers settings, a bunch of different debug sections will have to be added to the script.
+I have not found a more compact way which still allows debugging.
+Please write to me if you know the way!</p>
+
+
+</article>
+
+        </main>
+
+        
+        <footer>
+            <nav>
+                
+    <a style="float:left;" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;shell-scripts&#x2F;" rel="prev"> Older Post</a>
+
+    <a style="float:right;" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;dry-tests-in-c&#x2F;" rel="next"> Newer Post</a>
+
+
+                <a href="https://github.com/wonkodv">Github</a>
+                    &middot;
+                
+                <a href="https://github.com/wonkodv/wonkodv.github.io/blob/main/content/gnu-linker-assert-all-sections-placed.md">Source</a> /
+                <a href="https://github.com/wonkodv/wonkodv.github.io/edit/main/content/gnu-linker-assert-all-sections-placed.md">Change</a>
+                    &middot;
+                    <a href="https://github.com/wonkodv/wonkodv.github.io/discussions/new?category=general&title=About%20%22Explicitly%20Place%20All%20Sections%20When%20Linking%20With%20GNU%20LD%22&body=%0A%0A%0A%0A%0A%3C%21--%20please%20keep%20this%20footer%20--%3E%0A-----%0ALink%20to%20Post%0a%3Chttps%3A&#x2F;&#x2F;wonkodv.github.io&#x2F;gnu-linker-assert-all-sections-placed&#x2F;%3E">Discuss</a>
+                
+            </nav>
+        </footer>
+        
+    </body>
+</html>
+

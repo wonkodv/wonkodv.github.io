@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon"  href="https://wonkodv.github.io/favicon.png">
+        <link rel="stylesheet" type="text/css" href="https://wonkodv.github.io/style.css">
+        
+        <link rel="canonical" type="text/css" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;gta-vc-radio-stations-converter&#x2F;">
+        
+
+        
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://wonkodv.github.io/atom.xml">
+        
+
+        
+    <title> Convert GTA Vice City  ADF files - Zettelkasten</title>
+    <link rel="prev" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;neovim-remote-as-git-diff-tool&#x2F;" />
+    <link rel="next" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;recommended-reading&#x2F;" />
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Convert GTA Vice City  ADF files",
+        "alternativeHeadline": "GTA Vice City Radio Station audio files are obfuscated MP3s. Convert them with 5 lines of python.",
+        
+        "datePublished": "2023-03-12",
+        
+
+        "keywords": [
+        
+            "python"
+        
+        ],
+        "articleSection": "Programming"
+    }
+    </script>
+
+    <meta property="og:title" content="Convert GTA Vice City  ADF files">
+    <meta property="og:site_name" content="Zettelkasten">
+    <meta property="og:url" content="https://wonkodv.github.io/gta-vc-radio-stations-converter/">
+    <meta name="description" content="GTA Vice City Radio Station audio files are obfuscated MP3s. Convert them with 5 lines of python.">
+    <meta name="og:description" content="GTA Vice City Radio Station audio files are obfuscated MP3s. Convert them with 5 lines of python.">
+
+        
+    </head>
+
+    <body>
+        
+        <header>
+            <div class="big"><a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;" title="Home">Zettelkasten</a></div>
+            Wonko&#x27;s collection of notes
+            <nav>
+                <a href="https://wonkodv.github.io/first/">About</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;category&#x2F;">Categories</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;tags&#x2F;">Tags</a>
+
+                
+                
+            </nav>
+
+        </header>
+        
+
+        <main>
+            
+
+<article>
+
+    <p class="date">
+    Posted on <time datetime="2023-03-12T00:00:00+00:00">2023-03-12</time>
+    in 
+    
+        <a href="https://wonkodv.github.io/category/programming/">Programming</a>
+        <a href="https://wonkodv.github.io/category/playing/">Playing</a>,
+    tagged with 
+    
+        <a href="https://wonkodv.github.io/tags/python/" rel="tag">python</a>
+    
+
+    
+    </p>
+
+    <h1 id="convert-gta-vice-city-radio-station-adf-audio-files">Convert GTA Vice City Radio station ADF audio files</h1>
+<p>On the &quot;Game&quot; CD of GTA Vice City is a <code>Audio</code> Directory, which contains all the radio stations as <code>.adf</code> files.
+These are MP3 files &quot;encrypted&quot; using the sophisticated XOR algorithm with password <code>&quot;</code> that is, <code>0x22</code>.
+You can convert them to mp3 files with this python snippet.</p>
+<p>Listening might make you nostalgic though.</p>
+<pre data-lang="python" style="background-color:#fdf6e3;color:#657b83;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#cb4b16;">import </span><span>pathlib
+</span><span style="color:#cb4b16;">import </span><span>sys
+</span><span>
+</span><span style="color:#859900;">for </span><span>p_from </span><span style="color:#859900;">in </span><span>pathlib.</span><span style="color:#b58900;">Path</span><span>(sys.argv</span><span style="color:#268bd2;">[</span><span style="color:#6c71c4;">1</span><span style="color:#268bd2;">]</span><span>).</span><span style="color:#b58900;">glob</span><span>(</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">*.adf</span><span style="color:#839496;">&quot;</span><span>):
+</span><span>    pathlib.</span><span style="color:#b58900;">Path</span><span>(
+</span><span>        sys.argv</span><span style="color:#268bd2;">[</span><span style="color:#6c71c4;">2</span><span style="color:#268bd2;">]</span><span>,
+</span><span>        </span><span style="color:#268bd2;">f</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">GTA Vice City Radio - </span><span>{p_from.stem.</span><span style="color:#b58900;">capitalize</span><span>()}</span><span style="color:#2aa198;">.mp3</span><span style="color:#839496;">&quot;</span><span>,
+</span><span>    ).</span><span style="color:#b58900;">write_bytes</span><span>(</span><span style="color:#859900;">bytes</span><span>(b ^ </span><span style="color:#6c71c4;">0x22 </span><span style="color:#859900;">for </span><span>b </span><span style="color:#859900;">in </span><span>p_from.</span><span style="color:#b58900;">read_bytes</span><span>()))
+</span></code></pre>
+<p>Call as <code>python foo.py /mnt/Audio/ /path/to/your/music</code></p>
+
+
+</article>
+
+        </main>
+
+        
+        <footer>
+            <nav>
+                
+    <a style="float:left;" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;neovim-remote-as-git-diff-tool&#x2F;" rel="prev"> Older Post</a>
+
+    <a style="float:right;" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;recommended-reading&#x2F;" rel="next"> Newer Post</a>
+
+
+                <a href="https://github.com/wonkodv">Github</a>
+                    &middot;
+                
+                <a href="https://github.com/wonkodv/wonkodv.github.io/blob/main/content/gta_vc_radio_stations_converter.md">Source</a> /
+                <a href="https://github.com/wonkodv/wonkodv.github.io/edit/main/content/gta_vc_radio_stations_converter.md">Change</a>
+                    &middot;
+                    <a href="https://github.com/wonkodv/wonkodv.github.io/discussions/new?category=general&title=About%20%22Convert%20GTA%20Vice%20City%20%20ADF%20files%22&body=%0A%0A%0A%0A%0A%3C%21--%20please%20keep%20this%20footer%20--%3E%0A-----%0ALink%20to%20Post%0a%3Chttps%3A&#x2F;&#x2F;wonkodv.github.io&#x2F;gta-vc-radio-stations-converter&#x2F;%3E">Discuss</a>
+                
+            </nav>
+        </footer>
+        
+    </body>
+</html>
+

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon"  href="https://wonkodv.github.io/favicon.png">
+        <link rel="stylesheet" type="text/css" href="https://wonkodv.github.io/style.css">
+        
+        <link rel="canonical" type="text/css" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;presenting-with-vim&#x2F;">
+        
+
+        
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://wonkodv.github.io/atom.xml">
+        
+
+        
+    <title> Presenting in VIM - Zettelkasten</title>
+    <link rel="prev" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;dry-tests-in-c&#x2F;" />
+    <link rel="next" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;bluetooth-error&#x2F;" />
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Presenting in VIM",
+        "alternativeHeadline": "If your presentation is code heavy, leverage syntax highlighting and writing comfort by staying in the editor",
+        
+        
+        "image": [
+            "https://wonkodv.github.io/presenting_with_vim/presenting_with_vim.png"
+        ],
+        "author": {
+            "@type": "Person",
+            "name": "Wonko",
+            "url": "https://wonkodv.github.io/"
+        },
+        
+        "datePublished": "2021-09-16",
+        
+
+        "keywords": [
+        
+            "Vim"
+        
+        ],
+        "articleSection": "Programming"
+    }
+    </script>
+
+    <meta property="og:title" content="Presenting in VIM">
+    <meta property="og:site_name" content="Zettelkasten">
+    <meta property="og:url" content="https://wonkodv.github.io/presenting-with-vim/">
+    <meta name="description" content="If your presentation is code heavy, leverage syntax highlighting and writing comfort by staying in the editor">
+    <meta name="og:description" content="If your presentation is code heavy, leverage syntax highlighting and writing comfort by staying in the editor">
+    <meta property="og:image" content="https://wonkodv.github.io/presenting_with_vim/presenting_with_vim.png">
+
+        
+    </head>
+
+    <body>
+        
+        <header>
+            <div class="big"><a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;" title="Home">Zettelkasten</a></div>
+            Wonko&#x27;s collection of notes
+            <nav>
+                <a href="https://wonkodv.github.io/first/">About</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;category&#x2F;">Categories</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;tags&#x2F;">Tags</a>
+
+                
+                
+            </nav>
+
+        </header>
+        
+
+        <main>
+            
+
+<article>
+
+    <p class="date">
+    Posted on <time datetime="2021-09-16T00:00:00+00:00">2021-09-16</time>
+    in 
+    
+        <a href="https://wonkodv.github.io/category/programming/">Programming</a>,
+    tagged with 
+    
+        <a href="https://wonkodv.github.io/tags/vim/" rel="tag">Vim</a>
+    
+
+    
+    </p>
+
+    <h1 id="presenting-in-vim">Presenting in VIM</h1>
+<p>If you have to present something that contains mostly code and no graphics, you can stay in vim.
+The benefit is that you can write your presentation like code. Also, often when
+talking about code it is useful to show some real code, and that is easiest when
+you are already in the right tool.</p>
+
+
+
+    
+    
+
+
+
+
+
+    
+
+
+
+
+
+    
+    
+
+<a href="&#x2F;presenting_with_vim&#x2F;presenting_with_vim.png" target="_blank"><img width="800" height="600" src="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;processed_images&#x2F;3b89d1668c8bd41a00.png" alt="Screenshot of a presentation using vim" title="Screenshot using neovim in terminator"></a>
+
+<p>Write your &quot;Slides&quot; in Markdown, starting with a new Headline in line 50, 100,
+150, ...</p>
+<p>Some configuration is necessary to:</p>
+<ol>
+<li>hide every visual distraction</li>
+<li>Add a margin</li>
+<li>increase your font size</li>
+<li>enable smooth navigation.</li>
+</ol>
+<p>Points one and two are simply some settings. Which exactly depends on you normal setup and plugins.
+Enabling <code>cursorline</code> helps in online meetings if you would normally point at
+things with your finger.</p>
+<p>The font is either controlled by your terminal (<code>CTRL+SCROLL_WHEEL</code> in termnator)
+or by a setting <code>set guifont=Consolas:18</code> in GVim/<code>neovim-qt</code>.
+It should be large enough that bad projectors or vidoe codecs over low bandwith
+online meetings still produce something readable.</p>
+<p>Smooth navigation is achieved by a mapping that snaps lines 50, 100, 150, ... to the top of the screen.
+I currently have the following <code>present.vim</code> which I source when necessary:</p>
+<pre data-lang="vim" style="background-color:#fdf6e3;color:#657b83;" class="language-vim "><code class="language-vim" data-lang="vim"><span style="color:#859900;">nnoremap &lt;buffer&gt; &lt;F3&gt; &lt;CMD&gt;exe </span><span style="color:#2aa198;">&#39;normal &#39;</span><span style="color:#859900;">.</span><span>(</span><span style="color:#859900;">line</span><span>(</span><span style="color:#2aa198;">&quot;.&quot;</span><span>)/</span><span style="color:#6c71c4;">50</span><span style="color:#859900;">*</span><span style="color:#6c71c4;">50</span><span>)</span><span style="color:#859900;">.</span><span style="color:#2aa198;">&#39;Gzt&#39;</span><span style="color:#859900;">&lt;CR&gt;&lt;C-L&gt;
+</span><span style="color:#859900;">nmap &lt;buffer&gt; &lt;F2&gt; </span><span style="color:#6c71c4;">50</span><span>k</span><span style="color:#859900;">&lt;F3&gt;
+</span><span style="color:#859900;">nmap &lt;buffer&gt; &lt;F4&gt; </span><span style="color:#6c71c4;">50</span><span>j</span><span style="color:#859900;">&lt;F3&gt;
+</span><span style="color:#859900;">nnoremap &lt;buffer&gt; &lt;F5&gt;</span><span> yi</span><span style="color:#859900;">&lt;:! firefox &lt;C-R&gt;</span><span style="color:#93a1a1;">&quot;&lt;CR&gt;&lt;space&gt;
+</span><span>
+</span><span>highlight! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
+</span><span>
+</span><span style="color:#859900;">setlocal</span><span> scrolloff=</span><span style="color:#6c71c4;">1
+</span><span style="color:#859900;">setlocal</span><span> guifont=Consola</span><span style="color:#268bd2;">s:h18
+</span><span style="color:#859900;">setlocal</span><span> nonumber
+</span><span style="color:#859900;">setlocal</span><span> cmdheight=</span><span style="color:#6c71c4;">1
+</span><span style="color:#859900;">setlocal</span><span> statusline=
+</span><span style="color:#859900;">setlocal</span><span> showtabline=</span><span style="color:#6c71c4;">0
+</span><span style="color:#859900;">setlocal</span><span> signcolumn=ye</span><span style="color:#268bd2;">s:3
+</span><span style="color:#859900;">setlocal</span><span> noshowmode
+</span><span style="color:#859900;">setlocal</span><span> laststatus=</span><span style="color:#6c71c4;">0
+</span><span style="color:#859900;">setlocal</span><span> noshowcmd
+</span><span style="color:#859900;">setlocal</span><span> nocursorcolumn
+</span><span style="color:#859900;">setlocal</span><span> nolist
+</span><span style="color:#859900;">setlocal</span><span> colorcolumn=
+</span><span style="color:#859900;">setlocal</span><span> noruler
+</span></code></pre>
+<p>I navigate through the &quot;slides&quot; using F2 for previous, F4 for next and F3 to
+realign the slide to the top of the screen.
+F5 marks a URL inside <code>&lt;&gt;</code> and opens it in <code>firefox</code>, so you can show a picture.</p>
+<p>You can play around using <a href="/presenting_with_vim/present.vim">present.vim</a> and <a href="/presenting_with_vim/presentation.md">presentation.md</a></p>
+
+
+</article>
+
+        </main>
+
+        
+        <footer>
+            <nav>
+                
+    <a style="float:left;" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;dry-tests-in-c&#x2F;" rel="prev"> Older Post</a>
+
+    <a style="float:right;" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;bluetooth-error&#x2F;" rel="next"> Newer Post</a>
+
+
+                <a href="https://github.com/wonkodv">Github</a>
+                    &middot;
+                
+                <a href="https://github.com/wonkodv/wonkodv.github.io/blob/main/content/presenting_with_vim.md">Source</a> /
+                <a href="https://github.com/wonkodv/wonkodv.github.io/edit/main/content/presenting_with_vim.md">Change</a>
+                    &middot;
+                    <a href="https://github.com/wonkodv/wonkodv.github.io/discussions/new?category=general&title=About%20%22Presenting%20in%20VIM%22&body=%0A%0A%0A%0A%0A%3C%21--%20please%20keep%20this%20footer%20--%3E%0A-----%0ALink%20to%20Post%0a%3Chttps%3A&#x2F;&#x2F;wonkodv.github.io&#x2F;presenting-with-vim&#x2F;%3E">Discuss</a>
+                
+            </nav>
+        </footer>
+        
+    </body>
+</html>
+

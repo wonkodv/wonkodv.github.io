@@ -1,0 +1,18 @@
+base_url = "https://wonkodv.github.io/"
+title = "Zettelkasten"
+description = "Wonko's collection of notes"
+generate_feed = true
+output_dir = "docs"
+
+[[taxonomies]]
+name = "category"
+[[taxonomies]]
+name = "tags"
+
+[markdown]
+highlight_code = true
+highlight_theme = "solarized-light"
+
+external_links_target_blank = true
+[extra]
+# Put all your custom variables here

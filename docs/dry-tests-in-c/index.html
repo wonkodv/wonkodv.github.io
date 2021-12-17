@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon"  href="https://wonkodv.github.io/favicon.png">
+        <link rel="stylesheet" type="text/css" href="https://wonkodv.github.io/style.css">
+        
+        <link rel="canonical" type="text/css" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;dry-tests-in-c&#x2F;">
+        
+
+        
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="https://wonkodv.github.io/atom.xml">
+        
+
+        
+    <title> Don&#x27;t Repeat Yourself While Writing Unit Tests in C - Zettelkasten</title>
+    <link rel="prev" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;gnu-linker-assert-all-sections-placed&#x2F;" />
+    <link rel="next" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;presenting-with-vim&#x2F;" />
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Don&#x27;t Repeat Yourself While Writing Unit Tests in C",
+        "alternativeHeadline": "Use macro magic to avoid having to repeat test names",
+        
+        "datePublished": "2021-05-30",
+        
+        "dateModified": "2022-01-04",
+        
+
+        "keywords": [
+        
+            "C",  
+        
+            "Unit Tests"
+        
+        ],
+        "articleSection": "Programming"
+    }
+    </script>
+
+    <meta property="og:title" content="Don&#x27;t Repeat Yourself While Writing Unit Tests in C">
+    <meta property="og:site_name" content="Zettelkasten">
+    <meta property="og:url" content="https://wonkodv.github.io/dry-tests-in-c/">
+    <meta name="description" content="Use macro magic to avoid having to repeat test names">
+    <meta name="og:description" content="Use macro magic to avoid having to repeat test names">
+
+        
+    </head>
+
+    <body>
+        
+        <header>
+            <div class="big"><a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;" title="Home">Zettelkasten</a></div>
+            Wonko&#x27;s collection of notes
+            <nav>
+                <a href="https://wonkodv.github.io/first/">About</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;category&#x2F;">Categories</a>
+                     &middot;
+                
+                <a href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;tags&#x2F;">Tags</a>
+
+                
+                
+            </nav>
+
+        </header>
+        
+
+        <main>
+            
+
+<article>
+
+    <p class="date">
+    Posted on <time datetime="2021-05-30T00:00:00+00:00">2021-05-30</time>
+    in 
+    
+        <a href="https://wonkodv.github.io/category/programming/">Programming</a>,
+    tagged with 
+    
+        <a href="https://wonkodv.github.io/tags/c/" rel="tag">C</a>, 
+    
+        <a href="https://wonkodv.github.io/tags/unit-tests/" rel="tag">Unit Tests</a>
+    
+
+    
+            Updated on <time datetime="2022-01-04T00:00:00+00:00">2022-01-04</time>.
+    
+    </p>
+
+    <h1 id="don-t-repeat-yourself-while-writing-unit-tests-in-c">Don't Repeat Yourself While Writing Unit Tests in C</h1>
+<p>A File containing unit tests can be as simple as this:</p>
+<pre data-lang="c" style="background-color:#fdf6e3;color:#657b83;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#cb4b16;">#include </span><span style="color:#839496;">&lt;</span><span style="color:#2aa198;">test.h</span><span style="color:#839496;">&gt;
+</span><span style="color:#cb4b16;">#include </span><span style="color:#839496;">&lt;</span><span style="color:#2aa198;">sum.h</span><span style="color:#839496;">&gt;
+</span><span>
+</span><span style="color:#b58900;">TEST_CASE</span><span>(sum_zero_elements)
+</span><span>{
+</span><span>    </span><span style="color:#859900;">uint32_t</span><span> elements</span><span style="color:#268bd2;">[</span><span style="color:#6c71c4;">1</span><span style="color:#268bd2;">] </span><span>= {</span><span style="color:#6c71c4;">1</span><span>};
+</span><span>    s = </span><span style="color:#b58900;">sum</span><span>(elements, </span><span style="color:#6c71c4;">0</span><span>);
+</span><span>    </span><span style="color:#b58900;">ASSERT_EQUAL</span><span>(s, </span><span style="color:#6c71c4;">0</span><span>);
+</span><span>}
+</span><span style="color:#b58900;">TEST_CASE</span><span>(sum_one_element)
+</span><span>{
+</span><span>    </span><span style="color:#859900;">uint32_t</span><span> elements</span><span style="color:#268bd2;">[</span><span style="color:#6c71c4;">1</span><span style="color:#268bd2;">] </span><span>= {</span><span style="color:#6c71c4;">1</span><span>};
+</span><span>    s = </span><span style="color:#b58900;">sum</span><span>(elements, </span><span style="color:#6c71c4;">1</span><span>);
+</span><span>    </span><span style="color:#b58900;">ASSERT_EQUAL</span><span>(s, </span><span style="color:#6c71c4;">1</span><span>);
+</span><span>}
+</span><span style="color:#b58900;">TEST_CASE</span><span>(sum_null)
+</span><span>{
+</span><span>    s = </span><span style="color:#b58900;">sum</span><span>(</span><span style="color:#b58900;">NULL</span><span>, </span><span style="color:#6c71c4;">1</span><span>);
+</span><span>    </span><span style="color:#b58900;">ASSERT_ERROR</span><span>(ARGUMENT_ERROR);
+</span><span>}
+</span></code></pre>
+<p>There is no reason to write any Test Suite functions or Test Runners.
+The macro in cooperation with the linker can do that, with something like:</p>
+<pre data-lang="c" style="background-color:#fdf6e3;color:#657b83;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#cb4b16;">#define TEST_CASE</span><span>(</span><span style="color:#268bd2;">tc</span><span>)
+</span><span>   </span><span style="color:#586e75;">static </span><span style="color:#268bd2;">void</span><span> TC_##</span><span style="color:#b58900;">tc</span><span>(TEST_RUN</span><span style="color:#859900;">*</span><span> run);
+</span><span>   </span><span style="color:#586e75;">__attribute__</span><span>((</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">section=.test_cases.</span><span style="color:#839496;">&quot;</span><span>##tc)) </span><span style="color:#586e75;">static const</span><span> TEST_CASE_INFO TCI_##tc = {
+</span><span>    .</span><span style="color:#268bd2;">line</span><span>=</span><span style="color:#859900;">__LINE__</span><span>,
+</span><span>    .</span><span style="color:#268bd2;">file</span><span>=</span><span style="color:#859900;">__FILE__</span><span>,
+</span><span>    .</span><span style="color:#268bd2;">name</span><span>=#tc,
+</span><span>    .</span><span style="color:#268bd2;">function</span><span>=TC_##tc,
+</span><span>  }
+</span><span>  </span><span style="color:#586e75;">static </span><span style="color:#268bd2;">void</span><span> TC_##</span><span style="color:#b58900;">tc</span><span>(TEST_RUN</span><span style="color:#859900;">*</span><span> run)
+</span></code></pre>
+<p>This places an info struct in a dedicated section.
+The linker will link all those together to produce an array of <code>TEST_CASE_INFO</code> which the test runner can simply iterate over:</p>
+<pre data-lang="c" style="background-color:#fdf6e3;color:#657b83;" class="language-c "><code class="language-c" data-lang="c"><span>TEST_CASE_INFO __test_cases_start</span><span style="color:#268bd2;">[]</span><span>;
+</span><span>TEST_CASE_INFO __test_cases_end</span><span style="color:#268bd2;">[]</span><span>;
+</span><span>
+</span><span style="color:#859900;">uint32_t</span><span> passed, failed;
+</span><span>TEST_CASE_INFO tc;
+</span><span>
+</span><span style="color:#859900;">for </span><span>(tc=</span><span style="color:#859900;">&amp;</span><span>__test_cases_start</span><span style="color:#268bd2;">[</span><span style="color:#6c71c4;">0</span><span style="color:#268bd2;">]</span><span>; tc&lt;</span><span style="color:#859900;">&amp;</span><span>__test_cases_end</span><span style="color:#268bd2;">[</span><span style="color:#6c71c4;">0</span><span style="color:#268bd2;">]</span><span>; tc=</span><span style="color:#859900;">&amp;</span><span>tc</span><span style="color:#268bd2;">[</span><span style="color:#6c71c4;">1</span><span style="color:#268bd2;">]</span><span>) {
+</span><span>    TEST_RUN run = {
+</span><span>       .</span><span style="color:#268bd2;">failed</span><span>=</span><span style="color:#b58900;">false</span><span>,
+</span><span>       .</span><span style="color:#268bd2;">test_case</span><span>=tc,
+</span><span>    };
+</span><span>    tc.</span><span style="color:#b58900;">function</span><span>(</span><span style="color:#859900;">&amp;</span><span>run);
+</span><span>    </span><span style="color:#859900;">if </span><span>(run.</span><span style="color:#268bd2;">failed</span><span>) {
+</span><span>        failed += </span><span style="color:#6c71c4;">1</span><span>;
+</span><span>        </span><span style="color:#93a1a1;">/* info already printed by assert */
+</span><span>    } </span><span style="color:#859900;">else </span><span>{
+</span><span>        passed += </span><span style="color:#6c71c4;">1</span><span>;
+</span><span>        </span><span style="color:#859900;">printf</span><span>(</span><span style="color:#839496;">&quot;</span><span style="color:#cb4b16;">%s</span><span style="color:#2aa198;">:TC_</span><span style="color:#cb4b16;">%:%</span><span style="color:#2aa198;">d:PASS</span><span style="color:#dc322f;">\n</span><span style="color:#839496;">&quot;</span><span>, tc-&gt;file, tc-&gt;name, tc-&gt;line);
+</span><span>    }
+</span><span>}
+</span><span style="color:#b58900;">printf</span><span>(</span><span style="color:#839496;">&quot;</span><span style="color:#dc322f;">\n</span><span style="color:#2aa198;">SUMMARY</span><span style="color:#dc322f;">\n</span><span style="color:#cb4b16;">%d</span><span style="color:#2aa198;"> Tests Passed </span><span style="color:#cb4b16;">%d</span><span style="color:#2aa198;"> tests Failed</span><span style="color:#dc322f;">\n</span><span style="color:#839496;">&quot;</span><span>, passed, failed);
+</span></code></pre>
+<p>The benefits of this kind of approach:</p>
+<ul>
+<li>You don't repeat yourself.
+The Name of the test case appears exactly once in your project.
+Calling the function from a test suite and the suite from a test runner is just repeating things that you should not have to.
+Every step that has to be done by hand will be forgotten sooner or later.
+Automating solves the problem.</li>
+<li>Lean commits because you only touch one place when adding, deleting or renaming tests.</li>
+<li>You can concentrate on the test, not the surrounding, allowing you to write more tests in less time.</li>
+<li>It is easy to disable all tests you are not currently working on by deleting them. Later, get them from your git to run all tests.</li>
+<li>It is easy to partition tests into chunks if you want to run tests on an embedded device with limited memory, by simply compiling a couple of files at a time.</li>
+<li><code>ctags</code> can know where <code>TC_sum_zero_elements()</code> is defined by something like:<pre data-lang="txt" style="background-color:#fdf6e3;color:#657b83;" class="language-txt "><code class="language-txt" data-lang="txt"><span>--regex-c=/^ *TEST_CASE\(([a-zA-Z0-9_]*)\)/TC_\1/f/
+</span></code></pre>
+This regex extracts the word inside the parenthesis, prefixes it with <code>TC_</code> and adds it as a function tag.</li>
+</ul>
+<p>If you get a bad feeling whether all tests ran, you can do the following things (all of which are a good idea anyway):</p>
+<ul>
+<li>Measure code coverage</li>
+<li>Have your build tool tool count the number of <code>TEST_CASE</code> maybe also the number of <code>ASSERT</code> in your tests folder (<code>grep TEST_CASE -r tests/|wc -l</code>) 
+and verify that as many tests were executed.
+Before a Release, do the same by hand.
+This is even more important if you are not using linker magic,
+because developers will eventually forget to add their newly written tests to the test suite.</li>
+<li>Extend the TEST_CASE macro to add, which requirement(s) are covered by a test case and let your requirements,
+print the requirement ids in the testlog for tests that passed and
+configure your requirement tracing tool to track requirements into the test
+log<pre data-lang="c" style="background-color:#fdf6e3;color:#657b83;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#b58900;">TEST_CASE</span><span>(sum_one_element, </span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">UC_sum_1</span><span style="color:#839496;">&quot;</span><span>)
+</span><span>{
+</span><span>    </span><span style="color:#859900;">uint32_t</span><span> elements</span><span style="color:#268bd2;">[</span><span style="color:#6c71c4;">1</span><span style="color:#268bd2;">] </span><span>= {</span><span style="color:#6c71c4;">1</span><span>};
+</span><span>    s = </span><span style="color:#b58900;">sum</span><span>(elements, </span><span style="color:#6c71c4;">1</span><span>);
+</span><span>    </span><span style="color:#b58900;">ASSERT_EQUAL</span><span>(s, </span><span style="color:#6c71c4;">1</span><span>);
+</span><span>}
+</span></code></pre>
+<pre data-lang="txt" style="background-color:#fdf6e3;color:#657b83;" class="language-txt "><code class="language-txt" data-lang="txt"><span>ts_sum.c:TC_sum_one_element:42:PASS COVERS: UC_sum_1
+</span></code></pre>
+</li>
+<li>Use coverage marks in your code<pre data-lang="c" style="background-color:#fdf6e3;color:#657b83;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#b58900;">void </span><span>(</span><span style="color:#859900;">uint32_t *</span><span>elements, count) {
+</span><span>    </span><span style="color:#b58900;">COVER</span><span>(UC_sum);
+</span><span>    </span><span style="color:#859900;">if </span><span>(!elements) {
+</span><span>        </span><span style="color:#b58900;">COVER</span><span>(UC_sum_nullptr);
+</span><span>        </span><span style="color:#b58900;">set_error</span><span>(ARGUMENT_ERROR);
+</span><span>        </span><span style="color:#859900;">return</span><span>;
+</span><span>    }
+</span><span>    </span><span style="color:#859900;">...
+</span><span>}
+</span></code></pre>
+and define them to print marks when executing code.<pre data-lang="c" style="background-color:#fdf6e3;color:#657b83;" class="language-c "><code class="language-c" data-lang="c"><span style="color:#cb4b16;">#define COVER</span><span>(</span><span style="color:#268bd2;">m</span><span>) </span><span style="color:#859900;">do</span><span>{                                             </span><span style="color:#dc322f;">\
+</span><span style="color:#cb4b16;">    </span><span style="color:#859900;">printf</span><span>(</span><span style="color:#839496;">&quot;</span><span style="color:#2aa198;">{}:{}:{}:Covers: {}</span><span style="color:#dc322f;">\n</span><span style="color:#839496;">&quot;</span><span style="color:#cb4b16;">,                              \
+</span><span style="color:#cb4b16;">    current_test_run-&gt;tc.</span><span style="color:#268bd2;">file</span><span style="color:#cb4b16;">,                                   \
+</span><span style="color:#cb4b16;">    current_test_run-&gt;tc.</span><span style="color:#268bd2;">line</span><span style="color:#cb4b16;">,                                   \
+</span><span style="color:#cb4b16;">    current_test_run-&gt;tc.</span><span style="color:#268bd2;">name</span><span style="color:#cb4b16;">,                                   \
+</span><span style="color:#cb4b16;">    #m</span><span>)</span><span style="color:#cb4b16;">;
+</span></code></pre>
+The requirements tool can now verify that the unittest hit code that
+implements a requirement by tracing into the log:<pre style="background-color:#fdf6e3;color:#657b83;"><code><span>ts_sum.c:TC_sum_null:42:Covers: UC_sum
+</span><span>ts_sum.c:TC_sum_null:42:Covers: UC_sum_nullptr
+</span><span>ts_sum.c:TC_sum_null:42:PASS
+</span></code></pre>
+</li>
+</ul>
+
+
+</article>
+
+        </main>
+
+        
+        <footer>
+            <nav>
+                
+    <a style="float:left;" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;gnu-linker-assert-all-sections-placed&#x2F;" rel="prev"> Older Post</a>
+
+    <a style="float:right;" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;presenting-with-vim&#x2F;" rel="next"> Newer Post</a>
+
+
+                <a href="https://github.com/wonkodv">Github</a>
+                    &middot;
+                
+                <a href="https://github.com/wonkodv/wonkodv.github.io/blob/main/content/dry-tests-in-c.md">Source</a> /
+                <a href="https://github.com/wonkodv/wonkodv.github.io/edit/main/content/dry-tests-in-c.md">Change</a>
+                    &middot;
+                    <a href="https://github.com/wonkodv/wonkodv.github.io/discussions/new?category=general&title=About%20%22Don%27t%20Repeat%20Yourself%20While%20Writing%20Unit%20Tests%20in%20C%22&body=%0A%0A%0A%0A%0A%3C%21--%20please%20keep%20this%20footer%20--%3E%0A-----%0ALink%20to%20Post%0a%3Chttps%3A&#x2F;&#x2F;wonkodv.github.io&#x2F;dry-tests-in-c&#x2F;%3E">Discuss</a>
+                
+            </nav>
+        </footer>
+        
+    </body>
+</html>
+

@@ -1,0 +1,81 @@
+html,
+body {
+    font-family: arial;
+    font-size: 1.1rem;
+}
+
+a, a:visited {
+    color: blue;
+    text-decoration:none;
+}
+
+a:hover {
+    text-decoration:underline;
+}
+
+body {
+    margin: auto;
+    max-width: 50rem;
+    padding: 1rem;
+}
+
+header {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+main {
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    padding: 1em 0;
+}
+
+footer {
+    margin-top: 2rem;
+    font-size: 1rem;
+}
+footer nav {
+    text-align:center;
+}
+
+p.date {
+    font-size:0.8rem;
+}
+
+header .big {
+    font-size: 2rem;
+}
+
+li p {
+    margin: 0.3rem;
+}
+li .title {
+    font-size: 1.3rem;
+}
+
+
+pre {
+    overflow-x:auto;
+    padding: 1rem;
+}
+
+code {
+    background-color: #fdf6e3;
+    color: #002b36;
+}
+
+blockquote {
+    border-left: 2px solid black;
+    padding-left: 1rem;
+    margin-left: 1rem;
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+}
+
+sup.footnote-definition-label {
+    float:left;
+    margin-right:1rem;
+}

@@ -1,0 +1,1525 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+	<title>Zettelkasten</title>
+	<subtitle>Wonko&#x27;s collection of notes</subtitle>
+	<link href="https://wonkodv.github.io/atom.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://wonkodv.github.io/"/>
+	<generator uri="https://www.getzola.org/">Zola</generator>
+	<updated>2024-03-08T00:00:00+00:00</updated>
+	<id>https://wonkodv.github.io/atom.xml</id>
+	<entry xml:lang="en">
+		<title>Bookmarklets are Cool</title>
+		<published>2024-03-07T00:00:00+00:00</published>
+		<updated>2024-03-07T00:00:00+00:00</updated>
+		<link href="https://wonkodv.github.io/bookmarklets/" type="text/html"/>
+		<id>https://wonkodv.github.io/bookmarklets/</id>
+		<content type="html">&lt;h1 id=&quot;bookmarklets-are-cool&quot;&gt;Bookmarklets Are Cool&lt;&#x2F;h1&gt;
+&lt;p&gt;Bookmarklets are bookmarks that start with &lt;code&gt;javascript:&lt;&#x2F;code&gt;.
+Power users like them, to add functionality to a site.&lt;&#x2F;p&gt;
+&lt;p&gt;Here, I&#x27;m listing the ones that I usually have with me.
+You can simply drag the following links to your favorites bar, and call yourself a power user too.&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href= &quot;javascript:window.open(&#x27;http:&#x2F;&#x2F;chart.apis.google.com&#x2F;chart?cht=qr&amp;chs=500x500&amp;chl=&#x27;+encodeURIComponent(document.location.href), &#x27;_blank&#x27;, &#x27;innerHeight=550,innerWidth=550,menubar=no,scrollbars=no,status=no&#x27;); void(0);&quot;&gt;Qr Code&lt;&#x2F;a&gt; Open a window with the QR Code of the current url (sends the url to google)&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;javascript:scroll(0,0);void(0);&quot;&gt;Scroll Top&lt;&#x2F;a&gt; Scroll to the top of the page.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&quot;javascript:document.location.href+=&amp;quot;&amp;list=ULcxqQ59vzyTk&amp;quot; ;&quot; onmousedown=&quot;this.href=&#x27;javascript:document.location.href+=&amp;quot;&amp;list=ULcxqQ59vzyTk&amp;quot;;                                                            if(document.location.host.search(&amp;quot;youtube&amp;quot;)&gt;0)console.error(&amp;quot;\n\n\n\n\n\nI could have stolen your YT cookies, but i did not\n\n\n\n&amp;quot;,document.cookie);&#x27;&quot; onclick=&quot; this.href=&#x27;javascript:document.location.href+=&amp;quot;&amp;list=ULcxqQ59vzyTk&amp;quot;&#x27;;alert(&#x27;do not just click it here, drag it to your taskbar&#x27;); return false;&quot; onmouseup=&quot;this.href=&#x27;javascript:document.location.href+=&amp;quot;&amp;list=ULcxqQ59vzyTk&amp;quot;&#x27;&quot; ondragstart=&quot;this.href=&#x27;javascript:document.location.href+=&amp;quot;&amp;list=ULcxqQ59vzyTk&amp;quot;&#x27;&quot; &gt;    Youtube Channel Playlist&lt;&#x2F;a&gt;
+Click while watching a Youtube video, to get a playlist of all videos of that channel.
+I wrote a little more about the basic version &lt;a href=&quot;https:&#x2F;&#x2F;wonkodv.github.io&#x2F;videos-of-a-youtube-channel&#x2F;&quot;&gt;here&lt;&#x2F;a&gt;.
+But this is the enhanced version.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;is-dragging-links-dangerous&quot;&gt;Is dragging Links dangerous&lt;&#x2F;h2&gt;
+&lt;p&gt;When you use the last one, you get the desired effect. Plus an error entry in your debugging console with your YT cookies. How did that happen?
+The url changes in the &lt;code&gt;onmosedown&lt;&#x2F;code&gt; event. The changed url is put in the Bookmark. To keep up appearances, it changes back in &lt;code&gt;ondragstart&lt;&#x2F;code&gt;, &lt;code&gt;onclick&lt;&#x2F;code&gt; and &lt;code&gt;onmouseup&lt;&#x2F;code&gt;.
+The changed url has some additional javascript, where I could do all kinds of shenanigans.&lt;&#x2F;p&gt;
+&lt;p&gt;Chromium (v122) will just accept this.&lt;&#x2F;p&gt;
+&lt;p&gt;Firefox (v123) will show you the &amp;quot;Add Bookmark&amp;quot; dialog for javascript urls, but by being so honest about it all, this doesn&#x27;t surprise you.
+The evil part comes after enough whitespaces, that you don&#x27;t see it.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;is-this-a-bug&quot;&gt;Is this a Bug ?&lt;&#x2F;h2&gt;
+&lt;p&gt;I actually stumbled over this while &lt;a href=&quot;https:&#x2F;&#x2F;wonkodv.github.io&#x2F;videos-of-a-youtube-channel&#x2F;&quot;&gt;writing about the YT Playlist button&lt;&#x2F;a&gt;.
+I opened security bugs for firefox and chromium.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;chromium&quot;&gt;Chromium&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;issues.chromium.org&#x2F;issues&#x2F;40059144?pli=1&quot;&gt;https:&#x2F;&#x2F;issues.chromium.org&#x2F;issues&#x2F;40059144?pli=1&lt;&#x2F;a&gt;
+As this was filed as a security issue, the bug report is not publicly visible.&lt;&#x2F;p&gt;
+&lt;p&gt;The severity of the vulnerability was set to low, as this xss involves user interaction and users could be &amp;quot;social engeneered&amp;quot; into dragging a &lt;code&gt;javascript:&lt;&#x2F;code&gt; link directly.
+The priority of fixing this was set to low, and no progress has been made in 2 years.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;firefox&quot;&gt;Firefox&lt;&#x2F;h3&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;bugzilla.mozilla.org&#x2F;show_bug.cgi?id=1760392&quot;&gt;https:&#x2F;&#x2F;bugzilla.mozilla.org&#x2F;show_bug.cgi?id=1760392&lt;&#x2F;a&gt;
+The bug is closed, and marked as a duplicate of &amp;quot;Don&#x27;t allow dragging javascript: links&amp;quot;, where the gist is, that the &amp;quot;Add Bookmark&amp;quot; dialog is enough to make users aware of the javascript part.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;so&quot;&gt;So...&lt;&#x2F;h2&gt;
+&lt;p&gt;I recently though of this, and wanted to check up on what became of my reports. Since the browser vendors don&#x27;t consider this very risky, I might as well write about my finding.&lt;&#x2F;p&gt;
+&lt;p&gt;Was I able to trick you?&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Undefined Behavior regarding Pointers</title>
+		<published>2023-08-12T00:00:00+00:00</published>
+		<updated>2023-08-12T00:00:00+00:00</updated>
+		<link href="https://wonkodv.github.io/recommended-reading/" type="text/html"/>
+		<id>https://wonkodv.github.io/recommended-reading/</id>
+		<content type="html">&lt;h2 id=&quot;pointers-are-complicated&quot;&gt;Pointers are Complicated&lt;&#x2F;h2&gt;
+&lt;p&gt;This article explains why compilers need the concept of Undefined Behavior to allow optimizations&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.ralfj.de&#x2F;blog&#x2F;2018&#x2F;07&#x2F;24&#x2F;pointers-and-bytes.html&quot;&gt;https:&#x2F;&#x2F;www.ralfj.de&#x2F;blog&#x2F;2018&#x2F;07&#x2F;24&#x2F;pointers-and-bytes.html&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;p&gt;Key Takeaway:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Just because two pointers point to the same address, does not mean they are equal and can be used interchangeably.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Convert GTA Vice City  ADF files</title>
+		<published>2023-03-12T00:00:00+00:00</published>
+		<updated>2023-03-12T00:00:00+00:00</updated>
+		<link href="https://wonkodv.github.io/gta-vc-radio-stations-converter/" type="text/html"/>
+		<id>https://wonkodv.github.io/gta-vc-radio-stations-converter/</id>
+		<content type="html">&lt;h1 id=&quot;convert-gta-vice-city-radio-station-adf-audio-files&quot;&gt;Convert GTA Vice City Radio station ADF audio files&lt;&#x2F;h1&gt;
+&lt;p&gt;On the &amp;quot;Game&amp;quot; CD of GTA Vice City is a &lt;code&gt;Audio&lt;&#x2F;code&gt; Directory, which contains all the radio stations as &lt;code&gt;.adf&lt;&#x2F;code&gt; files.
+These are MP3 files &amp;quot;encrypted&amp;quot; using the sophisticated XOR algorithm with password &lt;code&gt;&amp;quot;&lt;&#x2F;code&gt; that is, &lt;code&gt;0x22&lt;&#x2F;code&gt;.
+You can convert them to mp3 files with this python snippet.&lt;&#x2F;p&gt;
+&lt;p&gt;Listening might make you nostalgic though.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;python&quot; style=&quot;background-color:#fdf6e3;color:#657b83;&quot; class=&quot;language-python &quot;&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span&gt;pathlib
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;import &lt;&#x2F;span&gt;&lt;span&gt;sys
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;p_from &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span&gt;pathlib.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;Path&lt;&#x2F;span&gt;&lt;span&gt;(sys.argv&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;]&lt;&#x2F;span&gt;&lt;span&gt;).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;glob&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;*.adf&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;):
+&lt;&#x2F;span&gt;&lt;span&gt;    pathlib.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;Path&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;        sys.argv&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;2&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;]&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;f&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;GTA Vice City Radio - &lt;&#x2F;span&gt;&lt;span&gt;{p_from.stem.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;capitalize&lt;&#x2F;span&gt;&lt;span&gt;()}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;.mp3&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;    ).&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;write_bytes&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;bytes&lt;&#x2F;span&gt;&lt;span&gt;(b ^ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0x22 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;b &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;in &lt;&#x2F;span&gt;&lt;span&gt;p_from.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;read_bytes&lt;&#x2F;span&gt;&lt;span&gt;()))
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Call as &lt;code&gt;python foo.py &#x2F;mnt&#x2F;Audio&#x2F; &#x2F;path&#x2F;to&#x2F;your&#x2F;music&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>NeoVim Remote as git diff tool</title>
+		<published>2022-11-21T00:00:00+00:00</published>
+		<updated>2022-11-21T00:00:00+00:00</updated>
+		<link href="https://wonkodv.github.io/neovim-remote-as-git-diff-tool/" type="text/html"/>
+		<id>https://wonkodv.github.io/neovim-remote-as-git-diff-tool/</id>
+		<content type="html">&lt;h1 id=&quot;neovim-remote-as-git-diff-tool&quot;&gt;NeoVim Remote as git diff tool&lt;&#x2F;h1&gt;
+&lt;p&gt;In Neovim you can open a terminal and use git.
+This git should not open another neovim when editing commit messages or rebase commands.
+Instead, you want those files to open in a new tab. This can be accomplished with
+&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;pypi.org&#x2F;project&#x2F;neovim-remote&#x2F;&quot;&gt;neovim-remote&lt;&#x2F;a&gt; and the following line in your vimrc:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;vim&quot; style=&quot;background-color:#fdf6e3;color:#657b83;&quot; class=&quot;language-vim &quot;&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span style=&quot;color:#859900;&quot;&gt;let&lt;&#x2F;span&gt;&lt;span&gt; $EDITOR=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;&amp;quot;nvr --remote-tab-wait&amp;quot;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;For diff and merge, you can configure git to call &lt;code&gt;nvr&lt;&#x2F;code&gt;, in &lt;code&gt;git config --global --edit&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;ini&quot; style=&quot;background-color:#fdf6e3;color:#657b83;&quot; class=&quot;language-ini &quot;&gt;&lt;code class=&quot;language-ini&quot; data-lang=&quot;ini&quot;&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;[diff]
+&lt;&#x2F;span&gt;&lt;span&gt;	&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;tool &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; nvimdiff
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;[merge]
+&lt;&#x2F;span&gt;&lt;span&gt;	&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;tool &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; nvimmerge
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;[difftool &amp;quot;nvimdiff&amp;quot;]
+&lt;&#x2F;span&gt;&lt;span&gt;	&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;cmd &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; nvr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt;s &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt;d &lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;\&amp;quot;$LOCAL\&amp;quot; \&amp;quot;$REMOTE\&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;[mergetool &amp;quot;nvimmerge&amp;quot;]
+&lt;&#x2F;span&gt;&lt;span&gt;	&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;cmd &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; nvr &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt;s &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt;d &lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;\&amp;quot;$LOCAL\&amp;quot; \&amp;quot;$BASE\&amp;quot; \&amp;quot;$REMOTE\&amp;quot; \&amp;quot;$MERGED\&amp;quot; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;-&lt;&#x2F;span&gt;&lt;span&gt;c &lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;&amp;#39;wincmd J | wincmd =&amp;#39;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Zola pre-push hook</title>
+		<published>2022-11-21T00:00:00+00:00</published>
+		<updated>2022-11-21T00:00:00+00:00</updated>
+		<link href="https://wonkodv.github.io/zola-pre-push-hook/" type="text/html"/>
+		<id>https://wonkodv.github.io/zola-pre-push-hook/</id>
+		<content type="html">&lt;h1 id=&quot;zola-pre-push-hook&quot;&gt;Zola pre-push hook&lt;&#x2F;h1&gt;
+&lt;p&gt;I commit the generated site files into my blog&#x27;s repo because that is the easiest way to get github to host it for me.
+In order to not forget to build, I wanted a hook that reminds me before I push.&lt;&#x2F;p&gt;
+&lt;p&gt;Running &lt;code&gt;zola build&lt;&#x2F;code&gt; alone isn&#x27;t enough, as it doesn&#x27;t give an error return code or modify one of the files to be pushed.
+&lt;code&gt;git diff&lt;&#x2F;code&gt; doesn&#x27;t normally have a return code to indicate if there are diffs, but &lt;code&gt;git diff --quiet&lt;&#x2F;code&gt; does.
+Combining both will build and then fail, if anything in &lt;code&gt;docs&#x2F;&lt;&#x2F;code&gt; isn&#x27;t added or committed.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#fdf6e3;color:#657b83;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;zola&lt;&#x2F;span&gt;&lt;span&gt; build &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;&amp;amp;&amp;amp; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;git&lt;&#x2F;span&gt;&lt;span&gt; diff&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt; --quiet&lt;&#x2F;span&gt;&lt;span&gt; docs&#x2F;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;To include this in a &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;pre-commit.com&quot;&gt;pre-commit&lt;&#x2F;a&gt; config, wrap it in &lt;code&gt;bash -c&lt;&#x2F;code&gt; and use as a system hook.
+Check out me &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;wonkodv&#x2F;wonkodv.github.io&#x2F;blob&#x2F;main&#x2F;.pre-commit-config.yaml&quot;&gt;.pre-commit-config.yaml&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Minimal Bash Prompt</title>
+		<published>2022-09-24T00:00:00+00:00</published>
+		<updated>2022-09-24T00:00:00+00:00</updated>
+		<link href="https://wonkodv.github.io/minimal-bash-prompt/" type="text/html"/>
+		<id>https://wonkodv.github.io/minimal-bash-prompt/</id>
+		<content type="html">&lt;h1 id=&quot;minimal-bash-prompt&quot;&gt;Minimal bash prompt&lt;&#x2F;h1&gt;
+&lt;p&gt;When I got into Unix, I made myself the ultimate bash prompt, with several modules each in its
+own file included from &lt;code&gt;.bashrc&lt;&#x2F;code&gt;. When all are active (what I usually did)
+they show:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;time&lt;&#x2F;li&gt;
+&lt;li&gt;user&lt;&#x2F;li&gt;
+&lt;li&gt;host&lt;&#x2F;li&gt;
+&lt;li&gt;git&#x2F;svn status (colors for uncomitted&#x2F; unpushed changes, branch)&lt;&#x2F;li&gt;
+&lt;li&gt;Jobs&lt;&#x2F;li&gt;
+&lt;li&gt;Return code of previous command&lt;&#x2F;li&gt;
+&lt;li&gt;In some configurations even SHLVL&lt;&#x2F;li&gt;
+&lt;li&gt;If I&#x27;m in SSH&lt;&#x2F;li&gt;
+&lt;li&gt;the python virtual env I&#x27;m in&lt;&#x2F;li&gt;
+&lt;li&gt;Current python virtual Environment&lt;&#x2F;li&gt;
+&lt;li&gt;The Id that the next command will have in &lt;code&gt;history&lt;&#x2F;code&gt; in case I want to reuse it with &lt;code&gt;!42&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+
+
+
+    
+    
+
+
+
+
+
+    
+
+
+
+
+
+    
+
+&lt;a href=&quot;&amp;#x2F;minimal-bash-prompt&amp;#x2F;old-bash-prompt.png&quot; target=&quot;_blank&quot;&gt;&lt;img width=&quot;717&quot; height=&quot;178&quot; src=&quot;&amp;#x2F;minimal-bash-prompt&amp;#x2F;old-bash-prompt.png&quot; alt=&quot;Screenshot of old bash prompt&quot; title=&quot;Old bash
+prompt showed everything and was rather confusing&quot;&gt;&lt;&#x2F;a&gt;
+
+&lt;p&gt;I&#x27;ve been using this for 10 years and then I stumbled upon someone on twitter who said &lt;code&gt;; &lt;&#x2F;code&gt; is enough.
+Thinking about that, I realized that I never really use all the information but it takes some time to generate on EVERY command.  (And on raspberries, the git prompt takes a loong time)&lt;&#x2F;p&gt;
+&lt;p&gt;So now my bash prompt looks like this:&lt;&#x2F;p&gt;
+
+
+
+    
+    
+
+
+
+
+
+    
+
+
+
+
+
+    
+
+&lt;a href=&quot;&amp;#x2F;minimal-bash-prompt&amp;#x2F;new-bash-prompt.png&quot; target=&quot;_blank&quot;&gt;&lt;img width=&quot;544&quot; height=&quot;568&quot; src=&quot;&amp;#x2F;minimal-bash-prompt&amp;#x2F;new-bash-prompt.png&quot; alt=&quot;Screenshot of new bash prompt&quot; title=&quot;New bash prompt shows nothing unless you ask&quot;&gt;&lt;&#x2F;a&gt;
+
+&lt;p&gt;I previously had an alias &lt;code&gt;alias ?=&amp;quot;git status&amp;quot;&lt;&#x2F;code&gt; which I used  &lt;em&gt;all the time&lt;&#x2F;em&gt;. So now my bash
+prompt does nothing and is instantaneous, and my &lt;code&gt;?&lt;&#x2F;code&gt; command tells me everything.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#fdf6e3;color:#657b83;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#859900;&quot;&gt;alias &lt;&#x2F;span&gt;&lt;span&gt;?=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;_status&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;function &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;_status&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#586e75;&quot;&gt;local &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;bold&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;\e[1m&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#586e75;&quot;&gt;local &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;red&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;\e[1;31m&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#586e75;&quot;&gt;local &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;clear&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;\e[0m&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;if [[ $&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;jobs |&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;wc&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt; -l &lt;&#x2F;span&gt;&lt;span&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;-gt&lt;&#x2F;span&gt;&lt;span&gt; 0 &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;]]
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;then
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;echo &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;-e &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;bold&lt;&#x2F;span&gt;&lt;span&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;Jobs&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;clear&lt;&#x2F;span&gt;&lt;span&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;jobs
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;fi
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;if [ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;-n &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;VIRTUAL_ENV&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;]
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;then
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;echo&lt;&#x2F;span&gt;&lt;span&gt; -ne&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;bold&lt;&#x2F;span&gt;&lt;span&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;VENV&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;clear&lt;&#x2F;span&gt;&lt;span&gt;}    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;echo &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;VIRTUAL_ENV&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;fi
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;if [ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;-n &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;SSH_CLIENT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;]
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;then
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;echo &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;-ne &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;bold&lt;&#x2F;span&gt;&lt;span&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;SSH&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;clear&lt;&#x2F;span&gt;&lt;span&gt;}   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;echo &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;SSH_CONNECTION&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;fi
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;echo &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;-en &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;bold&lt;&#x2F;span&gt;&lt;span&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;ID&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;clear&lt;&#x2F;span&gt;&lt;span&gt;}      &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;[ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;USER&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;==&lt;&#x2F;span&gt;&lt;span&gt; root &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;] &amp;amp;&amp;amp; echo &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;-ne &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;red&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;echo &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;-e &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;USER&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;clear&lt;&#x2F;span&gt;&lt;span&gt;}@&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;HOSTNAME
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;if [ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;-r&lt;&#x2F;span&gt;&lt;span&gt; &#x2F;sys&#x2F;class&#x2F;power_supply&#x2F;BAT0&#x2F; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;]
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;then
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;echo &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;-en &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;bold&lt;&#x2F;span&gt;&lt;span&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;BATTERY&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;clear&lt;&#x2F;span&gt;&lt;span&gt;} &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;full&lt;&#x2F;span&gt;&lt;span&gt;=`&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;cat&lt;&#x2F;span&gt;&lt;span&gt; &#x2F;sys&#x2F;class&#x2F;power_supply&#x2F;BAT0&#x2F;energy_full`
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;now&lt;&#x2F;span&gt;&lt;span&gt;=`&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;cat&lt;&#x2F;span&gt;&lt;span&gt; &#x2F;sys&#x2F;class&#x2F;power_supply&#x2F;BAT0&#x2F;energy_now`
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;echo &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;-n &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;((&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;now&lt;&#x2F;span&gt;&lt;span&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;100&lt;&#x2F;span&gt;&lt;span&gt;&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;full&lt;&#x2F;span&gt;&lt;span&gt;))&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;% &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;cat&lt;&#x2F;span&gt;&lt;span&gt; &#x2F;sys&#x2F;class&#x2F;power_supply&#x2F;BAT0&#x2F;status
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;fi
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;if   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;git&lt;&#x2F;span&gt;&lt;span&gt; rev-parse &amp;amp;&amp;gt;&#x2F;dev&#x2F;null
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;then
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;echo &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;-e &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;bold&lt;&#x2F;span&gt;&lt;span&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;GIT&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;clear&lt;&#x2F;span&gt;&lt;span&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;git&lt;&#x2F;span&gt;&lt;span&gt; status&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt; -bs --show-stash --ahead-behind -M
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;git&lt;&#x2F;span&gt;&lt;span&gt; stash list
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;fi
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;echo &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;-en &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;bold&lt;&#x2F;span&gt;&lt;span&gt;}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;PWD&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;clear&lt;&#x2F;span&gt;&lt;span&gt;}     &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;echo  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;PWD&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;I set this up 3 months ago and am quite happy with it.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Modern Terminal</title>
+		<published>2022-04-20T00:00:00+00:00</published>
+		<updated>2022-04-20T00:00:00+00:00</updated>
+		<link href="https://wonkodv.github.io/modern-terminal/" type="text/html"/>
+		<id>https://wonkodv.github.io/modern-terminal/</id>
+		<content type="html">&lt;h1 id=&quot;a-modern-terminal&quot;&gt;A Modern Terminal&lt;&#x2F;h1&gt;
+&lt;p&gt;Some years ago I saw a talk by Gary Bernhardt.
+The tile was &amp;quot;A Whole new World&amp;quot; and he showed this great new ecosystem of terminal emulator and editor that drew class diagrams onto the terminal.
+Turns out he just photoshopped those screenshots and none of this worked.&lt;&#x2F;p&gt;
+&lt;p&gt;When I stumbled upon &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;sw.kovidgoyal.net&#x2F;kitty&#x2F;&quot;&gt;Kitty&lt;&#x2F;a&gt;, it seemed this whole new world was finally coming.&lt;&#x2F;p&gt;
+&lt;p&gt;Some of the features:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Actually good font settings&lt;&#x2F;li&gt;
+&lt;li&gt;Graphics on the terminal, by sending escape codes that contain the filename or the image data (bmp or png base64-encoded)&lt;&#x2F;li&gt;
+&lt;li&gt;Hyperlinks and configurable handlers (ever clicked on a filename that &lt;code&gt;ls&lt;&#x2F;code&gt; printed?)&lt;&#x2F;li&gt;
+&lt;li&gt;Integration with the shell so the terminal can associate commands with their output
+&lt;ul&gt;
+&lt;li&gt;Shortcut to scroll to previous prompts (Ctrl+Shift+Z)&lt;&#x2F;li&gt;
+&lt;li&gt;Shortcut to open last output in a pager (Ctrl+Shift+H)&lt;&#x2F;li&gt;
+&lt;li&gt;or click to open any output in a pager (Ctrl+Shift+Mouse3)&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;I&#x27;m so happy.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Open Files on Windows from WSL</title>
+		<published>2022-03-19T00:00:00+00:00</published>
+		<updated>2024-03-08T00:00:00+00:00</updated>
+		<link href="https://wonkodv.github.io/open-files-on-windows-from-wsl/" type="text/html"/>
+		<id>https://wonkodv.github.io/open-files-on-windows-from-wsl/</id>
+		<content type="html">&lt;h1 id=&quot;open-files-on-windows-from-wsl&quot;&gt;Open Files on Windows from WSL&lt;&#x2F;h1&gt;
+&lt;p&gt;When you are in a WSL-bash and maybe generated an &lt;code&gt;svg&lt;&#x2F;code&gt; file and want to look at it, you can use the following bash function:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#fdf6e3;color:#657b83;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;function &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;o&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;w&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;wslpath&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt; -wa &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;| &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;sed &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;s&#x2F;&amp;#39;&#x2F;&amp;#39;&amp;#39;&#x2F;g)
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;    &#x2F;mnt&#x2F;c&#x2F;Windows&#x2F;System32&#x2F;WindowsPowerShell&#x2F;v1.0&#x2F;powershell.exe -Command Start-Process &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;${w}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;#39;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;What this does:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;use &lt;code&gt;wslpath&lt;&#x2F;code&gt; to translate the argument into an absolute windows path. This will be something like &lt;code&gt;\\wsl.localhost\Ubuntu-20.04\home\wonko\tmp\file.svg&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Open &lt;strong&gt;Windows Powershell&lt;&#x2F;strong&gt; (which is not the same as &lt;strong&gt;Powershell&lt;&#x2F;strong&gt;, see below)&lt;&#x2F;li&gt;
+&lt;li&gt;Tell that to open the file with &lt;code&gt;Start-Process&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Another nice tool is to open an explorer window with the file selected:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#fdf6e3;color:#657b83;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;function &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;x&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;w&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;wslpath&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt; -wa &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;&#x2F;mnt&#x2F;c&#x2F;Windows&#x2F;SysWOW64&#x2F;explorer.exe&lt;&#x2F;span&gt;&lt;span&gt; &#x2F;select, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;w&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;true &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;# because explorer.exe has the weirdest return codes :&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;earlier-attempts&quot;&gt;Earlier Attempts&lt;&#x2F;h2&gt;
+&lt;p&gt;The rest of this post is a deep dive into why &lt;code&gt;cmd.exe start&lt;&#x2F;code&gt; and
+&lt;code&gt;explorer.exe&lt;&#x2F;code&gt; are weird, don&#x27;t follow the windows best practices, and how
+I managed to get it working anyways, until it broke in the spring of 2023.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;using-cmd-exe-start&quot;&gt;Using &lt;code&gt;cmd.exe start&lt;&#x2F;code&gt;&lt;&#x2F;h3&gt;
+&lt;p&gt;In 2022 I had never touched powershell, so I naturally used &lt;code&gt;cmd.exe&lt;&#x2F;code&gt; which has been around since I started with computers.
+This no longer works, which I will address at the end of this article, but in 2022 it did work.
+The function I came up with at the time was this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;bash&quot; style=&quot;background-color:#fdf6e3;color:#657b83;&quot; class=&quot;language-bash &quot;&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;function &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;o&lt;&#x2F;span&gt;&lt;span&gt;() {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;w&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;wslpath&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt; -wa &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;    (
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;builtin&lt;&#x2F;span&gt;&lt;span&gt; cd &#x2F;mnt&#x2F;c&#x2F;Windows&#x2F;System32
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;exec&lt;&#x2F;span&gt;&lt;span&gt; cmd.exe &#x2F;c start &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;&amp;quot;Foo&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;#39; &amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;$&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;w&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    )
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The Windows command interpreter &lt;code&gt;cmd.exe&lt;&#x2F;code&gt; has many quirks. For example, it can not &lt;code&gt;cd&lt;&#x2F;code&gt; into &lt;code&gt;UNC&lt;&#x2F;code&gt; Paths (e.g. &lt;code&gt;\\server\path&lt;&#x2F;code&gt;) so you&#x27;d get a weird error message if you execute
+&lt;code&gt;cmd.exe&lt;&#x2F;code&gt; on a path in the Linux file system.
+(If you even have Windows exes in your PATH).
+That is why we &lt;code&gt;cd&lt;&#x2F;code&gt; first, to the director that contains &lt;code&gt;cmd.exe&lt;&#x2F;code&gt;. And that is done in a sub shell, so we do not have to &lt;code&gt;cd&lt;&#x2F;code&gt; back.&lt;&#x2F;p&gt;
+&lt;p&gt;You have to resolve the path with &lt;code&gt;wslpath&lt;&#x2F;code&gt; before &lt;code&gt;cd&lt;&#x2F;code&gt; so relative paths resolve correctly.&lt;&#x2F;p&gt;
+&lt;p&gt;I use &lt;code&gt;builtin cd&lt;&#x2F;code&gt; because &lt;code&gt;cd&lt;&#x2F;code&gt; is an alias that records where I&#x27;m at so I can quickly jump there later with &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;wonkodv&#x2F;bashjump&quot;&gt;bashjump&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;code&gt;start&lt;&#x2F;code&gt; is a builtin of the &lt;code&gt;cmd.exe&lt;&#x2F;code&gt; that does the same as double clicking on a file in the explorer.
+If the &lt;code&gt;&#x27;&amp;quot;Foo&amp;quot;&#x27;&lt;&#x2F;code&gt; bothers you, then you are correct. It bothers me too. I&#x27;ll get to that next.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;argument-parsing-on-windows-is-not-like-you-expect&quot;&gt;Argument Parsing on Windows is Not Like You Expect&lt;&#x2F;h3&gt;
+&lt;p&gt;Getting the above commands (using &lt;code&gt;explorer.exe&lt;&#x2F;code&gt; and &lt;code&gt;cmd.exe&lt;&#x2F;code&gt;) to work for files without spaces was trivial.
+Maybe 3 minutes.
+Getting them to work for files with spaces was hard.
+Maybe 4 hours.&lt;&#x2F;p&gt;
+&lt;p&gt;Because Windows command line parsing is special and &lt;code&gt;cmd.exe start&lt;&#x2F;code&gt; and &lt;code&gt;explorer.exe&lt;&#x2F;code&gt; are most very special.&lt;&#x2F;p&gt;
+&lt;p&gt;On Unix, a process receives an array of strings as arguments.
+It is the job of the calling process to supply that array.
+A shell will typically split a string on whitespace unless those whitespace are surrounded by quotes or escaped with backslashes.
+Other tools will either supply the array or ask the shell for help with splitting (see pythons &lt;code&gt;subprocess.Popen&lt;&#x2F;code&gt;).&lt;&#x2F;p&gt;
+&lt;p&gt;A Windows process only gets 1 String.
+The OS sometimes does some rather cursed&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt; interpretation
+of double quotes and whitespace in order to get the right executable,
+but the executable will always get the unmodified string, just as the caller supplied it.
+Then all applications call &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;docs.microsoft.com&#x2F;en-us&#x2F;windows&#x2F;win32&#x2F;api&#x2F;shellapi&#x2F;nf-shellapi-commandlinetoargvw&quot;&gt;CommandLineToArgvW()&lt;&#x2F;a&gt;
+which splits like a Unix shell (but cursed&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#2&quot;&gt;2&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;).
+All Applications? No. One small group of tools knows better, and of course &lt;code&gt;start&lt;&#x2F;code&gt; and &lt;code&gt;explorer&lt;&#x2F;code&gt; are among the rebellious.&lt;&#x2F;p&gt;
+&lt;p&gt;The initial versions of the commands above had the following relevant lines:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;cmd.exe &#x2F;c start &amp;quot;$w&amp;quot;&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;explorer.exe &#x2F;select,&amp;quot;$w&amp;quot;&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;With proper filenames that don&#x27;t contain spaces, everything worked. With spaces, it didn&#x27;t. I therefor tried to escape the spaces in bash so the exes would like
+them better: among the this I tried were: &lt;code&gt;&amp;quot;$w&amp;quot;&lt;&#x2F;code&gt;, &lt;code&gt;&#x27;&amp;quot;&#x27;$w&#x27;&amp;quot;&#x27;&lt;&#x2F;code&gt;, &lt;code&gt;&#x27;&amp;quot;&#x27;&amp;quot;$w&amp;quot;&#x27;&amp;quot;&#x27;&lt;&#x2F;code&gt; and finally something like &amp;quot;${w&#x2F;&#x2F; &#x2F;^ }&amp;quot; because
+someone suggested you can escape space with carets.&lt;&#x2F;p&gt;
+&lt;p&gt;I finally did the sensible thing and tried to get it working from cmd.exe, circumventing bash and the WSL-Windows bridge&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#3&quot;&gt;3&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;.
+Here are some samples of &lt;code&gt;cmd.exe start&lt;&#x2F;code&gt; executed from another &lt;code&gt;cmd.exe&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;cmd.exe &#x2F;c start \\wsl$\Ubuntu-20.04\home\wonko\tmp\file.svg&lt;&#x2F;code&gt; works&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;cmd.exe &#x2F;c start \\wsl$\Ubuntu-20.04\home\wonko\tmp\file with space.svg&lt;&#x2F;code&gt; works&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;cmd.exe &#x2F;c start &amp;quot;\\wsl$\Ubuntu-20.04\home\wonko\tmp\file with space.svg&amp;quot;&lt;&#x2F;code&gt; opens a new terminal window,
+waiting on your input.
+If you look real close,
+you will notice this window has the title
+&lt;code&gt;\\wsl$\Ubuntu-20.04\home\wonko\tmp\file with space.svg&lt;&#x2F;code&gt; 🤔&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;cmd.exe &#x2F;c start &amp;quot;Foo&amp;quot; &amp;quot;\\wsl$\Ubuntu-20.04\home\wonko\tmp\file with space.svg&amp;quot;&lt;&#x2F;code&gt; works.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Getting information about &lt;code&gt;start&lt;&#x2F;code&gt; is simple,
+you open &lt;code&gt;cmd.exe&lt;&#x2F;code&gt; and type &lt;code&gt;help start&lt;&#x2F;code&gt; and then very carefully note,
+that the synopsis begins with &lt;code&gt;START [&amp;quot;Title&amp;quot;] ... [PROGRAMM|FILE] [ARGUMENTS...]&lt;&#x2F;code&gt;.
+After you already know whats going on, the following questions become obvious:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;how can the first positional argument be optional?&lt;&#x2F;li&gt;
+&lt;li&gt;No single argument has quotes, why does title?
+Yes. They really did. If the first argument is surrounded by quotes, it is Title, otherwise it is File.
+Passing in a &lt;code&gt;&amp;quot;Title&amp;quot;&lt;&#x2F;code&gt; with quotes means even more quotes in bash &lt;code&gt;&#x27;&amp;quot;Foo&amp;quot;&#x27;&lt;&#x2F;code&gt; and things worked (Until an update in 2023, see below).&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Getting information about what arguments you can pass to &lt;code&gt;explorer.exe&lt;&#x2F;code&gt; is surprisingly difficult.
+Typing &lt;code&gt;help explorer&lt;&#x2F;code&gt; into &lt;code&gt;cmd.exe&lt;&#x2F;code&gt; can not help you but suggests you try &lt;code&gt;explorer &#x2F;?&lt;&#x2F;code&gt; which only opens &amp;quot;My Documents&amp;quot;.
+Searching the web gives you FAQs, 3rd party sites which don&#x27;t mention whitespace at all,
+and one poor soul on stackexchange who, in their quest for answers, looked at explorer.exe in a hex editor.
+I even tried with bing, hoping that they would know the way around msdn, but I did not find any vaguely official looking source of information.&lt;&#x2F;p&gt;
+&lt;p&gt;Consensus is, that you call &lt;code&gt;explorer.exe &#x2F;select,OBJECT&lt;&#x2F;code&gt; or &lt;code&gt;explorer.exe &#x2F;select, OBJECT&lt;&#x2F;code&gt; to open &lt;code&gt;OBJECT&lt;&#x2F;code&gt;.
+The comma is important, the whitespace after it isn&#x27;t.&lt;&#x2F;p&gt;
+&lt;p&gt;Here are some samples for &lt;code&gt;explorer.exe&lt;&#x2F;code&gt; again from a windows &lt;code&gt;cmd.exe&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;explorer.exe &#x2F;select,\\wsl$\Ubuntu-20.04\home\wonko\tmp\file.svg&lt;&#x2F;code&gt; works&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;explorer.exe &#x2F;select,\\wsl$\Ubuntu-20.04\home\wonko\tmp\file with space.svg&lt;&#x2F;code&gt; works&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;explorer.exe &#x2F;select,&amp;quot;\\wsl$\Ubuntu-20.04\home\wonko\tmp\file with space.svg&amp;quot;&lt;&#x2F;code&gt; works&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;explorer.exe &amp;quot;&#x2F;select,\\wsl$\Ubuntu-20.04\home\wonko\tmp\file with space.svg&amp;quot;&lt;&#x2F;code&gt; opens &amp;quot;My Documents&amp;quot;, thank you very much&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;explorer.exe &#x2F;select, &amp;quot;\\wsl$\Ubuntu-20.04\home\wonko\tmp\file with space.svg&amp;quot;&lt;&#x2F;code&gt; works&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;The culprit is again, special treatment of quotes in the arguments.
+Here, it is important that &lt;code&gt;&#x2F;select&lt;&#x2F;code&gt; is not inside quotes.
+The synopsis in a man page would be something like &lt;code&gt;explorer.exe &#x2F;select,&amp;quot;PATH&amp;quot;&lt;&#x2F;code&gt;
+The way to achieve this, when the WSL-Windows bridge adds double quotes,
+is to use the &lt;code&gt;&#x2F;select, PATH&lt;&#x2F;code&gt; syntax that includes a space not because &lt;code&gt;explorer.exe&lt;&#x2F;code&gt; needs
+this space, but to put &lt;code&gt;&#x2F;select&lt;&#x2F;code&gt; into a different slot in the argument array than the path,
+preventing double quotes around the &lt;code&gt;&#x2F;select&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;Conclusion: Don&#x27;t try to deal with windows argument parsing and whitespace in paths at the same time.
+And if you do, don&#x27;t add WSL and bash to the mix.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;windows-is-constantly-improving&quot;&gt;Windows is Constantly Improving&lt;&#x2F;h3&gt;
+&lt;p&gt;After a very optimistic, later regretted &lt;code&gt;wsl --update&lt;&#x2F;code&gt; in the spring of 2023,
+the &lt;code&gt;cmd.exe start&lt;&#x2F;code&gt; no longer worked.
+All I got when using &lt;code&gt;o FILE&lt;&#x2F;code&gt; was &amp;quot;Syntaxerror&amp;quot; on the terminal, nothing more.
+After procrastinating for 3 Months and not having a working &lt;code&gt;o&lt;&#x2F;code&gt; function, I finally investigated.&lt;&#x2F;p&gt;
+&lt;p&gt;Executing in a WSL Bash &lt;code&gt;cmd.exe &#x2F;c start &#x27;&amp;quot;Foo&amp;quot;&#x27; &amp;quot;File&amp;quot;&lt;&#x2F;code&gt; now leads to a process on windows,
+which has the command line &lt;code&gt;cmd.exe &#x2F;c start &amp;quot;\&amp;quot;Foo\&amp;quot;&amp;quot; &amp;quot;File&amp;quot;&lt;&#x2F;code&gt;.
+That is not something hat &lt;code&gt;cmd.exe&lt;&#x2F;code&gt; can deal with.
+The folks at Microsoft did something to the &amp;quot;WSL-Windows Bridge&amp;quot;&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#3&quot;&gt;3&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;, probably in an effort to
+make anything better, and now quotes are escaped. For processes that use &lt;code&gt;CommandLineToArgvW()&lt;&#x2F;code&gt;,
+this is  probably an improvement, since they now get the amount of quotes, that the caller intended.
+The new behavior is probably better, but this makes it impossible to call &lt;code&gt;cmd.exe start&lt;&#x2F;code&gt; correctly.&lt;&#x2F;p&gt;
+&lt;p&gt;I finally acknowledged, that &lt;code&gt;cmd.exe&lt;&#x2F;code&gt; is old and crappy, and informed myself about Powershell.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;powershell&quot;&gt;Powershell&lt;&#x2F;h3&gt;
+&lt;p&gt;The first thing I learned about Powershell is, that Powershell is not Windows Powershell.
+The first is new, cross platform, and typically installed in &lt;code&gt;C:\Program Files\Powershell\7\pwsh.exe&lt;&#x2F;code&gt;
+while the second is old, Windows only, more powerful,
+and installed in &lt;code&gt;C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe&lt;&#x2F;code&gt;.
+The second option seemed a more stable Path that might be the same everywhere, so I&#x27;m using that.
+Getting the windows powershell based version of &lt;code&gt;o&lt;&#x2F;code&gt; to work took 5 or 10 Minutes.
+Information about &lt;code&gt;-Command&lt;&#x2F;code&gt; and &lt;code&gt;Start-Process&lt;&#x2F;code&gt; is easy to get, although they do try to confuse you,
+by also providing &lt;code&gt;Invoke-Item&lt;&#x2F;code&gt; which has the same effect in my case.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;improving-the-powershell-version&quot;&gt;Improving the Powershell version&lt;&#x2F;h3&gt;
+&lt;p&gt;In the first pwsh version, I forgot to test with multiple whitespaces. This was pointed out to me on the discussions page on github, so I added
+the &lt;code&gt;sed&lt;&#x2F;code&gt; part. I can now successfully &lt;code&gt;o &amp;quot;foo&#x27;bar    ba\z.txt&amp;quot;&lt;&#x2F;code&gt;. Windows translates the backslash to something weird, but it can be opened.&lt;&#x2F;p&gt;
+&lt;hr &#x2F;&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;1&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
+&lt;p&gt;Excerpt from &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;docs.microsoft.com&#x2F;en-us&#x2F;windows&#x2F;win32&#x2F;api&#x2F;processthreadsapi&#x2F;nf-processthreadsapi-createprocessw&quot;&gt;CreateProcessW&lt;&#x2F;a&gt; ig you pass &lt;code&gt;lpCommandLine&lt;&#x2F;code&gt; but not &lt;code&gt;lpApplicationName&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;... consider the string &amp;quot;c:\program files\sub dir\program name&amp;quot;. This string can be interpreted in a number of ways. The system tries to interpret the possibilities in the following order:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;c:\program.exe&lt;&#x2F;li&gt;
+&lt;li&gt;c:\program files\sub.exe&lt;&#x2F;li&gt;
+&lt;li&gt;c:\program files\sub dir\program.exe&lt;&#x2F;li&gt;
+&lt;li&gt;c:\program files\sub dir\program name.exe&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;2&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;2&lt;&#x2F;sup&gt;
+&lt;p&gt;Excerpt from  &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;docs.microsoft.com&#x2F;en-us&#x2F;windows&#x2F;win32&#x2F;api&#x2F;shellapi&#x2F;nf-shellapi-commandlinetoargvw&quot;&gt;CommandLineToArgvW()&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;... has a special interpretation of backslash characters when they are followed by a quotation mark character (&amp;quot;). This interpretation assumes that any preceding argument is a valid file system path, &lt;strong&gt;or else it may behave unpredictably&lt;&#x2F;strong&gt;.&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;&#x2F;div&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;3&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;3&lt;&#x2F;sup&gt;
+&lt;p&gt;WSL-Windows Bridge is my placeholder name for whatever happens between the syscall into the linux kernel that bash does with its array of arguments and the
+process creation by the windows kernel with its single string.&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Playlist of all Videos of a Youtube Channel</title>
+		<published>2022-03-15T00:00:00+00:00</published>
+		<updated>2024-03-07T00:00:00+00:00</updated>
+		<link href="https://wonkodv.github.io/videos-of-a-youtube-channel/" type="text/html"/>
+		<id>https://wonkodv.github.io/videos-of-a-youtube-channel/</id>
+		<content type="html">&lt;h1 id=&quot;view-all-videos-of-a-youtube-channel&quot;&gt;View All videos of a Youtube channel&lt;&#x2F;h1&gt;
+&lt;p&gt;For most youtube channels I watch, I want a playlist of all videos that channel ever released, sorted from oldest to newest.
+This is unofficially supported by adding:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;color:#657b83;&quot;&gt;&lt;code&gt;&lt;span&gt;&amp;amp;list=ULcxqQ59vzyTk
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;to a video link. If you have&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;color:#657b83;&quot;&gt;&lt;code&gt;&lt;span&gt;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=mL3sho1CpkI
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;you turn it into&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;color:#657b83;&quot;&gt;&lt;code&gt;&lt;span&gt;https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=mL3sho1CpkI&amp;amp;list=ULcxqQ59vzyTk
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;you should now see a playlist, that shows you the video you were at, and some videos that came before and after it.
+There is no easy way to navigate to the very beginning or very end, only relative jumps of +- 10 or 20 videos.
+It works best if you navigate to the oldest video of the channel yourself, view it, and then add that string to the url.&lt;&#x2F;p&gt;
+&lt;p&gt;Although the string looks random it is not tied to a channel. If you search for this feature, you may stumble over posts claiming you only need to add &lt;code&gt;&amp;amp;list=UL&lt;&#x2F;code&gt; but this seems to have changed some years
+ago. &lt;em&gt;(The current approach still works as of 2024-03)&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;create-a-javascript-bookmark-for-the-lazy&quot;&gt;Create a Javascript Bookmark for the Lazy&lt;&#x2F;h2&gt;
+&lt;p&gt;You can store bookmarks in your browser with the URL scheme &lt;code&gt;javascript:&lt;&#x2F;code&gt; that,
+when clicked, will execute javascript in the page you are viewing.
+For our purpose, we want to execute:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;javascript&quot; style=&quot;background-color:#fdf6e3;color:#657b83;&quot; class=&quot;language-javascript &quot;&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span style=&quot;color:#859900;&quot;&gt;document&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;location&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;href &lt;&#x2F;span&gt;&lt;span&gt;+= &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;&amp;amp;list=ULcxqQ59vzyTk&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;We therefor need to create a bookmark, with a title like &amp;quot;YT Channel Playlist&amp;quot; and a URL of&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;color:#657b83;&quot;&gt;&lt;code&gt;&lt;span&gt;javascript:document.location.href += &amp;quot;&amp;amp;list=ULcxqQ59vzyTk&amp;quot;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Now navigate to a video and hit that bookmark to get the channel playlist.&lt;&#x2F;p&gt;
+&lt;p&gt;You &lt;a href=&quot;https:&#x2F;&#x2F;wonkodv.github.io&#x2F;bookmarklets&#x2F;&quot;&gt;should not drag anyone&#x27;s link into you bookmark bar&lt;&#x2F;a&gt;, so the following is just for me:&lt;&#x2F;p&gt;
+&lt;a href=&quot;javascript:document.location.href+=&#x27;&amp;list=ULcxqQ59vzyTk&#x27;;&quot; title=&quot;Drag this to your Bookmark Bar&quot;&gt;
+&lt;div style=&quot;display:block;  margin:auto; width:300px; background-color:#c4c4c4; border: 4px solid #bbb; border-color: #aaa #ccc #ccc #aaa; text-align: center; color:black;&quot;&gt;
+YT Channel Playlist
+&lt;&#x2F;div&gt;
+&lt;&#x2F;a&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>A Short Code for Factorio Rich Text in Zola</title>
+		<published>2022-01-04T00:00:00+00:00</published>
+		<updated>2022-01-04T00:00:00+00:00</updated>
+		<link href="https://wonkodv.github.io/zola-shortcode-factorio/" type="text/html"/>
+		<id>https://wonkodv.github.io/zola-shortcode-factorio/</id>
+		<content type="html">&lt;h1 id=&quot;a-short-code-for-factorio-rich-text-in-zola&quot;&gt;A Short Code for Factorio Rich Text in Zola&lt;&#x2F;h1&gt;
+&lt;p&gt;Yesterday I wanted to write a &lt;a href=&quot;https:&#x2F;&#x2F;wonkodv.github.io&#x2F;factorio&#x2F;automate-personal-transport-with-handy-car&#x2F;&quot;&gt;quick post&lt;&#x2F;a&gt; about a neat little blueprint I made in factorio.&lt;&#x2F;p&gt;
+&lt;p&gt;I typed it out, took some screenshots, and decided that I should just polish it
+a little and put it online. 
+Factorio has Rich Text which turns &lt;code&gt;[item=iron-plate]&lt;&#x2F;code&gt; into
+&lt;span style=&quot;background-color: #444344; color: #f1f1f1; padding:0.2rem 0.5rem;&quot; title=&quot;[item=iron-plate]&quot;&gt;&lt;img 
+            src=&#x27;&#x2F;factorio&#x2F;transparent.gif&#x27;
+            style=&#x27;
+                background-image:url(&amp;quot;&#x2F;factorio&#x2F;iron-plate.png&amp;quot;);
+                background-position: -95px 2px;
+                height:1.3em;
+                width:1em;
+                margin:-4px 0;
+                &#x27;
+            alt=&#x27;[item=iron-plate]&#x27;&gt;&lt;&#x2F;span&gt;
+. I thought I&#x27;d add a little
+&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.getzola.org&#x2F;documentation&#x2F;content&#x2F;shortcodes&#x2F;&quot;&gt;short code&lt;&#x2F;a&gt; and
+continue playing.&lt;&#x2F;p&gt;
+&lt;p&gt;At the start of every little project is a thought like&lt;&#x2F;p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;That shouldn&#x27;t take any time at all.&lt;br &#x2F;&gt;
+It&#x27;s just a little Regex to replace &lt;code&gt;[X=Y]&lt;&#x2F;code&gt;
+with &lt;code&gt;&amp;lt;img src=&amp;quot;factorio.com&#x2F;images&#x2F;X&#x2F;Y.png&amp;quot;&amp;gt;&lt;&#x2F;code&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;blockquote&gt;
+&lt;p&gt;And I wasn&#x27;t entirely wrong.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;adding-regex-to-zola&quot;&gt;Adding Regex to Zola&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.getzola.org&#x2F;&quot;&gt;Zola&lt;&#x2F;a&gt;
+uses
+&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;tera.netlify.app&#x2F;&quot;&gt;Tera&lt;&#x2F;a&gt; as template engine,
+and Tera does not have a regex-replace.
+Zola didn&#x27;t add one either.
+But it&#x27;s open source and I know a little rust so this should be easy right?&lt;&#x2F;p&gt;
+&lt;p&gt;I modified Zola a little to have a &lt;code&gt;regex_replace&lt;&#x2F;code&gt; filter.
+This is registered with &lt;code&gt;tera.register_filter&lt;&#x2F;code&gt; in &lt;code&gt;tpls.rs&lt;&#x2F;code&gt; (that name tho).&lt;&#x2F;p&gt;
+&lt;p&gt;After maybe an hour, I could use &lt;code&gt;regex_replace&lt;&#x2F;code&gt; in Zola templates (and thereby shortcodes). (Could have been closer to 2 hours?).
+It&#x27;s useful enough that I thought it might even be added to Zola.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;writing-the-short-code&quot;&gt;Writing the Short Code&lt;&#x2F;h2&gt;
+&lt;p&gt;10 minutes later I had the short code working using a regex that replaced the
+rich text elements with &lt;code&gt;&amp;lt;img&amp;gt;&lt;&#x2F;code&gt; tags that did not resolve yet, everything else
+was good.&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;jinja&quot; style=&quot;background-color:#fdf6e3;color:#657b83;&quot; class=&quot;language-jinja &quot;&gt;&lt;code class=&quot;language-jinja&quot; data-lang=&quot;jinja&quot;&gt;&lt;span&gt;&amp;lt;span style=&amp;quot;background-color: #444344; color: #f1f1f1;&amp;quot; title=&amp;quot;{{ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;body &lt;&#x2F;span&gt;&lt;span&gt;}}&amp;quot;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    {{- &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;body &lt;&#x2F;span&gt;&lt;span&gt;| &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;escape &lt;&#x2F;span&gt;&lt;span&gt;| &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;regex_replace&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;pattern&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;\[(?P&amp;lt;type&amp;gt;[^\]=]+)=(?P&amp;lt;name&amp;gt;[^\]=]+)]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;replace&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;&amp;lt;img src=&amp;#39;example.com&#x2F;factorio&#x2F;$1&#x2F;$2.png&amp;#39; alt=&amp;#39;$0&amp;#39;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    ) | &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;safe &lt;&#x2F;span&gt;&lt;span&gt;-}}
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&#x2F;span&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The entire text is put into a span with dark background and the unmodified text
+as title.&lt;&#x2F;p&gt;
+&lt;p&gt;The Regex does:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Match &lt;code&gt;[&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Capture Group with name &lt;code&gt;type&lt;&#x2F;code&gt;
+&lt;ul&gt;
+&lt;li&gt;Match 1 or more characters that are not &lt;code&gt;]&lt;&#x2F;code&gt; or &lt;code&gt;=&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Match &lt;code&gt;=&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;Capture Group with name &lt;code&gt;name&lt;&#x2F;code&gt;
+&lt;ul&gt;
+&lt;li&gt;Match 1 or more characters that are not &lt;code&gt;]&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Match &lt;code&gt;]&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;finding-the-icons&quot;&gt;Finding the Icons&lt;&#x2F;h2&gt;
+&lt;p&gt;Ok. Hard part done, now to the easy part.
+Finding a URL that hosts &lt;code&gt;&#x2F;item&#x2F;iron-ore.png&lt;&#x2F;code&gt; should be easy cause there is
+this great wiki and 100 fan sites, blueprint editors, ...&lt;&#x2F;p&gt;
+&lt;p&gt;Spoiler: finding icons is hard, you can skip this section.&lt;&#x2F;p&gt;
+&lt;p&gt;No, nothing is ever easy. I Closed the game and browsed through all the factorio
+links I keep around.&lt;&#x2F;p&gt;
+&lt;p&gt;The wiki does this media wiki thing of using capitalized names and have a
+&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;wiki.factorio.com&#x2F;Template:Icon&#x2F;doc&quot;&gt;wiki-syntax template&lt;&#x2F;a&gt;
+to deal with it.
+(It has 467 characters, 186 of which are &lt;code&gt;! &amp;quot; # . &#x2F; : ; &amp;lt; = &amp;gt; [ ] { | }&lt;&#x2F;code&gt;)&lt;&#x2F;p&gt;
+&lt;p&gt;The blueprint editor I looked at does some canvas magic and
+the resources are hidden in some javascript thing.&lt;&#x2F;p&gt;
+&lt;p&gt;2 fan sites have the image base64 encoded in a css style sheet.&lt;&#x2F;p&gt;
+&lt;p&gt;There is &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.factorioiconselect.com&#x2F;&quot;&gt;factorioiconselect.com&lt;&#x2F;a&gt; that has
+sane URLs but they made up there own schema (steam is in &lt;code&gt;fluid&#x2F;misc&#x2F;steam.png&lt;&#x2F;code&gt;)
+and don&#x27;t have the character icon.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;factoriolab.github.io&#x2F;&quot;&gt;Factorio Lab&lt;&#x2F;a&gt; has all the icons in one png:
+
+
+
+    
+
+
+
+    
+
+
+
+
+
+&lt;center&gt;
+
+
+
+    
+    
+
+&lt;a href=&quot;zola-shortcode-factorio&amp;#x2F;sprites.png&quot; target=&quot;_blank&quot;&gt;&lt;img width=&quot;400&quot; height=&quot;375&quot; src=&quot;https:&amp;#x2F;&amp;#x2F;wonkodv.github.io&amp;#x2F;processed_images&amp;#x2F;c297a447c7baf37e00.png&quot; alt=&quot;all icons in one file&quot; title=&quot;all icons in one file&quot;&gt;&lt;&#x2F;a&gt;
+
+&lt;&#x2F;center&gt;
+
+&lt;&#x2F;p&gt;
+&lt;p&gt;It is worth mentioning at this point, that templates in Zola&#x2F;Tera have some scripting
+support but not a full programming languages like python or lua with a huge string
+manipulation library (because those projects do NOT WANT one).
+Templates are supposed to be templates not programs.&lt;&#x2F;p&gt;
+&lt;p&gt;I realized I probably have all the files on my local machine anyway, most likely
+even with good file names because why would the devs make their own life harder?&lt;&#x2F;p&gt;
+&lt;p&gt;I did the easy thing and put a symlink to the graphics directory of my factorio
+install (&lt;code&gt;&#x2F;base&#x2F;graphics&#x2F;icons&#x2F;&lt;&#x2F;code&gt;) into the blog&#x27;s static directory.
+There is an &lt;code&gt;icons&#x2F;&lt;&#x2F;code&gt; directory with all the items and fluids.&lt;&#x2F;p&gt;
+&lt;p&gt;Feeling good, I spent an hour writing a first draft of this post.&lt;&#x2F;p&gt;
+&lt;p&gt;Going back to the rich text short code I realized &lt;code&gt;character.png&lt;&#x2F;code&gt; was missing
+(for when you have  &lt;code&gt;[entity=character]&lt;&#x2F;code&gt;).
+That is &lt;strong&gt;the only one&lt;&#x2F;strong&gt; which I wanted to use in the post I was actually trying to write.
+I did find &lt;code&gt;entity&#x2F;bigass-explosion&#x2F;&lt;&#x2F;code&gt; which made me smile but did not help.&lt;&#x2F;p&gt;
+&lt;p&gt;I later found the character icon in &lt;code&gt;&#x2F;core&#x2F;graphics&#x2F;icons&#x2F;entity&#x2F;&lt;&#x2F;code&gt; (core not base).&lt;&#x2F;p&gt;
+&lt;p&gt;Placing the symlink to graphics in &lt;code&gt;static&lt;&#x2F;code&gt; ensures that all graphics end up in
+my public directory, so I removed the symlink and only copied the images I need.&lt;&#x2F;p&gt;
+&lt;p&gt;I then noticed, that those &amp;quot;icons&amp;quot; are not icons as I understand them, but icons as a game
+engine understands them. 4 images of different resolution inside the same png.
+But, I can use the trick with css &lt;code&gt;background-position&lt;&#x2F;code&gt; I picked up on the way
+and make an &lt;code&gt;&amp;lt;img&amp;gt;&lt;&#x2F;code&gt; with a transparent pixel as &lt;code&gt;src&lt;&#x2F;code&gt; and the &amp;quot;icon&amp;quot; as
+background, using a constant offset. It somehow worked out that the second
+resolution fits nicely in my line.
+As soon as I change anything about the line size this will probably break and
+future me will have to write a script that crops the image instead and places
+&lt;em&gt;normal&lt;&#x2F;em&gt; icons in my static folder.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;the-final-short-code&quot;&gt;The Final Short Code&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;code&gt;templates&#x2F;shortcodes&#x2F;factorio_string.html&lt;&#x2F;code&gt; now looks like this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;jinja&quot; style=&quot;background-color:#fdf6e3;color:#657b83;&quot; class=&quot;language-jinja &quot;&gt;&lt;code class=&quot;language-jinja&quot; data-lang=&quot;jinja&quot;&gt;&lt;span&gt;&amp;lt;span style=&amp;quot;background-color: #444344; color: #f1f1f1; padding-x:0 2px;&amp;quot; title=&amp;quot;{{ &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;body &lt;&#x2F;span&gt;&lt;span&gt;}}&amp;quot;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;    {{- &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;body &lt;&#x2F;span&gt;&lt;span&gt;| &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;escape &lt;&#x2F;span&gt;&lt;span&gt;| &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;regex_replace&lt;&#x2F;span&gt;&lt;span&gt;(
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;pattern&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;\[(?P&amp;lt;type&amp;gt;[^\]=]+)=(?P&amp;lt;name&amp;gt;[^\]=]+)]&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;replace&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;&amp;lt;img
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;            src=&amp;#39;&#x2F;factorio&#x2F;transparent.gif&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;            style=&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;                background-image:url(&amp;amp;quot;&#x2F;factorio&#x2F;${name}.png&amp;amp;quot;);
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;                background-position: -95px 2px;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;                height:1.3em;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;                width:1em;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;                margin:-4px 0;&amp;#39;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;            alt=&amp;#39;$0&amp;#39;&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;    ) | &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;safe &lt;&#x2F;span&gt;&lt;span&gt;-}}
+&lt;&#x2F;span&gt;&lt;span&gt;&amp;lt;&#x2F;span&amp;gt;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Factorio: Automate Personal Transportation with Handy Car</title>
+		<published>2022-01-03T00:00:00+00:00</published>
+		<updated>2022-01-03T00:00:00+00:00</updated>
+		<link href="https://wonkodv.github.io/factorio/automate-personal-transport-with-handy-car/" type="text/html"/>
+		<id>https://wonkodv.github.io/factorio/automate-personal-transport-with-handy-car/</id>
+		<content type="html">&lt;h1 id=&quot;automate-personal-transportation-with-handy-car&quot;&gt;Automate Personal Transportation with Handy Car&lt;&#x2F;h1&gt;
+
+
+
+    
+    
+
+
+
+
+
+    
+
+
+
+&lt;center&gt;
+
+
+
+    
+    
+
+&lt;a href=&quot;&amp;#x2F;factorio&amp;#x2F;automate_personal_transport_with_handy_car&amp;#x2F;handy_car.png&quot; target=&quot;_blank&quot;&gt;&lt;img width=&quot;800&quot; height=&quot;539&quot; src=&quot;https:&amp;#x2F;&amp;#x2F;wonkodv.github.io&amp;#x2F;processed_images&amp;#x2F;5ab82943ebd6977e00.png&quot; alt=&quot;Train arriving to pick me up&quot; title=&quot;Timmy is coming to pick me up.&quot;&gt;&lt;&#x2F;a&gt;
+
+&lt;&#x2F;center&gt;
+
+&lt;h2 id=&quot;the-problem&quot;&gt;The Problem&lt;&#x2F;h2&gt;
+&lt;p&gt;My Base is hard to navigate without Spidertron or train.
+There are train tracks everywhere, lots of trains trying to roll over me, and no
+safe path to drive a car in.&lt;&#x2F;p&gt;
+
+
+
+    
+    
+
+
+
+
+
+
+
+&lt;center&gt;
+
+
+
+    
+    
+
+&lt;a href=&quot;&amp;#x2F;factorio&amp;#x2F;automate_personal_transport_with_handy_car&amp;#x2F;too_many_rails.png&quot; target=&quot;_blank&quot;&gt;&lt;img width=&quot;500&quot; height=&quot;337&quot; src=&quot;https:&amp;#x2F;&amp;#x2F;wonkodv.github.io&amp;#x2F;processed_images&amp;#x2F;5c018c93df00ee6a00.png&quot; alt=&quot;Screenshot of a Base with lots of rails&quot; title=&quot;2 by 2 chunk squares, only left turns, 1-1 Trains.&quot;&gt;&lt;&#x2F;a&gt;
+
+&lt;&#x2F;center&gt;
+
+&lt;h2 id=&quot;the-solution&quot;&gt;The Solution&lt;&#x2F;h2&gt;
+&lt;p&gt;The solution is &lt;strong&gt;Handy Car&lt;&#x2F;strong&gt;&lt;sup class=&quot;footnote-reference&quot;&gt;&lt;a href=&quot;#1&quot;&gt;1&lt;&#x2F;a&gt;&lt;&#x2F;sup&gt;. (I considered calling it uber).&lt;&#x2F;p&gt;
+&lt;p&gt;You place a Train stop called &lt;span style=&quot;background-color: #444344; color: #f1f1f1; padding:0.2rem 0.5rem;&quot; title=&quot;[entity=character] L&quot;&gt;&lt;img 
+            src=&#x27;&#x2F;factorio&#x2F;transparent.gif&#x27;
+            style=&#x27;
+                background-image:url(&amp;quot;&#x2F;factorio&#x2F;character.png&amp;quot;);
+                background-position: -95px 2px;
+                height:1.3em;
+                width:1em;
+                margin:-4px 0;
+                &#x27;
+            alt=&#x27;[entity=character]&#x27;&gt; L&lt;&#x2F;span&gt;
+ using a blueprint on the nearest track.
+Pretty soon there comes Timmy (A Train) and waits for you to enter.
+It will start driving immediately. You can:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Do nothing and get transported to &lt;span style=&quot;background-color: #444344; color: #f1f1f1; padding:0.2rem 0.5rem;&quot; title=&quot;Timmy&amp;#x27;s HQ&quot;&gt;Timmy&amp;#x27;s HQ&lt;&#x2F;span&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Use &lt;code&gt;CTRL+LEFT_CLICK&lt;&#x2F;code&gt; in the map to place a temporary Waypoint&lt;&#x2F;li&gt;
+&lt;li&gt;Let Bots (or other players if you have friends) place
+a Station &lt;span style=&quot;background-color: #444344; color: #f1f1f1; padding:0.2rem 0.5rem;&quot; title=&quot;[entity=character] U&quot;&gt;&lt;img 
+            src=&#x27;&#x2F;factorio&#x2F;transparent.gif&#x27;
+            style=&#x27;
+                background-image:url(&amp;quot;&#x2F;factorio&#x2F;character.png&amp;quot;);
+                background-position: -95px 2px;
+                height:1.3em;
+                width:1em;
+                margin:-4px 0;
+                &#x27;
+            alt=&#x27;[entity=character]&#x27;&gt; U&lt;&#x2F;span&gt;
+ and automatically
+get taken there.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Once you leave the train, it will drive back to &lt;span style=&quot;background-color: #444344; color: #f1f1f1; padding:0.2rem 0.5rem;&quot; title=&quot;Timmy&amp;#x27;s HQ&quot;&gt;Timmy&amp;#x27;s HQ&lt;&#x2F;span&gt;
+.&lt;&#x2F;p&gt;
+&lt;p&gt;With some circuitry, the pickup and drop off stations will deactivate
+automatically after the trains topped there, so that they do not interfere with
+your transportation needs later.
+Disabled train stops add a pathing penalty so you should remove the unused stops eventually.
+A speaker places a blinking icon on the map reminding you to remove the train stops.
+You can just hit &lt;code&gt;CTRL-Z&lt;&#x2F;code&gt; to let bots undo the placing.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;implementation&quot;&gt;Implementation&lt;&#x2F;h2&gt;
+&lt;h3 id=&quot;train&quot;&gt;Train&lt;&#x2F;h3&gt;
+&lt;p&gt;A dedicated Train With the following configuration:&lt;&#x2F;p&gt;
+
+
+
+    
+    
+
+
+
+
+
+    
+
+
+
+
+
+    
+
+&lt;a href=&quot;&amp;#x2F;factorio&amp;#x2F;automate_personal_transport_with_handy_car&amp;#x2F;train_schedule.png&quot; target=&quot;_blank&quot;&gt;&lt;img width=&quot;447&quot; height=&quot;549&quot; src=&quot;&amp;#x2F;factorio&amp;#x2F;automate_personal_transport_with_handy_car&amp;#x2F;train_schedule.png&quot; alt=&quot;Screenshot of schedule&quot; title=&quot;Handy Car Schedule&quot;&gt;&lt;&#x2F;a&gt;
+
+&lt;p&gt;The Timeout is to give you some time to enter, but eventually get over it if you
+forgot about your appointment.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;timmy-s-hq&quot;&gt;Timmy&#x27;s HQ&lt;&#x2F;h3&gt;
+&lt;p&gt;A Train Stop  somewhere in the middle, well connected, with refueling.
+If your base is large, you can have multiple trains and multiple stations, each
+with limit 1.&lt;&#x2F;p&gt;
+&lt;h3 id=&quot;pickup-and-dropoff-site&quot;&gt;Pickup and Dropoff Site&lt;&#x2F;h3&gt;
+&lt;p&gt;Apart from the Name, the Pickup and Dropoff Stations are the same Blueprint.&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The Station with this configuration:&lt;&#x2F;p&gt;
+
+
+
+    
+    
+
+
+
+    
+
+
+
+    
+
+
+
+
+
+    
+
+&lt;a href=&quot;&amp;#x2F;factorio&amp;#x2F;automate_personal_transport_with_handy_car&amp;#x2F;station_config.png&quot; target=&quot;_blank&quot;&gt;&lt;img width=&quot;234&quot; height=&quot;448&quot; src=&quot;&amp;#x2F;factorio&amp;#x2F;automate_personal_transport_with_handy_car&amp;#x2F;station_config.png&quot; alt=&quot;Station with &amp;#x27;Enable&amp;#x2F;disable&amp;#x27; and &amp;#x27;Read stopped train&amp;#x27;&quot; title=&quot;Station with &amp;#x27;Enable&amp;#x2F;disable&amp;#x27; and &amp;#x27;Read stopped train&amp;#x27;&quot;&gt;&lt;&#x2F;a&gt;
+
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Combinator that sends nothing in the beginning (&lt;code&gt;T == D == 0&lt;&#x2F;code&gt;). Once the
+train comes (e.g. &lt;code&gt;T == 4267&lt;&#x2F;code&gt;) it sends &lt;code&gt;D&lt;&#x2F;code&gt; until you destroy it.&lt;&#x2F;p&gt;
+
+
+
+    
+    
+
+
+
+    
+
+
+
+    
+
+
+
+
+
+    
+
+&lt;a href=&quot;&amp;#x2F;factorio&amp;#x2F;automate_personal_transport_with_handy_car&amp;#x2F;decider_config.png&quot; target=&quot;_blank&quot;&gt;&lt;img width=&quot;448&quot; height=&quot;409&quot; src=&quot;&amp;#x2F;factorio&amp;#x2F;automate_personal_transport_with_handy_car&amp;#x2F;decider_config.png&quot; alt=&quot;Decider combinator with &amp;#x27;if T ≠ D set D to 1&amp;#x27;&quot; title=&quot;Decider combinator with &amp;#x27;if T ≠ D set D to 1&amp;#x27;&quot;&gt;&lt;&#x2F;a&gt;
+
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Speaker that shows the map icon.&lt;&#x2F;p&gt;
+
+
+
+    
+    
+
+
+
+    
+
+
+
+    
+
+
+
+
+
+    
+
+&lt;a href=&quot;&amp;#x2F;factorio&amp;#x2F;automate_personal_transport_with_handy_car&amp;#x2F;speaker_config.png&quot; target=&quot;_blank&quot;&gt;&lt;img width=&quot;445&quot; height=&quot;575&quot; src=&quot;&amp;#x2F;factorio&amp;#x2F;automate_personal_transport_with_handy_car&amp;#x2F;speaker_config.png&quot; alt=&quot;Speaker with volume 0, Condition &amp;#x27;anything &amp;gt; 0&amp;#x27; T as Icon, the String &amp;#x27;Remove&amp;#x27; and &amp;#x27;Show icon on map&amp;#x27; checked.&quot; title=&quot;Speaker with volume 0, Condition &amp;#x27;anything &amp;gt; 0&amp;#x27; T as Icon, the String &amp;#x27;Remove&amp;#x27; and &amp;#x27;Show icon on map&amp;#x27; checked.&quot;&gt;&lt;&#x2F;a&gt;
+
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;an opportunistic power pole to make the speaker and circuitry work.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;blueprint&quot;&gt;Blueprint&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;color:#657b83;&quot;&gt;&lt;code&gt;&lt;span&gt;0eNrtWM1u2zgQfhWDl73IgX4ty0B72R562EO7aE5FIFASLRORSIGi3BqBHmDfYp9tn2RnKFtWGkWWkyz2EgSORA45&#x2F;zPf2A8kKRpWKS50nEh5TzYP552abL4&#x2F;XHEAaTyVotuueS5ogXv6UDGyIVyzklhE0BJXhUxlKTXfM9JahIuM&#x2F;SQbp7VGLu650g3s9He7E8s&#x2F;Bjfd9s4iTGiuOevkm8UhFk2ZMAWs+9sJz5esYKlWPF1WsmDAuJI13JQCpQK3pQ&#x2F;HD3DJdv0WdfqFmdsz04pysay1rMa4eCcuAWiacQVCDXllEfCTVrKIE7ajey4V3km5ShuuY6BlPaMtV7WOZzvlEzoFg6ApRsTGRVlRRTXKIB8M+SiHCZoULM54jU+y0aphFlGMZjFaVLEsNvadKGbRk2ar9I20nU6is7&#x2F;GOw7+UywbxorDyj+rh0unvcPLYE3nD&#x2F;K9O&#x2F;sh3YFNqWbqboF58CREXq9FpWSuaFmijcu6YvQe6GMhvwn6cN0E7X8XIioOesdFPh2pj8NI4XbJwFrju45PvKdQeTGv44rrdEc2W1rUDCuihnCV4A&#x2F;jQeArpGbd+3OByBVj4kIo3C4Uj1WpCnpIaHof72XRoJEgrt&#x2F;LC5nQojj0qsFC&#x2F;oih5g7VTorTfosEpp5YuYOzhnDKP7MjRVzS6rSF&#x2F;eboeaPknGQ8iStZXdMcaX+yUu7ZYiS3bslY&#x2F;fs914ylPGNqCaFLuDChG0kt+3FiXe4ER7bnNKtfkGfG1Johj6v7xyAR&#x2F;&#x2F;nrbzglG1011&#x2F;eh6gA2NJCKWyXLmAvgcYr6i3uCO4jIKTEt4s5uKNZ4unuY3yPBDs6mYQPMd3oJj2Ky34ePo2zQyeDfZgCXFilowopnmtriGy&#x2F;Lw2&#x2F;14gtP7xuElz0URsdu7fhh5IZ+FPhh4J1R0Eb13xCP3avw+HZw03tbPHait8Bj13nH42vx2Lsej2+n8XhWy3TW7y3zNS3Te03L9Oa2TP+ZlulfO3w50fvwdSGA78PX1Xh87vdP8Pgp29Vstmcwej3M3&#x2F;Yw&#x2F;0nJSm63s3DeGRO0NN&#x2F;Pz9I+U5EdFr9TrDeQBsgen8aEl80SGatTxatj4&#x2F;9S0JQtpIDPdgElVVsLxbYNK2DBFgaaFjumEM1nDyHG4Zd+Dpg1t8yePi7mkHdMolU0PXkMFJngEno3UbSyIy&#x2F;EJicVB35HKLWxBaay6Hpdp2Rutt3IdxwMUhA47ioKPMeFownSIj+ynWjl2Ou1s7YD34ki11mHQKZI9qO17cFOAA&#x2F;HX3kr17P91doIRz+aWhdNWjCqlhg8dPokes&#x2F;2V+hMI8N8Rt4ru0DPKGgn6356dvSOw334S9H7w2noVMyfv5LHsZyKVG4qMjEBvxC1Ef3DFzgibLFA6nTHsqY4Vsg5f3HtDuhd5Y7ZaOpz+qcZi&#x2F;ygQ8juhHVgy+JjSZsR8Phe0bpmIodJrlIM3rSRMnFB8xJLTsPXJGDurWzbxunm4dKQ+grNANPP2t3h32Tff5QV&#x2F;2t3b&#x2F;8FltdpAg==
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The Blueprint is a book that contains:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Station with train&lt;&#x2F;li&gt;
+&lt;li&gt;Another Book that you can place in your hotbar
+&lt;ul&gt;
+&lt;li&gt;Pickup&lt;&#x2F;li&gt;
+&lt;li&gt;Dropoff&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;You can select the inner book from the hotbar and cycle through the blueprints with &lt;code&gt;SHIFT+MOUSE_WHEEL&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;random-tip&quot;&gt;Random Tip&lt;&#x2F;h2&gt;
+&lt;p&gt;Instead of going through the Train&#x27;s Menu to switch it to manual driving, you
+can add or remove a wagon.
+Modifying the train puts it into manual.&lt;&#x2F;p&gt;
+&lt;p&gt;There are two ways:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Quickly add a Wagon: Put a Cargo Wagon on Hotbar 4 slot 4, so &lt;code&gt;SHIFT+4 4 Click&lt;&#x2F;code&gt; does the trick (if your aim is good). Use &lt;code&gt;CTRL+Z&lt;&#x2F;code&gt; to let the bots undo.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Quickly remove a wagon: using a deconstruction planner, remove the wagon and
+attach it with &lt;code&gt;CTRL+Z&lt;&#x2F;code&gt;. Do not start driving before, or the bots will place
+the wagon at the place you instructed them, while the train will have moved
+on.&lt;&#x2F;p&gt;
+&lt;p&gt;On the handy car train I haul around an empty wagon for just that.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;Using &lt;code&gt;CTRL+Click&lt;&#x2F;code&gt; on the map adds a temporary waypoint and switches the train to automatic.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;further-reading&quot;&gt;Further Reading&lt;&#x2F;h2&gt;
+&lt;div class=&quot;footnote-definition&quot; id=&quot;1&quot;&gt;&lt;sup class=&quot;footnote-definition-label&quot;&gt;1&lt;&#x2F;sup&gt;
+&lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;southpark.fandom.com&#x2F;wiki&#x2F;Handicar&quot;&gt;https:&#x2F;&#x2F;southpark.fandom.com&#x2F;wiki&#x2F;Handicar&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Sudo Button</title>
+		<published>2021-12-21T00:00:00+00:00</published>
+		<updated>2021-12-21T00:00:00+00:00</updated>
+		<link href="https://wonkodv.github.io/sudo-button/" type="text/html"/>
+		<id>https://wonkodv.github.io/sudo-button/</id>
+		<content type="html">&lt;h1 id=&quot;sudo-button&quot;&gt;Sudo Button&lt;&#x2F;h1&gt;
+&lt;p&gt;You can configure PAM to accept u2f as an authentication mechanism for using
+&lt;code&gt;sudo&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;Install &lt;code&gt;pam_u2f&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;Add the following line to the top  of &lt;code&gt;&#x2F;etc&#x2F;pam.d&#x2F;sudo&lt;&#x2F;code&gt;:&lt;pre style=&quot;background-color:#fdf6e3;color:#657b83;&quot;&gt;&lt;code&gt;&lt;span&gt;auth sufficient pam_u2f.so authfile=&#x2F;etc&#x2F;u2f_keys
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Generate &lt;code&gt;&#x2F;etc&#x2F;u2f_keys&lt;&#x2F;code&gt; by executing &lt;code&gt;pamu2fcfg&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;This is especially useful inside neovim when you execute &lt;code&gt;:w ! sudo dd of=%&lt;&#x2F;code&gt; to
+write a root owned file. In VIM, you would get the &lt;code&gt;sudo-askpass&lt;&#x2F;code&gt; password prompt, but in
+neovim the command is executed in a different session that has no access to your
+tty so it can not ask you for your password. With this setup, your u2f button
+blinks and you push it.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Video on Measuring &#x2F; Increasing Performance of Code</title>
+		<published>2021-12-21T00:00:00+00:00</published>
+		<updated>2021-12-21T00:00:00+00:00</updated>
+		<link href="https://wonkodv.github.io/video-on-performance/" type="text/html"/>
+		<id>https://wonkodv.github.io/video-on-performance/</id>
+		<content type="html">&lt;h1 id=&quot;video-on-measuring-increasing-performance-of-code&quot;&gt;Video on Measuring &#x2F; Increasing Performance of Code&lt;&#x2F;h1&gt;
+&lt;p&gt;Emery Berger talks about performance improvements that work &#x2F; don&#x27;t work.&lt;&#x2F;p&gt;
+&lt;div &gt;
+    &lt;iframe src=&quot;https:&#x2F;&#x2F;www.youtube-nocookie.com&#x2F;embed&#x2F;r-TLSBdHe1A&quot; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;&#x2F;iframe&gt;
+&lt;&#x2F;div&gt;
+&lt;h2 id=&quot;key-points&quot;&gt;Key Points&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;When optimizing your code, you can easily get random side effects which impact performance more than the changes.&lt;&#x2F;li&gt;
+&lt;li&gt;The execution environment (command args, current directory, environment
+variables) can have significant impact on execuiton speed, so they have to
+be factored out when measuring performance.&lt;&#x2F;li&gt;
+&lt;li&gt;Use &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;plasma-umass&#x2F;stabilizer&quot;&gt;&lt;code&gt;stabilizer&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; to randomize
+the layout of a linked binary and ignore accidental sideeffects.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;-O3&lt;&#x2F;code&gt; has no statistically significant benefit over &lt;code&gt;-O2&lt;&#x2F;code&gt; in &lt;code&gt;clang&lt;&#x2F;code&gt; &#x2F; LLVM.&lt;&#x2F;li&gt;
+&lt;li&gt;Typical profilers come from the single threaded single core time, and are not well
+suited to profile async or concurrent code.&lt;&#x2F;li&gt;
+&lt;li&gt;Use &lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;plasma-umass&#x2F;coz&quot;&gt;&lt;code&gt;coz-profiler&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; to find code that
+causes performance problems.&lt;&#x2F;li&gt;
+&lt;li&gt;Users don&#x27;t care about the performance they care about responsiveness. This
+may or may not be the same thing.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Fixing the Bluetooth Error `br-connection-unknown`</title>
+		<published>2021-12-14T00:00:00+00:00</published>
+		<updated>2021-12-14T00:00:00+00:00</updated>
+		<link href="https://wonkodv.github.io/bluetooth-error/" type="text/html"/>
+		<id>https://wonkodv.github.io/bluetooth-error/</id>
+		<content type="html">&lt;h1 id=&quot;fixing-the-bluetooth-error-br-connection-unknown&quot;&gt;Fixing the Bluetooth Error &lt;code&gt;br-connection-unknown&lt;&#x2F;code&gt;&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;the-problem&quot;&gt;The Problem&lt;&#x2F;h2&gt;
+&lt;p&gt;After not using a bluetooth headset for some time, I got the following error
+when I tried to connect it to my computer:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;color:#657b83;&quot;&gt;&lt;code&gt;&lt;span&gt;Failed to connect: org.bluez.Error.Failed br-connection-unknown
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;I used the following commands in &lt;code&gt;bluetoothctl&lt;&#x2F;code&gt;:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;color:#657b83;&quot;&gt;&lt;code&gt;&lt;span&gt;[bluetooth]# power on
+&lt;&#x2F;span&gt;&lt;span&gt;[CHG] Controller XX:XX:XX:XX:XX:XX Class: 0x00XXXXXX
+&lt;&#x2F;span&gt;&lt;span&gt;Changing power on succeeded
+&lt;&#x2F;span&gt;&lt;span&gt;[CHG] Controller XX:XX:XX:XX:XX:XX Powered: yes
+&lt;&#x2F;span&gt;&lt;span&gt;[bluetooth]# connect YY:YY:YY:YY:YY:YY
+&lt;&#x2F;span&gt;&lt;span&gt;Attempting to connect to YY:YY:YY:YY:YY:YY
+&lt;&#x2F;span&gt;&lt;span&gt;[CHG] Device YY:YY:YY:YY:YY:YY Connected: yes
+&lt;&#x2F;span&gt;&lt;span&gt;Failed to connect: org.bluez.Error.Failed br-connection-unknown
+&lt;&#x2F;span&gt;&lt;span&gt;[CHG] Device YY:YY:YY:YY:YY:YY Connected: no
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;h2 id=&quot;the-solution&quot;&gt;The Solution&lt;&#x2F;h2&gt;
+&lt;p&gt;Searching the net gave no quick solution,
+but after playing around with it a bit,
+I tried to unpair and pair again,
+which solved the problem:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;color:#657b83;&quot;&gt;&lt;code&gt;&lt;mark style=&quot;background-color:#3f3d3812;&quot;&gt;&lt;span&gt;[bluetooth]# remove YY:YY:YY:YY:YY:YY
+&lt;&#x2F;span&gt;&lt;&#x2F;mark&gt;&lt;span&gt;[DEL] Device YY:YY:YY:YY:YY:YY btheadphone
+&lt;&#x2F;span&gt;&lt;span&gt;Device has been removed
+&lt;&#x2F;span&gt;&lt;span&gt;[NEW] Device YY:YY:YY:YY:YY:YY WH-CH510
+&lt;&#x2F;span&gt;&lt;mark style=&quot;background-color:#3f3d3812;&quot;&gt;&lt;span&gt;[bluetooth]# pair YY:YY:YY:YY:YY:YY
+&lt;&#x2F;span&gt;&lt;&#x2F;mark&gt;&lt;span&gt;Attempting to pair with YY:YY:YY:YY:YY:YY
+&lt;&#x2F;span&gt;&lt;span&gt;[CHG] Device YY:YY:YY:YY:YY:YY Connected: yes
+&lt;&#x2F;span&gt;&lt;span&gt;[CHG] ...
+&lt;&#x2F;span&gt;&lt;span&gt;[CHG] Device YY:YY:YY:YY:YY:YY ServicesResolved: yes
+&lt;&#x2F;span&gt;&lt;span&gt;[CHG] Device YY:YY:YY:YY:YY:YY Paired: yes
+&lt;&#x2F;span&gt;&lt;span&gt;Pairing successful
+&lt;&#x2F;span&gt;&lt;span&gt;[CHG] Device YY:YY:YY:YY:YY:YY ServicesResolved: no
+&lt;&#x2F;span&gt;&lt;span&gt;[CHG] Device YY:YY:YY:YY:YY:YY Connected: no
+&lt;&#x2F;span&gt;&lt;mark style=&quot;background-color:#3f3d3812;&quot;&gt;&lt;span&gt;[bluetooth]# connect YY:YY:YY:YY:YY:YY
+&lt;&#x2F;span&gt;&lt;&#x2F;mark&gt;&lt;span&gt;Attempting to connect to YY:YY:YY:YY:YY:YY
+&lt;&#x2F;span&gt;&lt;span&gt;[CHG] Device YY:YY:YY:YY:YY:YY Connected: yes
+&lt;&#x2F;span&gt;&lt;span&gt;Connection successful
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;I then remembered, that I had used the headphone last on a different machine,
+from which I copied the entire home folder over to the current one.&lt;&#x2F;p&gt;
+&lt;p&gt;I imagine the problem was the following:&lt;&#x2F;p&gt;
+&lt;p&gt;Bluetooth uses some encryption with keys derived from secrets,
+exchanged while pairing, and the mac addresses of both devices.
+Since I changed computer, my MAC changed,
+but I copied my entire home folder to the new machine,
+so &lt;code&gt;bluetoothctl&lt;&#x2F;code&gt; used a cached intermediate key that was only valid on the old computer.
+When both devices use different crypto keys they can not understand each other.
+In such cases it is hard for the tool to give a more helpful error message than &amp;quot;doesn&#x27;t work&amp;quot;.
+If this explanation is wrong, please point me at the right resources to read up on it,
+I kind of stopped digging when things worked again.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Presenting in VIM</title>
+		<published>2021-09-16T00:00:00+00:00</published>
+		<updated>2021-09-16T00:00:00+00:00</updated>
+		<link href="https://wonkodv.github.io/presenting-with-vim/" type="text/html"/>
+		<id>https://wonkodv.github.io/presenting-with-vim/</id>
+		<content type="html">&lt;h1 id=&quot;presenting-in-vim&quot;&gt;Presenting in VIM&lt;&#x2F;h1&gt;
+&lt;p&gt;If you have to present something that contains mostly code and no graphics, you can stay in vim.
+The benefit is that you can write your presentation like code. Also, often when
+talking about code it is useful to show some real code, and that is easiest when
+you are already in the right tool.&lt;&#x2F;p&gt;
+
+
+
+    
+    
+
+
+
+
+
+    
+
+
+
+
+
+    
+    
+
+&lt;a href=&quot;&amp;#x2F;presenting_with_vim&amp;#x2F;presenting_with_vim.png&quot; target=&quot;_blank&quot;&gt;&lt;img width=&quot;800&quot; height=&quot;600&quot; src=&quot;https:&amp;#x2F;&amp;#x2F;wonkodv.github.io&amp;#x2F;processed_images&amp;#x2F;3b89d1668c8bd41a00.png&quot; alt=&quot;Screenshot of a presentation using vim&quot; title=&quot;Screenshot using neovim in terminator&quot;&gt;&lt;&#x2F;a&gt;
+
+&lt;p&gt;Write your &amp;quot;Slides&amp;quot; in Markdown, starting with a new Headline in line 50, 100,
+150, ...&lt;&#x2F;p&gt;
+&lt;p&gt;Some configuration is necessary to:&lt;&#x2F;p&gt;
+&lt;ol&gt;
+&lt;li&gt;hide every visual distraction&lt;&#x2F;li&gt;
+&lt;li&gt;Add a margin&lt;&#x2F;li&gt;
+&lt;li&gt;increase your font size&lt;&#x2F;li&gt;
+&lt;li&gt;enable smooth navigation.&lt;&#x2F;li&gt;
+&lt;&#x2F;ol&gt;
+&lt;p&gt;Points one and two are simply some settings. Which exactly depends on you normal setup and plugins.
+Enabling &lt;code&gt;cursorline&lt;&#x2F;code&gt; helps in online meetings if you would normally point at
+things with your finger.&lt;&#x2F;p&gt;
+&lt;p&gt;The font is either controlled by your terminal (&lt;code&gt;CTRL+SCROLL_WHEEL&lt;&#x2F;code&gt; in termnator)
+or by a setting &lt;code&gt;set guifont=Consolas:18&lt;&#x2F;code&gt; in GVim&#x2F;&lt;code&gt;neovim-qt&lt;&#x2F;code&gt;.
+It should be large enough that bad projectors or vidoe codecs over low bandwith
+online meetings still produce something readable.&lt;&#x2F;p&gt;
+&lt;p&gt;Smooth navigation is achieved by a mapping that snaps lines 50, 100, 150, ... to the top of the screen.
+I currently have the following &lt;code&gt;present.vim&lt;&#x2F;code&gt; which I source when necessary:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;vim&quot; style=&quot;background-color:#fdf6e3;color:#657b83;&quot; class=&quot;language-vim &quot;&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span style=&quot;color:#859900;&quot;&gt;nnoremap &amp;lt;buffer&amp;gt; &amp;lt;F3&amp;gt; &amp;lt;CMD&amp;gt;exe &lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;&amp;#39;normal &amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;line&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;&amp;quot;.&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&#x2F;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;50&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;50&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;&amp;#39;Gzt&amp;#39;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;&amp;lt;CR&amp;gt;&amp;lt;C-L&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;nmap &amp;lt;buffer&amp;gt; &amp;lt;F2&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;50&lt;&#x2F;span&gt;&lt;span&gt;k&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;&amp;lt;F3&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;nmap &amp;lt;buffer&amp;gt; &amp;lt;F4&amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;50&lt;&#x2F;span&gt;&lt;span&gt;j&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;&amp;lt;F3&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;nnoremap &amp;lt;buffer&amp;gt; &amp;lt;F5&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt; yi&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;&amp;lt;:! firefox &amp;lt;C-R&amp;gt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&amp;quot;&amp;lt;CR&amp;gt;&amp;lt;space&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span&gt;highlight! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;setlocal&lt;&#x2F;span&gt;&lt;span&gt; scrolloff=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;setlocal&lt;&#x2F;span&gt;&lt;span&gt; guifont=Consola&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;s:h18
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;setlocal&lt;&#x2F;span&gt;&lt;span&gt; nonumber
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;setlocal&lt;&#x2F;span&gt;&lt;span&gt; cmdheight=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;setlocal&lt;&#x2F;span&gt;&lt;span&gt; statusline=
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;setlocal&lt;&#x2F;span&gt;&lt;span&gt; showtabline=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;setlocal&lt;&#x2F;span&gt;&lt;span&gt; signcolumn=ye&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;s:3
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;setlocal&lt;&#x2F;span&gt;&lt;span&gt; noshowmode
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;setlocal&lt;&#x2F;span&gt;&lt;span&gt; laststatus=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;setlocal&lt;&#x2F;span&gt;&lt;span&gt; noshowcmd
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;setlocal&lt;&#x2F;span&gt;&lt;span&gt; nocursorcolumn
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;setlocal&lt;&#x2F;span&gt;&lt;span&gt; nolist
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;setlocal&lt;&#x2F;span&gt;&lt;span&gt; colorcolumn=
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;setlocal&lt;&#x2F;span&gt;&lt;span&gt; noruler
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;I navigate through the &amp;quot;slides&amp;quot; using F2 for previous, F4 for next and F3 to
+realign the slide to the top of the screen.
+F5 marks a URL inside &lt;code&gt;&amp;lt;&amp;gt;&lt;&#x2F;code&gt; and opens it in &lt;code&gt;firefox&lt;&#x2F;code&gt;, so you can show a picture.&lt;&#x2F;p&gt;
+&lt;p&gt;You can play around using &lt;a href=&quot;&#x2F;presenting_with_vim&#x2F;present.vim&quot;&gt;present.vim&lt;&#x2F;a&gt; and &lt;a href=&quot;&#x2F;presenting_with_vim&#x2F;presentation.md&quot;&gt;presentation.md&lt;&#x2F;a&gt;&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Don&#x27;t Repeat Yourself While Writing Unit Tests in C</title>
+		<published>2021-05-30T00:00:00+00:00</published>
+		<updated>2022-01-04T00:00:00+00:00</updated>
+		<link href="https://wonkodv.github.io/dry-tests-in-c/" type="text/html"/>
+		<id>https://wonkodv.github.io/dry-tests-in-c/</id>
+		<content type="html">&lt;h1 id=&quot;don-t-repeat-yourself-while-writing-unit-tests-in-c&quot;&gt;Don&#x27;t Repeat Yourself While Writing Unit Tests in C&lt;&#x2F;h1&gt;
+&lt;p&gt;A File containing unit tests can be as simple as this:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#fdf6e3;color:#657b83;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;#include &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;test.h&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;#include &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;sum.h&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;gt;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;TEST_CASE&lt;&#x2F;span&gt;&lt;span&gt;(sum_zero_elements)
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;uint32_t&lt;&#x2F;span&gt;&lt;span&gt; elements&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;] &lt;&#x2F;span&gt;&lt;span&gt;= {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;span&gt;    s = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;sum&lt;&#x2F;span&gt;&lt;span&gt;(elements, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;ASSERT_EQUAL&lt;&#x2F;span&gt;&lt;span&gt;(s, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;TEST_CASE&lt;&#x2F;span&gt;&lt;span&gt;(sum_one_element)
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;uint32_t&lt;&#x2F;span&gt;&lt;span&gt; elements&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;] &lt;&#x2F;span&gt;&lt;span&gt;= {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;span&gt;    s = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;sum&lt;&#x2F;span&gt;&lt;span&gt;(elements, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;ASSERT_EQUAL&lt;&#x2F;span&gt;&lt;span&gt;(s, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;TEST_CASE&lt;&#x2F;span&gt;&lt;span&gt;(sum_null)
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    s = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;sum&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;NULL&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;ASSERT_ERROR&lt;&#x2F;span&gt;&lt;span&gt;(ARGUMENT_ERROR);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;There is no reason to write any Test Suite functions or Test Runners.
+The macro in cooperation with the linker can do that, with something like:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#fdf6e3;color:#657b83;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;#define TEST_CASE&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;tc&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#586e75;&quot;&gt;static &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;void&lt;&#x2F;span&gt;&lt;span&gt; TC_##&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;tc&lt;&#x2F;span&gt;&lt;span&gt;(TEST_RUN&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt; run);
+&lt;&#x2F;span&gt;&lt;span&gt;   &lt;&#x2F;span&gt;&lt;span style=&quot;color:#586e75;&quot;&gt;__attribute__&lt;&#x2F;span&gt;&lt;span&gt;((&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;section=.test_cases.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;##tc)) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#586e75;&quot;&gt;static const&lt;&#x2F;span&gt;&lt;span&gt; TEST_CASE_INFO TCI_##tc = {
+&lt;&#x2F;span&gt;&lt;span&gt;    .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;line&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;__LINE__&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;    .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;file&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;__FILE__&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;    .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span&gt;=#tc,
+&lt;&#x2F;span&gt;&lt;span&gt;    .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;function&lt;&#x2F;span&gt;&lt;span&gt;=TC_##tc,
+&lt;&#x2F;span&gt;&lt;span&gt;  }
+&lt;&#x2F;span&gt;&lt;span&gt;  &lt;&#x2F;span&gt;&lt;span style=&quot;color:#586e75;&quot;&gt;static &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;void&lt;&#x2F;span&gt;&lt;span&gt; TC_##&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;tc&lt;&#x2F;span&gt;&lt;span&gt;(TEST_RUN&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt; run)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This places an info struct in a dedicated section.
+The linker will link all those together to produce an array of &lt;code&gt;TEST_CASE_INFO&lt;&#x2F;code&gt; which the test runner can simply iterate over:&lt;&#x2F;p&gt;
+&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#fdf6e3;color:#657b83;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span&gt;TEST_CASE_INFO __test_cases_start&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;[]&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;TEST_CASE_INFO __test_cases_end&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;[]&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;uint32_t&lt;&#x2F;span&gt;&lt;span&gt; passed, failed;
+&lt;&#x2F;span&gt;&lt;span&gt;TEST_CASE_INFO tc;
+&lt;&#x2F;span&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;for &lt;&#x2F;span&gt;&lt;span&gt;(tc=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span&gt;__test_cases_start&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;]&lt;&#x2F;span&gt;&lt;span&gt;; tc&amp;lt;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span&gt;__test_cases_end&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;0&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;]&lt;&#x2F;span&gt;&lt;span&gt;; tc=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span&gt;tc&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;]&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;    TEST_RUN run = {
+&lt;&#x2F;span&gt;&lt;span&gt;       .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;failed&lt;&#x2F;span&gt;&lt;span&gt;=&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;false&lt;&#x2F;span&gt;&lt;span&gt;,
+&lt;&#x2F;span&gt;&lt;span&gt;       .&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;test_case&lt;&#x2F;span&gt;&lt;span&gt;=tc,
+&lt;&#x2F;span&gt;&lt;span&gt;    };
+&lt;&#x2F;span&gt;&lt;span&gt;    tc.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;function&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span&gt;run);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(run.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;failed&lt;&#x2F;span&gt;&lt;span&gt;) {
+&lt;&#x2F;span&gt;&lt;span&gt;        failed += &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&#x2F;* info already printed by assert *&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;    } &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;else &lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;        passed += &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;printf&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;%s&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;:TC_&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;%:%&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;d:PASS&lt;&#x2F;span&gt;&lt;span style=&quot;color:#dc322f;&quot;&gt;\n&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;, tc-&amp;gt;file, tc-&amp;gt;name, tc-&amp;gt;line);
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;printf&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#dc322f;&quot;&gt;\n&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;SUMMARY&lt;&#x2F;span&gt;&lt;span style=&quot;color:#dc322f;&quot;&gt;\n&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;%d&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt; Tests Passed &lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;%d&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt; tests Failed&lt;&#x2F;span&gt;&lt;span style=&quot;color:#dc322f;&quot;&gt;\n&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;, passed, failed);
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The benefits of this kind of approach:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;You don&#x27;t repeat yourself.
+The Name of the test case appears exactly once in your project.
+Calling the function from a test suite and the suite from a test runner is just repeating things that you should not have to.
+Every step that has to be done by hand will be forgotten sooner or later.
+Automating solves the problem.&lt;&#x2F;li&gt;
+&lt;li&gt;Lean commits because you only touch one place when adding, deleting or renaming tests.&lt;&#x2F;li&gt;
+&lt;li&gt;You can concentrate on the test, not the surrounding, allowing you to write more tests in less time.&lt;&#x2F;li&gt;
+&lt;li&gt;It is easy to disable all tests you are not currently working on by deleting them. Later, get them from your git to run all tests.&lt;&#x2F;li&gt;
+&lt;li&gt;It is easy to partition tests into chunks if you want to run tests on an embedded device with limited memory, by simply compiling a couple of files at a time.&lt;&#x2F;li&gt;
+&lt;li&gt;&lt;code&gt;ctags&lt;&#x2F;code&gt; can know where &lt;code&gt;TC_sum_zero_elements()&lt;&#x2F;code&gt; is defined by something like:&lt;pre data-lang=&quot;txt&quot; style=&quot;background-color:#fdf6e3;color:#657b83;&quot; class=&quot;language-txt &quot;&gt;&lt;code class=&quot;language-txt&quot; data-lang=&quot;txt&quot;&gt;&lt;span&gt;--regex-c=&#x2F;^ *TEST_CASE\(([a-zA-Z0-9_]*)\)&#x2F;TC_\1&#x2F;f&#x2F;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+This regex extracts the word inside the parenthesis, prefixes it with &lt;code&gt;TC_&lt;&#x2F;code&gt; and adds it as a function tag.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;If you get a bad feeling whether all tests ran, you can do the following things (all of which are a good idea anyway):&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Measure code coverage&lt;&#x2F;li&gt;
+&lt;li&gt;Have your build tool tool count the number of &lt;code&gt;TEST_CASE&lt;&#x2F;code&gt; maybe also the number of &lt;code&gt;ASSERT&lt;&#x2F;code&gt; in your tests folder (&lt;code&gt;grep TEST_CASE -r tests&#x2F;|wc -l&lt;&#x2F;code&gt;) 
+and verify that as many tests were executed.
+Before a Release, do the same by hand.
+This is even more important if you are not using linker magic,
+because developers will eventually forget to add their newly written tests to the test suite.&lt;&#x2F;li&gt;
+&lt;li&gt;Extend the TEST_CASE macro to add, which requirement(s) are covered by a test case and let your requirements,
+print the requirement ids in the testlog for tests that passed and
+configure your requirement tracing tool to track requirements into the test
+log&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#fdf6e3;color:#657b83;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;TEST_CASE&lt;&#x2F;span&gt;&lt;span&gt;(sum_one_element, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;UC_sum_1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;span&gt;{
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;uint32_t&lt;&#x2F;span&gt;&lt;span&gt; elements&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;[&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;] &lt;&#x2F;span&gt;&lt;span&gt;= {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;};
+&lt;&#x2F;span&gt;&lt;span&gt;    s = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;sum&lt;&#x2F;span&gt;&lt;span&gt;(elements, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;ASSERT_EQUAL&lt;&#x2F;span&gt;&lt;span&gt;(s, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#6c71c4;&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;pre data-lang=&quot;txt&quot; style=&quot;background-color:#fdf6e3;color:#657b83;&quot; class=&quot;language-txt &quot;&gt;&lt;code class=&quot;language-txt&quot; data-lang=&quot;txt&quot;&gt;&lt;span&gt;ts_sum.c:TC_sum_one_element:42:PASS COVERS: UC_sum_1
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Use coverage marks in your code&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#fdf6e3;color:#657b83;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;void &lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;uint32_t *&lt;&#x2F;span&gt;&lt;span&gt;elements, count) {
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;COVER&lt;&#x2F;span&gt;&lt;span&gt;(UC_sum);
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;if &lt;&#x2F;span&gt;&lt;span&gt;(!elements) {
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;COVER&lt;&#x2F;span&gt;&lt;span&gt;(UC_sum_nullptr);
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#b58900;&quot;&gt;set_error&lt;&#x2F;span&gt;&lt;span&gt;(ARGUMENT_ERROR);
+&lt;&#x2F;span&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;return&lt;&#x2F;span&gt;&lt;span&gt;;
+&lt;&#x2F;span&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;...
+&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+and define them to print marks when executing code.&lt;pre data-lang=&quot;c&quot; style=&quot;background-color:#fdf6e3;color:#657b83;&quot; class=&quot;language-c &quot;&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;#define COVER&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;m&lt;&#x2F;span&gt;&lt;span&gt;) &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;do&lt;&#x2F;span&gt;&lt;span&gt;{                                             &lt;&#x2F;span&gt;&lt;span style=&quot;color:#dc322f;&quot;&gt;\
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#859900;&quot;&gt;printf&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#2aa198;&quot;&gt;{}:{}:{}:Covers: {}&lt;&#x2F;span&gt;&lt;span style=&quot;color:#dc322f;&quot;&gt;\n&lt;&#x2F;span&gt;&lt;span style=&quot;color:#839496;&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;,                              \
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;    current_test_run-&amp;gt;tc.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;file&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;,                                   \
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;    current_test_run-&amp;gt;tc.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;line&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;,                                   \
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;    current_test_run-&amp;gt;tc.&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;name&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;,                                   \
+&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;    #m&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span style=&quot;color:#cb4b16;&quot;&gt;;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+The requirements tool can now verify that the unittest hit code that
+implements a requirement by tracing into the log:&lt;pre style=&quot;background-color:#fdf6e3;color:#657b83;&quot;&gt;&lt;code&gt;&lt;span&gt;ts_sum.c:TC_sum_null:42:Covers: UC_sum
+&lt;&#x2F;span&gt;&lt;span&gt;ts_sum.c:TC_sum_null:42:Covers: UC_sum_nullptr
+&lt;&#x2F;span&gt;&lt;span&gt;ts_sum.c:TC_sum_null:42:PASS
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Explicitly Place All Sections When Linking With GNU LD</title>
+		<published>2021-03-12T00:00:00+00:00</published>
+		<updated>2022-01-04T00:00:00+00:00</updated>
+		<link href="https://wonkodv.github.io/gnu-linker-assert-all-sections-placed/" type="text/html"/>
+		<id>https://wonkodv.github.io/gnu-linker-assert-all-sections-placed/</id>
+		<content type="html">&lt;h1 id=&quot;explicitly-place-all-sections-when-linking-with-gnu-ld&quot;&gt;Explicitly Place All Sections When Linking With GNU LD&lt;&#x2F;h1&gt;
+&lt;h2 id=&quot;the-problem&quot;&gt;The Problem&lt;&#x2F;h2&gt;
+&lt;p&gt;If you place your sections manually, you sometimes forget one and the gnu linker places it automatically.
+Having data or code linked in the wrong place often works for a while or when
+not doing in depth tests, but can cause your system to have very odd behavior
+that is hard to pinpoint.
+If you are writing a linker script, it is best to place everything explicitly and get notified about every unplaced section.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;the-solution&quot;&gt;The Solution&lt;&#x2F;h2&gt;
+&lt;p&gt;A way to produce such a warning, is to define a catch all section and using &lt;code&gt;ASSERT()&lt;&#x2F;code&gt; to test, that it is empty:&lt;&#x2F;p&gt;
+&lt;pre data-linenos data-lang=&quot;ld&quot; style=&quot;background-color:#fdf6e3;color:#657b83;&quot; class=&quot;language-ld &quot;&gt;&lt;code class=&quot;language-ld&quot; data-lang=&quot;ld&quot;&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;1&lt;&#x2F;td&gt;&lt;td&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;memories&lt;&#x2F;span&gt;&lt;span&gt; {&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;...&lt;&#x2F;span&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;2&lt;&#x2F;td&gt;&lt;td&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;sections&lt;&#x2F;span&gt;&lt;span&gt; {
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;3&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;4&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.text&lt;&#x2F;span&gt;&lt;span&gt; : {
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;5&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;        *(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.text&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;6&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;    } &amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;rom
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;7&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.data&lt;&#x2F;span&gt;&lt;span&gt; : {
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;8&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;        *(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.data&lt;&#x2F;span&gt;&lt;span&gt;)
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;9&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;    } &amp;gt; &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;ram
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;10&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;11&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.debug_macro&lt;&#x2F;span&gt;&lt;span&gt;   : { *(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.debug_macro&lt;&#x2F;span&gt;&lt;span&gt;)   }
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;12&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.debug_line&lt;&#x2F;span&gt;&lt;span&gt;    : { *(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.debug_line&lt;&#x2F;span&gt;&lt;span&gt;)    }
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;13&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.debug_str&lt;&#x2F;span&gt;&lt;span&gt;     : { *(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.debug_str&lt;&#x2F;span&gt;&lt;span&gt;)     }
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;14&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.debug_frame&lt;&#x2F;span&gt;&lt;span&gt;   : { *(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.debug_frame&lt;&#x2F;span&gt;&lt;span&gt;)   }
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;15&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.debug_info&lt;&#x2F;span&gt;&lt;span&gt;    : { *(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.debug_info&lt;&#x2F;span&gt;&lt;span&gt;)    }
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;16&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.debug_abbrev&lt;&#x2F;span&gt;&lt;span&gt;  : { *(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.debug_abbrev&lt;&#x2F;span&gt;&lt;span&gt;)  }
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;17&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.debug_aranges&lt;&#x2F;span&gt;&lt;span&gt; : { *(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.debug_aranges&lt;&#x2F;span&gt;&lt;span&gt;) }
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;18&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.debug_ranges&lt;&#x2F;span&gt;&lt;span&gt;  : { *(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.debug_ranges&lt;&#x2F;span&gt;&lt;span&gt;)  }
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;19&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.debug_loc&lt;&#x2F;span&gt;&lt;span&gt;     : { *(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.debug_loc&lt;&#x2F;span&gt;&lt;span&gt;)     }
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;20&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.comment&lt;&#x2F;span&gt;&lt;span&gt;       : { *(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.comment&lt;&#x2F;span&gt;&lt;span&gt;)       }
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;21&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.version_info&lt;&#x2F;span&gt;&lt;span&gt;  : { *(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.version_info&lt;&#x2F;span&gt;&lt;span&gt;)  }
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;22&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;23&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;    &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;.unplaced&lt;&#x2F;span&gt;&lt;span&gt; : {
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;24&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;__unplaced_start&lt;&#x2F;span&gt;&lt;span&gt; = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d33682;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span&gt; ;
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;25&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;        *(*)
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;26&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;__unplaced_end&lt;&#x2F;span&gt;&lt;span&gt; = &lt;&#x2F;span&gt;&lt;span style=&quot;color:#d33682;&quot;&gt;.&lt;&#x2F;span&gt;&lt;span&gt; ;
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;27&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;&lt;mark style=&quot;background-color:#3f3d3812;&quot;&gt;28&lt;&#x2F;mark&gt;&lt;&#x2F;td&gt;&lt;td&gt;&lt;mark style=&quot;background-color:#3f3d3812;&quot;&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;ASSERT&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;__unplaced_start&lt;&#x2F;span&gt;&lt;span&gt; == &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;__unplaced_end&lt;&#x2F;span&gt;&lt;span&gt;, &lt;&#x2F;span&gt;&lt;span style=&quot;color:#268bd2;&quot;&gt;&amp;quot;ASSERT(.unplaced empty) failed&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;);
+&lt;&#x2F;span&gt;&lt;&#x2F;mark&gt;&lt;tr&gt;&lt;td&gt;29&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;        &lt;&#x2F;span&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;&#x2F;*
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;30&lt;&#x2F;td&gt;&lt;td&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;        * If the assert failed, check the .unplaced section in map file and
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;31&lt;&#x2F;td&gt;&lt;td&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;        * manually place anything that was placed there.
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;32&lt;&#x2F;td&gt;&lt;td&gt;&lt;span style=&quot;color:#93a1a1;&quot;&gt;        *&#x2F;
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;33&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;    }
+&lt;&#x2F;span&gt;&lt;tr&gt;&lt;td&gt;34&lt;&#x2F;td&gt;&lt;td&gt;&lt;span&gt;}
+&lt;&#x2F;span&gt;&lt;&#x2F;tr&gt;&lt;&#x2F;tbody&gt;&lt;&#x2F;table&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This part of the linker script places &lt;code&gt;.data&lt;&#x2F;code&gt; in ram, a bunch of debug stuff at its default location and anything else will end up in &lt;code&gt;.unplaced&lt;&#x2F;code&gt; and trigger an error like this:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;color:#657b83;&quot;&gt;&lt;code&gt;&lt;span&gt;ld: error: ASSERT(.unplaced empty) failed
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;If you look at the map file:&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;color:#657b83;&quot;&gt;&lt;code&gt;&lt;span&gt;.unplaced       memory region -&amp;gt; &#x2F;DISCARD&#x2F;
+&lt;&#x2F;span&gt;&lt;span&gt;                0x00000000    0x1234
+&lt;&#x2F;span&gt;&lt;span&gt;                0x00000000                __unplaced_start = .
+&lt;&#x2F;span&gt;&lt;span&gt; *(*)
+&lt;&#x2F;span&gt;&lt;span&gt; .text.hello_world
+&lt;&#x2F;span&gt;&lt;span&gt;                0x00000000        0x32 .&#x2F;lib&#x2F;lib.a(test.o)
+&lt;&#x2F;span&gt;&lt;span&gt;                0x00000034                __unplaced_end = .
+&lt;&#x2F;span&gt;&lt;span&gt;                0x00000000                ASSERT ((__unplaced_start == __unplaced_end), ...)
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This tells you, that there is a section &lt;code&gt;.text.hello_world&lt;&#x2F;code&gt; which the compiler created when compiling &lt;code&gt;test.o&lt;&#x2F;code&gt; which is part of &lt;code&gt;lib&#x2F;lib.a&lt;&#x2F;code&gt; and you did not place it explicitly.
+The reason is, that we captured &lt;code&gt;.text&lt;&#x2F;code&gt; but not &lt;code&gt;.text.*&lt;&#x2F;code&gt;. The issue was
+introduced when adding &lt;code&gt;-ffunction-sections&lt;&#x2F;code&gt; to the compiler options in order to
+reduce ROM usage (by also passing &lt;code&gt;-gc-sections&lt;&#x2F;code&gt; to the linker). This changes
+the section where code is placed, so it ended up in the wrong place.&lt;&#x2F;p&gt;
+&lt;p&gt;Depending on your compilers settings, a bunch of different debug sections will have to be added to the script.
+I have not found a more compact way which still allows debugging.
+Please write to me if you know the way!&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Writing good shell scripts</title>
+		<published>2021-01-19T00:00:00+00:00</published>
+		<updated>2021-12-17T00:00:00+00:00</updated>
+		<link href="https://wonkodv.github.io/shell-scripts/" type="text/html"/>
+		<id>https://wonkodv.github.io/shell-scripts/</id>
+		<content type="html">&lt;h1 id=&quot;how-to-write-good-shell-scripts&quot;&gt;How to write good shell scripts&lt;&#x2F;h1&gt;
+&lt;p&gt;I encounter (and have written) a lot of shell scripts which are horrible, so
+here I want to present some ideas that would make me like your script more:&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;don-t&quot;&gt;Don&#x27;t&lt;&#x2F;h2&gt;
+&lt;p&gt;&lt;strong&gt;Don&#x27;t write shell scrips!&lt;&#x2F;strong&gt; The language a shell implements is optimized to be as powerful as possible
+in 1 line, while staying backwards compatible to the Bourne Shell (&lt;code&gt;sh&lt;&#x2F;code&gt;) release in 1978.
+This goal is completely contrary to being readable.&lt;&#x2F;p&gt;
+&lt;p&gt;Writing a shell script, because you find yourself executing the same line again and again,
+comes naturally (not to everyone I guess) and makes sense.
+But soon you add arguments.
+Then argument verification.
+Then Error messages.
+Then you have 50 lines of spaghetti code with that one overly complicated one-liner at its center.
+3 months later you have no clue how anything works and you rewrite the script.&lt;&#x2F;p&gt;
+&lt;p&gt;Before you start on this path, stop.
+Think about the tool you want to have and then write it in 150 lines of beautiful readable rust.
+You will need more or less the same time, but now, maintenance of the tool is possible (easy).
+You have probably already written 1 or 2 unit tests
+for the complicated parts and &lt;code&gt;clap&lt;&#x2F;code&gt; gives you &lt;code&gt;--help&lt;&#x2F;code&gt; for free.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;but-i-have-to&quot;&gt;But I have to&lt;&#x2F;h2&gt;
+&lt;p&gt;If you have to use shell or batch (e.g. no python, no binaries allowed, obscure security measures),
+then you should still stop,
+think about the tool you need and then write it in a proper fashion.
+Every shell script should include:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Feedback on errors.&lt;&#x2F;li&gt;
+&lt;li&gt;In bash, put &lt;code&gt;set -e&lt;&#x2F;code&gt; at the top so that the script aborts on failed
+commands.&lt;&#x2F;li&gt;
+&lt;li&gt;Usage instructions, at least a good comment at the top, better yet that
+comment being printed when you call the script with &lt;code&gt;-h&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
+&lt;li&gt;Write &lt;code&gt;cd $(dirname $0)&lt;&#x2F;code&gt; in &lt;code&gt;sh&lt;&#x2F;code&gt; or &lt;code&gt;cd &#x2F;D %~dp0&lt;&#x2F;code&gt; in &lt;code&gt;.bat&lt;&#x2F;code&gt; to change to
+the directory that the script lives in, so that your relative paths do not
+break when the script is invoked fom somewhere unexpected.&lt;&#x2F;li&gt;
+&lt;li&gt;Do not source other scripts, execute them in a separate shell unless they
+are explicitly written to be sourced.&lt;&#x2F;li&gt;
+&lt;li&gt;Comments when using the more obscure syntax (do you know what &lt;code&gt;${s%%*&#x2F;}&lt;&#x2F;code&gt; is? Are you aware that the
+value of &lt;code&gt;${SECONDS}&lt;&#x2F;code&gt; changes once per second?)&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Submodules in Git</title>
+		<published>2021-01-05T00:00:00+00:00</published>
+		<updated>2021-01-05T00:00:00+00:00</updated>
+		<link href="https://wonkodv.github.io/submodule/" type="text/html"/>
+		<id>https://wonkodv.github.io/submodule/</id>
+		<content type="html">&lt;h1 id=&quot;should-you-use-submodules-in-git&quot;&gt;Should you use submodules in Git?&lt;&#x2F;h1&gt;
+&lt;p&gt;When starting a larger project, there is the question of how to partition code and if submodules could help.
+With git, you can either put all your code in one repository or use submodules.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;benefits-of-a-single-repository&quot;&gt;Benefits of a single repository&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Simple&lt;&#x2F;li&gt;
+&lt;li&gt;Basic git knowledge suffices for the developers&lt;&#x2F;li&gt;
+&lt;li&gt;related commits to different components can be tracked under 1 feature branch and pull request&lt;&#x2F;li&gt;
+&lt;li&gt;Tools work faster if they do not have to recourse through submodules&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;benefits-of-submodules&quot;&gt;Benefits of Submodules&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Keep unrelated commits out of a component&#x27;s repository.
+Git resolves conflicts very well, but a merge without conflicts can still break the repository. That is why &lt;code&gt;git merge&lt;&#x2F;code&gt; prepares a commit for you whenever the merge is not linear (fast forwardable). For example
+&lt;ul&gt;
+&lt;li&gt;A removes an &amp;quot;unused&amp;quot; function from &lt;code&gt;util&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;B starts to use that function in &lt;code&gt;app&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;Reusing a component is as simple as including the components repository as submodule in another project. The entire history will be there, bugs fixed in that new project will be fixed for all uses of that component.&lt;&#x2F;li&gt;
+&lt;li&gt;Each repository is very small, which makes working with the repository faster. (But work on the entire project of multiple submodules becomes slower)&lt;&#x2F;li&gt;
+&lt;li&gt;Enforces good architecture&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;requirements-to-use-submodules&quot;&gt;Requirements to use submodules&lt;&#x2F;h2&gt;
+&lt;p&gt;Using submodules will work well for:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Third Party code&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Non Code (Requirements documentation, test logs, build tools, ...)&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;well encapsulated components which:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;deal with 1 well defined responsibility&lt;&#x2F;li&gt;
+&lt;li&gt;contain documentation: a README.md file which tells what this submodule represents,
+how the file tree is structured, &lt;strong&gt;How to build it&lt;&#x2F;strong&gt;, external dependencies,  ...&lt;&#x2F;li&gt;
+&lt;li&gt;contain tests: The tests serve both as verification to create trust in the component as well as the most precise documentation by giving functional examples which are never out of date &#x2F; unmaintained.&lt;&#x2F;li&gt;
+&lt;li&gt;have a clear interface towards:
+&lt;ul&gt;
+&lt;li&gt;Software: A set of well documented functions that are usable by dependant code.&lt;&#x2F;li&gt;
+&lt;li&gt;Tooling: A configuration for the build&#x2F;bundle tool (&lt;code&gt;Makefile&lt;&#x2F;code&gt;, &lt;code&gt;CMakeLists.txt&lt;&#x2F;code&gt;, &lt;code&gt;setup.py&lt;&#x2F;code&gt;, ...)&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;p&gt;All of these can be expected of a well designed software component anyway.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Changes to multiple submodules must be rare.&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;Touching 2 submodules will happen, when new functionality is added to a library L and later used by a dependant library or application D. When functionality is added, new L is a drop in replacement for old L.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;&#x2F;li&gt;
+&lt;li&gt;
+&lt;p&gt;Is released in versions. When the submodule changes, the commit message should
+be &lt;code&gt;Bump BSP to v2.3.9&lt;&#x2F;code&gt; instead of &lt;code&gt;use newest BSP&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;indicators-when-not-to-use-submodules&quot;&gt;Indicators when not to use submodules&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;your architecture will likely change&lt;&#x2F;li&gt;
+&lt;li&gt;your project is not that large&lt;&#x2F;li&gt;
+&lt;li&gt;The components are not that useful outside of that project.&lt;&#x2F;li&gt;
+&lt;li&gt;The code of the submodule can not be compiled into a library easily.&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;h2 id=&quot;so&quot;&gt;So . . .&lt;&#x2F;h2&gt;
+&lt;p&gt;It must be mentioned, that the Linux kernel developers created &lt;code&gt;git&lt;&#x2F;code&gt; based on
+their experience creating the kernel and they do not use submodules. They manage
+twenty different architectures and hundreds of drivers and modules in one
+single repository. But then,
+the kernel is a very different kind of project, compared with whatever you are
+planning.&lt;&#x2F;p&gt;
+&lt;p&gt;If the use of submodules seems to create extra work this can be viewed to some
+extend as effort that would be needed later, when untangling a component for
+reuse in a different project.
+If your pull requests in one repository stall because of other pull requests in
+other repositories, those two components should probably be developed in the
+same repository (for a while?).&lt;&#x2F;p&gt;
+&lt;p&gt;My recommendation is to start with 1 repository and whenever a component appears
+as a good submodule candidate, &lt;a href=&quot;https:&#x2F;&#x2F;wonkodv.github.io&#x2F;git-extract-submodule&#x2F;&quot;&gt;extract it into one&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Extract a Submodule from a Git Repository</title>
+		<published>2020-12-15T00:00:00+00:00</published>
+		<updated>2020-12-15T00:00:00+00:00</updated>
+		<link href="https://wonkodv.github.io/git-extract-submodule/" type="text/html"/>
+		<id>https://wonkodv.github.io/git-extract-submodule/</id>
+		<content type="html">&lt;h1 id=&quot;extract-a-submodule-from-a-git-repository&quot;&gt;Extract a Submodule from a Git Repository&lt;&#x2F;h1&gt;
+&lt;p&gt;Using several git commands, you can extract a directory and all of its commit
+history into a new git repository and include that as a submodule.&lt;&#x2F;p&gt;
+&lt;p&gt;&lt;code&gt;git subtree split&lt;&#x2F;code&gt; filters the entire commit history, collecting those that touched a directory, and produces a new commit chain from it.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;prepare-the-server&quot;&gt;Prepare the server&lt;&#x2F;h2&gt;
+&lt;p&gt;A repository with submodules specifies the URL where to clone the sub repositories from. You must create a new repository on that server and fix access rights and stuff. It should be the same where everyone gets your project from.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;extract-the-history&quot;&gt;Extract the history&lt;&#x2F;h2&gt;
+&lt;p&gt;Extract the history of &lt;code&gt;component&lt;&#x2F;code&gt; and label it as the branch &lt;code&gt;split&lt;&#x2F;code&gt;. Prefix every commit message with &lt;code&gt;S!&lt;&#x2F;code&gt; to indicate that this commit happend before the split.&lt;&#x2F;p&gt;
+&lt;p&gt;Go to your repository and execute the following command. Then grab a coffee because git now checks every commit in your projects history and this can takes 0.1 to 1 second per commit.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;color:#657b83;&quot;&gt;&lt;code&gt;&lt;span&gt;project$ git subtree split --prefix=component --branch split --annotate &amp;quot;S! &amp;quot; master
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Once this is done, you can inspect the new history with &lt;code&gt;git log --stat split&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;create-the-sub-repository&quot;&gt;Create the sub repository&lt;&#x2F;h2&gt;
+&lt;p&gt;Delete the component from the project repository&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;color:#657b83;&quot;&gt;&lt;code&gt;&lt;span&gt;project$ git rm -rf component
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Create a dedicated repository&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;color:#657b83;&quot;&gt;&lt;code&gt;&lt;span&gt;project$ mkdir component
+&lt;&#x2F;span&gt;&lt;span&gt;project$ cd component
+&lt;&#x2F;span&gt;&lt;span&gt;component$ git init
+&lt;&#x2F;span&gt;&lt;span&gt;component$ cd ..
+&lt;&#x2F;span&gt;&lt;span&gt;project$ 
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Copy (push) the created history into the dedicated repo&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;color:#657b83;&quot;&gt;&lt;code&gt;&lt;span&gt;project$ git push .&#x2F;component split
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;There are no files in &lt;code&gt;component&lt;&#x2F;code&gt; yet, because &lt;code&gt;master&lt;&#x2F;code&gt; is the initial empty state and the branch&lt;code&gt;split&lt;&#x2F;code&gt; you just pushed is not checked out.&lt;&#x2F;p&gt;
+&lt;p&gt;Got to the component repository and switch to &lt;code&gt;master&lt;&#x2F;code&gt; and, also do some cleanup:&lt;&#x2F;p&gt;
+&lt;ul&gt;
+&lt;li&gt;remove the &lt;code&gt;split&lt;&#x2F;code&gt; branch&lt;&#x2F;li&gt;
+&lt;li&gt;create a &lt;code&gt;.gitignore&lt;&#x2F;code&gt;&lt;&#x2F;li&gt;
+&lt;li&gt;create a commit that explains the extraction (use &lt;code&gt;--allow-empty&lt;&#x2F;code&gt; if you have no changed files to commit to add a note to the history)&lt;&#x2F;li&gt;
+&lt;li&gt;configure the &lt;code&gt;remote&lt;&#x2F;code&gt; and push&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;color:#657b83;&quot;&gt;&lt;code&gt;&lt;span&gt;project$ cd component
+&lt;&#x2F;span&gt;&lt;span&gt;component$ git -C master
+&lt;&#x2F;span&gt;&lt;span&gt;component$ git branch -d split
+&lt;&#x2F;span&gt;&lt;span&gt;component$ echo &amp;quot;stuff to ignore&amp;quot; &amp;gt;&amp;gt; .gitignore
+&lt;&#x2F;span&gt;&lt;span&gt;component$ git add .gitignore
+&lt;&#x2F;span&gt;&lt;span&gt;component$ git commit -m &amp;quot;extract component from project&amp;quot;
+&lt;&#x2F;span&gt;&lt;span&gt;component$ git remote add server https:&#x2F;&#x2F;server&#x2F;component
+&lt;&#x2F;span&gt;&lt;span&gt;component$ git push server -u master master
+&lt;&#x2F;span&gt;&lt;span&gt;component$ cd ..
+&lt;&#x2F;span&gt;&lt;span&gt;project$ 
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;You now have a git repository for the component inside the project repository, but it is not a submodule yet. If you accidentally &lt;code&gt;git add&lt;&#x2F;code&gt; the component, there is a special warning message for you.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;add-the-sub-repository-as-submodule&quot;&gt;Add the sub repository as submodule&lt;&#x2F;h2&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;color:#657b83;&quot;&gt;&lt;code&gt;&lt;span&gt;project$ git submodule add https:&#x2F;&#x2F;server&#x2F;component component
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Note that &lt;code&gt;git submodule add&lt;&#x2F;code&gt; will not inspect or test the url when adding existing subrepositories. It will only write it into the &lt;code&gt;.gitmodules&lt;&#x2F;code&gt; file. Users who try to pull&#x2F;clone your repository will notice any errors you make here before you do.&lt;&#x2F;p&gt;
+&lt;p&gt;In the project repository, add the &lt;code&gt;.gitmodules&lt;&#x2F;code&gt; file and the submodule&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;color:#657b83;&quot;&gt;&lt;code&gt;&lt;span&gt;project$ git add .gitmodules
+&lt;&#x2F;span&gt;&lt;span&gt;project$ git add component
+&lt;&#x2F;span&gt;&lt;span&gt;project$ git commit -m &amp;#39;component: extract into submodule&amp;#39;
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The last thing to do is to delete the &lt;code&gt;split&lt;&#x2F;code&gt; branch used to hold the artificial history in the project repository.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;color:#657b83;&quot;&gt;&lt;code&gt;&lt;span&gt;project$ git branch -D split
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Test the entire project. If the component was successfully pushed to the server, you can now push the project.&lt;&#x2F;p&gt;
+&lt;pre style=&quot;background-color:#fdf6e3;color:#657b83;&quot;&gt;&lt;code&gt;&lt;span&gt;project$ git push
+&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Done. 5 Minutes + 1 coffee break.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+	<entry xml:lang="en">
+		<title>Wonko&#x27;s Blog</title>
+		<published>2020-12-05T00:00:00+00:00</published>
+		<updated>2021-10-19T00:00:00+00:00</updated>
+		<link href="https://wonkodv.github.io/first/" type="text/html"/>
+		<id>https://wonkodv.github.io/first/</id>
+		<content type="html">&lt;h1 id=&quot;wonko-s-blog&quot;&gt;Wonko&#x27;s Blog&lt;&#x2F;h1&gt;
+&lt;p&gt;Everyone else has a blog, so I thought I&#x27;d better get one too.&lt;&#x2F;p&gt;
+&lt;p&gt;Also, I needed a place to put some texts I wrote to link to when I&#x27;m trying to win online arguments.&lt;&#x2F;p&gt;
+&lt;p&gt;Of course it ended up more complicated to set up and looking worse, using 500
+bytes of &lt;code&gt;css&lt;&#x2F;code&gt;, but is now very comfortable to work with.
+&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;www.getzola.org&#x2F;&quot;&gt;Zola&lt;&#x2F;a&gt; builds the entire site from scratch in 98
+milliseconds, which will help amortizing the two days I spent setting it up
+because I didn&#x27;t want to use other peoples themes.
+You can check out the source using the link at the bottom. Feel free to submit
+Issues or pull requests if I got something wrong.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;zettelkasten&quot;&gt;Zettelkasten&lt;&#x2F;h2&gt;
+&lt;p&gt;Is German for a box for slips of paper. That is how I plan on using it.&lt;&#x2F;p&gt;
+</content>
+	</entry>
+</feed>

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% import "macros.html" as macros %}
+
+
+{% block head %}
+    <title>{{ term.name | capitalize }} - {{ config.title }}</title>
+{% endblock head %}
+
+
+{% block content %}
+  <h1>{{ term.name | capitalize }}</h1>
+
+  {{ macros::list_pages(pages=term.pages) }}
+
+
+{% endblock content %}
