@@ -1,9 +1,9 @@
 +++
-title = "Extract a Submodule from a Git Repository"
-description = "Extract a directory and its history into a new git repository"
-date  = "2020-12-15"
-taxonomies.category=["Programming"]
-taxonomies.tags=["Git"]
+title               = "Extract a Submodule from a Git Repository"
+description         = "Extract a directory and its history into a new git repository"
+date                = "2020-12-15"
+taxonomies.category = ["Programming"]
+taxonomies.tags     = ["git"]
 +++
 
 # Extract a Submodule from a Git Repository

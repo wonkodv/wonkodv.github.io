@@ -3,7 +3,7 @@ title               = "Undefined Behavior regarding Pointers"
 description         = "An article explains why languages have undefined behavior"
 date                = 2023-08-12
 taxonomies.category = ["Programming"]
-taxonomies.tags     = ["Recommended Reading", "C", "Rust"]
+taxonomies.tags     = ["recommended reading", "c", "rust"]
 +++
 
 ## Pointers are Complicated

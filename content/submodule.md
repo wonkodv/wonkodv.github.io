@@ -1,9 +1,9 @@
 +++
-title = "Submodules in Git"
-description = "When to use submodules in git"
-date  = "2021-01-05"
-taxonomies.category=["Programming"]
-taxonomies.tags=["Git"]
+title               = "Submodules in Git"
+description         = "When to use submodules in git"
+date                = "2021-01-05"
+taxonomies.category = ["Programming"]
+taxonomies.tags     = ["git"]
 +++
 
 # Should you use submodules in Git?

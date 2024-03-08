@@ -1,0 +1,16 @@
+{% import "macro_tag.html" as macro_tag %}
+
+{% macro list_pages(pages) %}
+<ul>
+{% for page in pages %}
+    <li>
+        <p class="title">
+        <a href="{{ page.permalink }}">{{ page.title }}</a></p>
+
+        {{ page.description | markdown | safe }}
+
+        {{ macro_tag::tagline(page=page) }}
+    </li>
+{% endfor %}
+</ul>
+{% endmacro list_pages %}

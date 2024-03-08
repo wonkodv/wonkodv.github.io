@@ -1,10 +1,10 @@
 +++
-title = "Explicitly Place All Sections When Linking With GNU LD"
-description = "Use an assertion to detect sections that are not placed explicitly by a linker script"
-date  = 2021-03-12
-updated = 2022-01-04
-taxonomies.category=["Programming"]
-taxonomies.tags=["C", "Embedded"]
+title               = "Explicitly Place All Sections When Linking With GNU LD"
+description         = "Use an assertion to detect sections that are not placed explicitly by a linker script"
+date                = 2021-03-12
+updated             = 2022-01-04
+taxonomies.category = ["Programming"]
+taxonomies.tags     = ["c", "embedded"]
 +++
 
 Explicitly Place All Sections When Linking With GNU LD

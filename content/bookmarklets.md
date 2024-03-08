@@ -2,9 +2,9 @@
 title               = "Bookmarklets are Cool"
 description         = "Use `javascript:` bookmarks to enhance website functionality (but be careful where you get them from)"
 date                = 2024-03-07
-# updated            = 2023-07-29
-taxonomies.category = ["Security"]
-taxonomies.tags     = ["Javascript", 'Web']
+# updated           = 2023-07-29
+taxonomies.category = ["Web"]
+taxonomies.tags     = ["javascript", "web", "security"]
 +++
 
 # Bookmarklets Are Cool

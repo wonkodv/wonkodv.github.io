@@ -1,10 +1,10 @@
 +++
-title = "Open Files on Windows from WSL"
-description = "Use the Windows default application to open files from the Windows Subsystem for Windows bash"
-date = 2022-03-19
-updated = 2024-03-08
-taxonomies.category=["Using Windows"]
-taxonomies.tags=["WSL", "shell"]
+title               = "Open Files on Windows from WSL"
+description         = "Use the Windows default application to open files from the Windows Subsystem for Windows bash"
+date                = 2022-03-19
+updated             = 2024-03-08
+taxonomies.category = ["Using Windows"]
+taxonomies.tags     = ["wsl", "shell"]
 +++
 
 # Open Files on Windows from WSL
@@ -13,7 +13,7 @@ When you are in a WSL-bash and maybe generated an `svg` file and want to look at
 
 ```bash
 function o() {
-    w=$(wslpath -wa "$1" | sed "s/'/''/g)
+    w=$(wslpath -wa "$1" | sed "s/'/''/g")
     /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command Start-Process "'${w}'"
 }
 ```

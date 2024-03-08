@@ -1,9 +1,9 @@
 +++
-title = "Video on Measuring / Increasing Performance of Code"
-description = "Emery Berger talks about performance improvements that work / don't work."
-date = 2021-12-21
-taxonomies.category=["Programming"]
-taxonomies.tags=["Performance", "Video", "Recommended Reading"]
+title               = "Video on Measuring / Increasing Performance of Code"
+description         = "Emery Berger talks about performance improvements that work / don't work."
+date                = 2021-12-21
+taxonomies.category = ["Programming"]
+taxonomies.tags     = ["performance", "video", "recommended reading"]
 +++
 
 Video on Measuring / Increasing Performance of Code

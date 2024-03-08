@@ -1,10 +1,10 @@
 +++
-title = "Factorio: Automate Personal Transportation with Handy Car"
-description = "A System of Blueprints and Train Schedule to ease personal transportation trains"
-taxonomies.category=["Playing"]
-taxonomies.tags=["Factorio"]
-date=2022-01-03
-extra.image= "factorio/automate_personal_transport_with_handy_car/handy_car.png"
+title               = "Factorio: Automate Personal Transportation with Handy Car"
+description         = "A System of Blueprints and Train Schedule to ease personal transportation trains"
+taxonomies.category = ["Gaming"]
+taxonomies.tags     = ["factorio"]
+date                = 2022-01-03
+extra.image         = "factorio/automate_personal_transport_with_handy_car/handy_car.png"
 +++
 
 # Automate Personal Transportation with Handy Car

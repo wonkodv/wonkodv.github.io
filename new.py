@@ -8,14 +8,14 @@ import os
 import toml
 
 
-
-
 if len(sys.argv) > 1:
     title = " ".join(sys.argv[1:])
 else:
     title = input("Title? ")
 
-file = title.replace(" ", "-").replace("_","-").lower() # good slugs use only alphanum and -
+file = (
+    title.replace(" ", "-").replace("_", "-").lower()
+)  # good slugs use only alphanum and -
 file = f"{file}.md"
 
 path = pathlib.Path("content") / file
@@ -25,18 +25,19 @@ if path.exists():
 date = datetime.date.today()
 
 
-tags = set();
+tags = set()
+categories = set()
 for f in pathlib.Path("content").glob("**/*.md"):
     try:
         front_matter = f.read_text().split("+++")[1]
-        print (front_matter)
+        print(front_matter)
         front_matter = toml.loads(front_matter)
-        print (front_matter)
-        tags.update(front_matter['taxonomies']['tags'])
+        print(front_matter)
+        tags.update(front_matter["taxonomies"]["tags"])
+        categories.update(front_matter["taxonomies"]["categories"])
     except KeyError:
         pass
 tags = ", ".join(map(repr, tags))
-
 
 
 path.write_text(
@@ -44,9 +45,9 @@ path.write_text(
 title               = "{title} TODO"
 description         = "TODO"
 date                = {date:%Y-%m-%d}
-# updated            = 2023-07-29
-taxonomies.category = ["Programming", "Using Unix"]
-taxonomies.tags     = ["TODO", {tags}]
+# updated            = {date:%Y-%m-%d}
+taxonomies.category = [{categories} , "TODO"]
+taxonomies.tags     = [{tags}, "TODO"]
 +++
 
 # {title}

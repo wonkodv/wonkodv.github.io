@@ -1,10 +1,10 @@
 +++
-title = "Wonko's Blog"
-description = "A place where I put texts on the net"
-date = 2020-12-05
-updated = 2021-10-19
-taxonomies.category=["About"]
-taxonomies.tags=["Meta"]
+title               = "Wonko's Blog"
+description         = "A place where I put texts on the net"
+date                = 2020-12-05
+updated             = 2021-10-19
+taxonomies.category = []
+taxonomies.tags     = []
 +++
 
 # Wonko's Blog

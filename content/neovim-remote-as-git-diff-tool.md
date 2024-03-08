@@ -2,7 +2,7 @@
 title               = "NeoVim Remote as git diff tool"
 description         = "use `neovim-remote` as git diff tool, for using git in nvim's `:terminal`"
 date                = 2022-11-21
-taxonomies.category = ["Using Unix"]
+taxonomies.category = ["Unix"]
 taxonomies.tags     = ["git", "vim"]
 +++
 

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% import "macros.html" as macros %}
+{% import "macros_list.html" as macros_list %}
 
 
 {% block head %}
@@ -10,7 +10,7 @@
 {% block content %}
   <h1>{{ term.name | capitalize }}</h1>
 
-  {{ macros::list_pages(pages=term.pages) }}
+  {{ macros_list::list_pages(pages=term.pages) }}
 
 
 {% endblock content %}

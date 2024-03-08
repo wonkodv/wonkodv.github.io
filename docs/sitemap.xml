@@ -15,16 +15,13 @@
         <loc>https://wonkodv.github.io/category/</loc>
     </url>
     <url>
-        <loc>https://wonkodv.github.io/category/about/</loc>
-    </url>
-    <url>
-        <loc>https://wonkodv.github.io/category/playing/</loc>
+        <loc>https://wonkodv.github.io/category/gaming/</loc>
     </url>
     <url>
         <loc>https://wonkodv.github.io/category/programming/</loc>
     </url>
     <url>
-        <loc>https://wonkodv.github.io/category/security/</loc>
+        <loc>https://wonkodv.github.io/category/unix/</loc>
     </url>
     <url>
         <loc>https://wonkodv.github.io/category/using-unix/</loc>
@@ -123,9 +120,6 @@
         <loc>https://wonkodv.github.io/tags/javascript/</loc>
     </url>
     <url>
-        <loc>https://wonkodv.github.io/tags/meta/</loc>
-    </url>
-    <url>
         <loc>https://wonkodv.github.io/tags/performance/</loc>
     </url>
     <url>
@@ -135,7 +129,13 @@
         <loc>https://wonkodv.github.io/tags/recommended-reading/</loc>
     </url>
     <url>
+        <loc>https://wonkodv.github.io/tags/regex/</loc>
+    </url>
+    <url>
         <loc>https://wonkodv.github.io/tags/rust/</loc>
+    </url>
+    <url>
+        <loc>https://wonkodv.github.io/tags/security/</loc>
     </url>
     <url>
         <loc>https://wonkodv.github.io/tags/shell/</loc>

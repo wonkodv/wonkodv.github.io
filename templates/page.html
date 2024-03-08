@@ -1,9 +1,14 @@
 {% extends "base.html" %}
 
-{% import "macros.html" as macros %}
+{% import "macro_tag.html" as macro_tag %}
 {% import "macro_tax.html" as macro_tax %}
 
 {% block head %}
+    {% if page.extra.image %}
+    {% set image = page.extra.image %}
+    {% else %}
+    {% set image = "favicon.png" %}
+    {% endif %}
     <title> {{ page.title }} - {{ config.title }}</title>
     {%- if page.earlier %}
     <link rel="prev" href="{{ page.earlier.permalink }}" />
@@ -17,28 +22,29 @@
         "@type": "BlogPosting",
         "headline": "{{page.title}}",
         "alternativeHeadline": "{{page.description}}",
-        {% if page.extra.image %}
-        {% set _meta = get_image_metadata(path=page.extra.image) %}
         "image": [
-            "{{ get_url(path=page.extra.image) }}"
+            "{{ get_url(path=image) }}"
         ],
-        "author": {
-            "@type": "Person",
-            "name": "Wonko",
-            "url": "{{config.base_url | safe}}"
-        },
-        {% endif %}
         "datePublished": "{{page.date}}",
         {% if page.updated %}
         "dateModified": "{{page.updated}}",
         {% endif %}
 
-        "keywords": [
-        {% for tag in page.taxonomies['tags'] %}
-            "{{tag}}" {%- if not loop.last -%} ,  {% endif %}
-        {% endfor %}
-        ],
-        "articleSection": "{{ page.taxonomies['category'][0] }}"
+        {% if page.taxonomies['tags'] %}
+            "keywords": [
+            {% for tag in page.taxonomies['tags'] %}
+                "{{tag}}" {%- if not loop.last -%} ,  {% endif %}
+            {% endfor %}
+            ],
+        {% endif %}
+        {% if page.taxonomies['tags'] %}
+            "articleSection": "{{ page.taxonomies['category'][0] }}",
+        {% endif %}
+        "author": {
+            "@type": "Person",
+            "name": "Wonko",
+            "url": "{{config.base_url | safe}}"
+        },
     }
     </script>
 
@@ -47,9 +53,7 @@
     <meta property="og:url" content="{{ current_url | safe }}">
     <meta name="description" content="{{page.description}}">
     <meta name="og:description" content="{{page.description}}">
-    {%- if page.extra.image %}
-    <meta property="og:image" content="{{ get_url(path=page.extra.image) }}">
-    {%- endif -%}
+    <meta property="og:image" content="{{ get_url(path=image) }}">
 
 {% endblock head %}
 
@@ -57,14 +61,7 @@
 
 <article>
 
-    <p class="date">
-    Posted on <time datetime="{{ page.date | date(format="%+") }}">{{ page.date }}</time>
-    in {{ macro_tax::category(page=page)  -}},
-    tagged with {{ macro_tax::tags(page=page) }}
-    {% if page.updated %}
-            Updated on <time datetime="{{ page.updated | date(format="%+") }}">{{ page.updated }}</time>.
-    {% endif %}
-    </p>
+    {{ macro_tag::tagline(page=page) }}
 
     {{ page.content | safe }}
 

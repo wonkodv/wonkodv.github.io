@@ -1,10 +1,10 @@
 +++
-title = "Don't Repeat Yourself While Writing Unit Tests in C"
-description = "Use macro magic to avoid having to repeat test names"
-date  = 2021-05-30
-updated = 2022-01-04
-taxonomies.category=["Programming"]
-taxonomies.tags=["C", "Unit Tests"]
+title               = "Don't Repeat Yourself While Writing Unit Tests in C"
+description         = "Use macro magic to avoid having to repeat test names"
+date                = 2021-05-30
+updated             = 2022-01-04
+taxonomies.category = ["Programming"]
+taxonomies.tags     = ["c", "unit tests"]
 +++
 
 # Don't Repeat Yourself While Writing Unit Tests in C

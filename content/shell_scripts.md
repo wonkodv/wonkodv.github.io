@@ -4,7 +4,7 @@ description = "How to write less ugly shell scripts"
 date  = "2021-01-19"
 updated = "2021-12-17"
 taxonomies.category=["Programming"]
-taxonomies.tags=["Shell"]
+taxonomies.tags=["shell"]
 +++
 
 # How to write good shell scripts

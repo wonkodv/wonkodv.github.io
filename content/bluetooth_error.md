@@ -1,9 +1,9 @@
 +++
-title = "Fixing the Bluetooth Error `br-connection-unknown`"
-description = "Fix `Failed to connect: org.bluez.Error.Failed br-connection-unknown` by pairing again"
-date  = "2021-12-14"
-taxonomies.category=["Using Unix"]
-taxonomies.tags=["Bluetooth"]
+title               = "Fixing the Bluetooth Error `br-connection-unknown`"
+description         = "Fix `Failed to connect: org.bluez.Error.Failed br-connection-unknown` by pairing again"
+date                = "2021-12-14"
+taxonomies.category = ["Unix"]
+taxonomies.tags     = ["bluetooth"]
 +++
 
 # Fixing the Bluetooth Error `br-connection-unknown`

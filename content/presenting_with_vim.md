@@ -3,7 +3,7 @@ title               = "Presenting in VIM"
 description         = "If your presentation is code heavy, leverage syntax highlighting and writing comfort by staying in the editor"
 date                = "2021-09-16"
 taxonomies.category = ["Programming"]
-taxonomies.tags     = ["Vim"]
+taxonomies.tags     = ["vim"]
 extra.image         = "presenting_with_vim/presenting_with_vim.png"
 +++
 

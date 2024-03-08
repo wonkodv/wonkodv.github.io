@@ -1,9 +1,9 @@
 +++
-title = "A Short Code for Factorio Rich Text in Zola"
-description = "Adding a shortcode that shows in-game rich text in my blog"
-taxonomies.category=["Programming"]
-taxonomies.tags=["Factorio", "Rust", "Zola", "Tera"]
-date=2022-01-04
+title               = "A Short Code for Factorio Rich Text in Zola"
+description         = "Adding a shortcode that shows in-game rich text in my blog"
+taxonomies.category = ["Programming"]
+taxonomies.tags     = ["factorio", "rust", "zola", "tera", "regex"]
+date                = 2022-01-04
 +++
 
 # A Short Code for Factorio Rich Text in Zola

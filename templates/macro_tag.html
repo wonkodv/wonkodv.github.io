@@ -1,0 +1,16 @@
+{% import "macro_tax.html" as macro_tax %}
+
+{% macro tagline(page) %}
+        <p class="date">
+            Posted on <time datetime="{{ page.date | date(format="%+") }}">{{ page.date }}</time>
+            {%- if page.updated -%}
+                , updated on <time datetime="{{ page.updated | date(format="%+") }}">{{ page.updated }}</time>
+            {%- endif -%}
+            {%- if page.taxonomies['category'] -%}
+                , in {{ macro_tax::category(page=page)  -}}
+            {%- endif %}
+            {%- if page.taxonomies['category'] -%}
+                , tagged with {{ macro_tax::tags(page=page) }}
+            {%- endif -%}
+        </p>
+{% endmacro %}

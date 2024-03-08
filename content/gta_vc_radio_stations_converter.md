@@ -2,7 +2,7 @@
 title               = "Convert GTA Vice City  ADF files"
 description         = "GTA Vice City Radio Station audio files are obfuscated MP3s. Convert them with 5 lines of python."
 date                = 2023-03-12
-taxonomies.category = ["Programming", "Playing"]
+taxonomies.category = ["Programming", "Gaming"]
 taxonomies.tags     = ["python"]
 +++
 

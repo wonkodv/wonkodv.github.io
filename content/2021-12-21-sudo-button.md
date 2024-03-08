@@ -1,8 +1,8 @@
 +++
-title = "Sudo Button"
-description = "Press a button on your U2F instead of typing the sudo password"
-taxonomies.category=["Using Unix"]
-taxonomies.tags=["U2F", "Sudo"]
+title               = "Sudo Button"
+description         = "Press a button on your U2F instead of typing the sudo password"
+taxonomies.category = ["Using Unix"]
+taxonomies.tags     = ["u2f", "sudo"]
 +++
 
 Sudo Button
