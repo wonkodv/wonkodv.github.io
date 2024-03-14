@@ -34,10 +34,11 @@ for f in pathlib.Path("content").glob("**/*.md"):
         front_matter = toml.loads(front_matter)
         print(front_matter)
         tags.update(front_matter["taxonomies"]["tags"])
-        categories.update(front_matter["taxonomies"]["categories"])
+        categories.update(front_matter["taxonomies"]["category"])
     except KeyError:
         pass
 tags = ", ".join(map(repr, tags))
+categories = ", ".join(map(repr, categories))
 
 
 path.write_text(
