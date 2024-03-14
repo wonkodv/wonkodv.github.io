@@ -31,7 +31,7 @@
         ],
         "datePublished": "2021-01-19",
         
-        "dateModified": "2021-12-17",
+        "dateModified": "2024-03-14",
         
 
         
@@ -92,7 +92,7 @@
 
     
         <p class="date">
-            Posted on <time datetime="2021-01-19T00:00:00+00:00">2021-01-19</time>, updated on <time datetime="2021-12-17T00:00:00+00:00">2021-12-17</time>, in 
+            Posted on <time datetime="2021-01-19T00:00:00+00:00">2021-01-19</time>, updated on <time datetime="2024-03-14T00:00:00+00:00">2024-03-14</time>, in 
     
         <a href="https://wonkodv.github.io/category/programming/">Programming</a>, tagged with 
     
@@ -131,13 +131,12 @@ Every shell script should include:</p>
 commands.</li>
 <li>Usage instructions, at least a good comment at the top, better yet that
 comment being printed when you call the script with <code>-h</code>.</li>
-<li>Write <code>cd $(dirname $0)</code> in <code>sh</code> or <code>cd /D %~dp0</code> in <code>.bat</code> to change to
-the directory that the script lives in, so that your relative paths do not
-break when the script is invoked fom somewhere unexpected.</li>
-<li>Do not source other scripts, execute them in a separate shell unless they
-are explicitly written to be sourced.</li>
-<li>Comments when using the more obscure syntax (do you know what <code>${s%%*/}</code> is? Are you aware that the
-value of <code>${SECONDS}</code> changes once per second?)</li>
+<li>If your script uses relative paths internally and does not take arguments,
+write <code>cd &quot;$(dirname &quot;$0&quot;)&quot;</code> for unix shells or <code>cd /D %~dp0</code> in windows batch files.
+This makes the shell <code>cd</code> into the directory that the script lives in.
+Now relative paths work, even when the script is invoked from somewhere unexpected.</li>
+<li>Comments for the more obscure features and syntax (do you know what <code>${s%%*/}</code> is? Are you aware that the
+value of <code>${SECONDS}</code> changes every second?)</li>
 </ul>
 
 
@@ -161,6 +160,7 @@ value of <code>${SECONDS}</code> changes once per second?)</li>
                 <a href="https://github.com/wonkodv/wonkodv.github.io/edit/main/content/shell_scripts.md">Change</a>
                     &middot;
                     <a href="https://github.com/wonkodv/wonkodv.github.io/discussions/new?category=general&title=About%20%22Writing%20good%20shell%20scripts%22&body=%0A%0A%0A%0A%0A%3C%21--%20please%20keep%20this%20footer%20--%3E%0A-----%0ALink%20to%20Post%0a%3Chttps%3A&#x2F;&#x2F;wonkodv.github.io&#x2F;shell-scripts&#x2F;%3E">Discuss</a>
+                
                 
             </nav>
         </footer>

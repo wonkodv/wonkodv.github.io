@@ -38,6 +38,10 @@ to look for these components in the current code.&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
 &lt;p&gt;Just 20 lines would have helped me a lot in many projects. It might be best if they are written by
 someone new to the project, because they know best what information would have helped them.&lt;&#x2F;p&gt;
+&lt;h2 id=&quot;examples&quot;&gt;Examples&lt;&#x2F;h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;wonkodv&#x2F;bomberhans2&#x2F;blob&#x2F;main&#x2F;hitchhiker.md&quot;&gt;Bomber Hans2&lt;&#x2F;a&gt;&lt;&#x2F;li&gt;
+&lt;&#x2F;ul&gt;
 </content>
 	</entry>
 	<entry xml:lang="en">
@@ -65,8 +69,9 @@ I wrote a little more about the basic version &lt;a href=&quot;https:&#x2F;&#x2F
 But this is the enhanced version.&lt;&#x2F;p&gt;
 &lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
-&lt;h2 id=&quot;is-dragging-links-dangerous&quot;&gt;Is dragging Links dangerous&lt;&#x2F;h2&gt;
-&lt;p&gt;When you use the last one, you get the desired effect. Plus an error entry in your debugging console with your YT cookies. How did that happen?
+&lt;h2 id=&quot;dragging-links-is-dangerous&quot;&gt;Dragging Links is Dangerous&lt;&#x2F;h2&gt;
+&lt;p&gt;When you use the last one, you get the desired effect.
+But I also put an error entry in your browser&#x27;s debugging console with your YT cookies. How did that happen?
 The url changes in the &lt;code&gt;onmosedown&lt;&#x2F;code&gt; event. The changed url is put in the Bookmark. To keep up appearances, it changes back in &lt;code&gt;ondragstart&lt;&#x2F;code&gt;, &lt;code&gt;onclick&lt;&#x2F;code&gt; and &lt;code&gt;onmouseup&lt;&#x2F;code&gt;.
 The changed url has some additional javascript, where I could do all kinds of shenanigans.&lt;&#x2F;p&gt;
 &lt;p&gt;Chromium (v122) will just accept this.&lt;&#x2F;p&gt;
@@ -85,7 +90,7 @@ The priority of fixing this was set to low, and no progress has been made in 2 y
 The bug is closed, and marked as a duplicate of &amp;quot;Don&#x27;t allow dragging javascript: links&amp;quot;, where the gist is, that the &amp;quot;Add Bookmark&amp;quot; dialog is enough to make users aware of the javascript part.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;so&quot;&gt;So...&lt;&#x2F;h2&gt;
 &lt;p&gt;I recently though of this, and wanted to check up on what became of my reports. Since the browser vendors don&#x27;t consider this very risky, I might as well write about my finding.&lt;&#x2F;p&gt;
-&lt;p&gt;Was I able to trick you?&lt;&#x2F;p&gt;
+&lt;p&gt;Could I have tricked you into executing my javascript code in your youtube session?&lt;&#x2F;p&gt;
 </content>
 	</entry>
 	<entry xml:lang="en">
@@ -1333,7 +1338,7 @@ Please write to me if you know the way!&lt;&#x2F;p&gt;
 	<entry xml:lang="en">
 		<title>Writing good shell scripts</title>
 		<published>2021-01-19T00:00:00+00:00</published>
-		<updated>2021-12-17T00:00:00+00:00</updated>
+		<updated>2024-03-14T00:00:00+00:00</updated>
 		<link href="https://wonkodv.github.io/shell-scripts/" type="text/html"/>
 		<id>https://wonkodv.github.io/shell-scripts/</id>
 		<content type="html">&lt;h1 id=&quot;how-to-write-good-shell-scripts&quot;&gt;How to write good shell scripts&lt;&#x2F;h1&gt;
@@ -1366,13 +1371,12 @@ Every shell script should include:&lt;&#x2F;p&gt;
 commands.&lt;&#x2F;li&gt;
 &lt;li&gt;Usage instructions, at least a good comment at the top, better yet that
 comment being printed when you call the script with &lt;code&gt;-h&lt;&#x2F;code&gt;.&lt;&#x2F;li&gt;
-&lt;li&gt;Write &lt;code&gt;cd $(dirname $0)&lt;&#x2F;code&gt; in &lt;code&gt;sh&lt;&#x2F;code&gt; or &lt;code&gt;cd &#x2F;D %~dp0&lt;&#x2F;code&gt; in &lt;code&gt;.bat&lt;&#x2F;code&gt; to change to
-the directory that the script lives in, so that your relative paths do not
-break when the script is invoked fom somewhere unexpected.&lt;&#x2F;li&gt;
-&lt;li&gt;Do not source other scripts, execute them in a separate shell unless they
-are explicitly written to be sourced.&lt;&#x2F;li&gt;
-&lt;li&gt;Comments when using the more obscure syntax (do you know what &lt;code&gt;${s%%*&#x2F;}&lt;&#x2F;code&gt; is? Are you aware that the
-value of &lt;code&gt;${SECONDS}&lt;&#x2F;code&gt; changes once per second?)&lt;&#x2F;li&gt;
+&lt;li&gt;If your script uses relative paths internally and does not take arguments,
+write &lt;code&gt;cd &amp;quot;$(dirname &amp;quot;$0&amp;quot;)&amp;quot;&lt;&#x2F;code&gt; for unix shells or &lt;code&gt;cd &#x2F;D %~dp0&lt;&#x2F;code&gt; in windows batch files.
+This makes the shell &lt;code&gt;cd&lt;&#x2F;code&gt; into the directory that the script lives in.
+Now relative paths work, even when the script is invoked from somewhere unexpected.&lt;&#x2F;li&gt;
+&lt;li&gt;Comments for the more obscure features and syntax (do you know what &lt;code&gt;${s%%*&#x2F;}&lt;&#x2F;code&gt; is? Are you aware that the
+value of &lt;code&gt;${SECONDS}&lt;&#x2F;code&gt; changes every second?)&lt;&#x2F;li&gt;
 &lt;&#x2F;ul&gt;
 </content>
 	</entry>

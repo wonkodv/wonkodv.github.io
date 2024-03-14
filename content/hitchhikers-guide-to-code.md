@@ -31,3 +31,7 @@ I suggest the following content:
 
 Just 20 lines would have helped me a lot in many projects. It might be best if they are written by
 someone new to the project, because they know best what information would have helped them.
+
+## Examples
+
+*   [Bomber Hans2](https://github.com/wonkodv/bomberhans2/blob/main/hitchhiker.md)

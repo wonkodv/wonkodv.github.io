@@ -70,6 +70,12 @@
                     &middot;
                 <a href="https://github.com/wonkodv/wonkodv.github.io/discussions/">Discuss</a>
                 {% endif %}
+                {% if config.mode == "Serve" %}
+                    {% if current_path %}
+                        &middot;
+                        <a href="https://wonkodv.github.io{{current_path}}">live version</a>
+                    {% endif %}
+                {% endif %}
             </nav>
         </footer>
         {% endblock footer %}

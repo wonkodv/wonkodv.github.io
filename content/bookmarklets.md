@@ -26,9 +26,10 @@ You can simply drag the following links to your favorites bar, and call yourself
     I wrote a little more about the basic version [here](@/videos-of-a-youtube-channel.md).
     But this is the enhanced version.
 
-## Is dragging Links dangerous
+## Dragging Links is Dangerous
 
-When you use the last one, you get the desired effect. Plus an error entry in your debugging console with your YT cookies. How did that happen?
+When you use the last one, you get the desired effect.
+But I also put an error entry in your browser's debugging console with your YT cookies. How did that happen?
 The url changes in the `onmosedown` event. The changed url is put in the Bookmark. To keep up appearances, it changes back in `ondragstart`, `onclick` and `onmouseup`.
 The changed url has some additional javascript, where I could do all kinds of shenanigans.
 
@@ -36,7 +37,6 @@ Chromium (v122) will just accept this.
 
 Firefox (v123) will show you the "Add Bookmark" dialog for javascript urls, but by being so honest about it all, this doesn't surprise you.
 The evil part comes after enough whitespaces, that you don't see it.
-
 
 ## Is this a Bug ?
 
@@ -61,4 +61,5 @@ The bug is closed, and marked as a duplicate of "Don't allow dragging javascript
 
 I recently though of this, and wanted to check up on what became of my reports. Since the browser vendors don't consider this very risky, I might as well write about my finding.
 
-Was I able to trick you?
+
+Could I have tricked you into executing my javascript code in your youtube session?

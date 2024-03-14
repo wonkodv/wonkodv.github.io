@@ -126,8 +126,9 @@ I wrote a little more about the basic version <a href="https://wonkodv.github.io
 But this is the enhanced version.</p>
 </li>
 </ul>
-<h2 id="is-dragging-links-dangerous">Is dragging Links dangerous</h2>
-<p>When you use the last one, you get the desired effect. Plus an error entry in your debugging console with your YT cookies. How did that happen?
+<h2 id="dragging-links-is-dangerous">Dragging Links is Dangerous</h2>
+<p>When you use the last one, you get the desired effect.
+But I also put an error entry in your browser's debugging console with your YT cookies. How did that happen?
 The url changes in the <code>onmosedown</code> event. The changed url is put in the Bookmark. To keep up appearances, it changes back in <code>ondragstart</code>, <code>onclick</code> and <code>onmouseup</code>.
 The changed url has some additional javascript, where I could do all kinds of shenanigans.</p>
 <p>Chromium (v122) will just accept this.</p>
@@ -146,7 +147,7 @@ The priority of fixing this was set to low, and no progress has been made in 2 y
 The bug is closed, and marked as a duplicate of &quot;Don't allow dragging javascript: links&quot;, where the gist is, that the &quot;Add Bookmark&quot; dialog is enough to make users aware of the javascript part.</p>
 <h2 id="so">So...</h2>
 <p>I recently though of this, and wanted to check up on what became of my reports. Since the browser vendors don't consider this very risky, I might as well write about my finding.</p>
-<p>Was I able to trick you?</p>
+<p>Could I have tricked you into executing my javascript code in your youtube session?</p>
 
 
 </article>
@@ -169,6 +170,7 @@ The bug is closed, and marked as a duplicate of &quot;Don't allow dragging javas
                 <a href="https://github.com/wonkodv/wonkodv.github.io/edit/main/content/bookmarklets.md">Change</a>
                     &middot;
                     <a href="https://github.com/wonkodv/wonkodv.github.io/discussions/new?category=general&title=About%20%22Bookmarklets%20are%20Cool%22&body=%0A%0A%0A%0A%0A%3C%21--%20please%20keep%20this%20footer%20--%3E%0A-----%0ALink%20to%20Post%0a%3Chttps%3A&#x2F;&#x2F;wonkodv.github.io&#x2F;bookmarklets&#x2F;%3E">Discuss</a>
+                
                 
             </nav>
         </footer>

@@ -2,7 +2,7 @@
 title = "Writing good shell scripts"
 description = "How to write less ugly shell scripts"
 date  = "2021-01-19"
-updated = "2021-12-17"
+updated = "2024-03-14"
 taxonomies.category=["Programming"]
 taxonomies.tags=["shell"]
 +++
@@ -44,10 +44,9 @@ Every shell script should include:
     commands.
 -   Usage instructions, at least a good comment at the top, better yet that
     comment being printed when you call the script with `-h`.
--   Write `cd $(dirname $0)` in `sh` or `cd /D %~dp0` in `.bat` to change to
-    the directory that the script lives in, so that your relative paths do not
-    break when the script is invoked fom somewhere unexpected.
--   Do not source other scripts, execute them in a separate shell unless they
-    are explicitly written to be sourced.
--   Comments when using the more obscure syntax (do you know what `${s%%*/}` is? Are you aware that the
-    value of `${SECONDS}` changes once per second?)
+-   If your script uses relative paths internally and does not take arguments,
+    write `cd "$(dirname "$0")"` for unix shells or `cd /D %~dp0` in windows batch files.
+    This makes the shell `cd` into the directory that the script lives in.
+    Now relative paths work, even when the script is invoked from somewhere unexpected.
+-   Comments for the more obscure features and syntax (do you know what `${s%%*/}` is? Are you aware that the
+    value of `${SECONDS}` changes every second?)
