@@ -2,7 +2,7 @@
 title               = "Hitchhikers Guide to the Code"
 description         = "I'd like open source projects to have a guide that points me to the highlights in the code"
 date                = 2024-03-14
-# updated            = 2024-03-14
+ updated            = 2024-03-16
 taxonomies.category = ["Programming"]
 taxonomies.tags     = []
 +++
@@ -35,3 +35,4 @@ someone new to the project, because they know best what information would have h
 ## Examples
 
 *   [Bomber Hans2](https://github.com/wonkodv/bomberhans2/blob/main/hitchhiker.md)
+*   [Req Trace](https://github.com/wonkodv/reqtrace/blob/master/hitchhiker.md)
