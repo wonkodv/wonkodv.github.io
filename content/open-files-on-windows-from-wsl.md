@@ -3,13 +3,13 @@ title               = "Open Files on Windows from WSL"
 description         = "Use the Windows default application to open files from the Windows Subsystem for Windows bash"
 date                = 2022-03-19
 updated             = 2024-03-08
-taxonomies.category = ["Using Windows"]
+taxonomies.category = ["Windows"]
 taxonomies.tags     = ["wsl", "shell"]
 +++
 
 # Open Files on Windows from WSL
 
-When you are in a WSL-bash and maybe generated an `svg` file and want to look at it, you can use the following bash function:
+When you are in a WSL-bash and maybe generated an `.svg` file and want to look at it, you can use the following bash function:
 
 ```bash
 function o() {

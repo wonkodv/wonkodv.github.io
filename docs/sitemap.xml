@@ -24,13 +24,10 @@
         <loc>https://wonkodv.github.io/category/unix/</loc>
     </url>
     <url>
-        <loc>https://wonkodv.github.io/category/using-unix/</loc>
-    </url>
-    <url>
-        <loc>https://wonkodv.github.io/category/using-windows/</loc>
-    </url>
-    <url>
         <loc>https://wonkodv.github.io/category/web/</loc>
+    </url>
+    <url>
+        <loc>https://wonkodv.github.io/category/windows/</loc>
     </url>
     <url>
         <loc>https://wonkodv.github.io/dry-tests-in-c/</loc>

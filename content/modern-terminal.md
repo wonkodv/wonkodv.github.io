@@ -2,7 +2,7 @@
 title               = "Modern Terminal"
 description         = "I found a new Terminal Emulator and love it"
 date                = 2022-04-20
-taxonomies.category = ["Using Unix"]
+taxonomies.category = ["Unix"]
 taxonomies.tags     = ["bash"]
 +++
 

@@ -2,7 +2,7 @@
 title               = "Zola pre-push hook"
 description         = "A pre-push hook to build zola"
 date                = 2022-11-21
-taxonomies.category = ["Using Unix"]
+taxonomies.category = ["Unix"]
 taxonomies.tags     = ["git", "zola"]
 +++
 

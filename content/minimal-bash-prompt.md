@@ -2,7 +2,7 @@
 title               = "Minimal Bash Prompt"
 description         = "Working with a minimal bash prompt"
 date                = 2022-09-24
-taxonomies.category = ["Using Unix"]
+taxonomies.category = ["Unix"]
 taxonomies.tags     = ["bash"]
 +++
 
