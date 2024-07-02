@@ -17,15 +17,15 @@
     
     
     
-    <title> Bookmarklets are Cool - Zettelkasten</title>
+    <title> Security of Bookmarklets - Zettelkasten</title>
     <link rel="prev" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;recommended-reading&#x2F;" />
     <link rel="next" href="https:&#x2F;&#x2F;wonkodv.github.io&#x2F;hitchhikers-guide-to-code&#x2F;" />
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
-        "headline": "Bookmarklets are Cool",
-        "alternativeHeadline": "Use `javascript:` bookmarks to enhance website functionality (but be careful where you get them from)",
+        "headline": "Security of Bookmarklets",
+        "alternativeHeadline": "Use `javascript:` bookmarks to enhance website functionality (or get your identity stolen)",
         "image": [
             "https://wonkodv.github.io/favicon.png"
         ],
@@ -54,11 +54,11 @@
     }
     </script>
 
-    <meta property="og:title" content="Bookmarklets are Cool">
+    <meta property="og:title" content="Security of Bookmarklets">
     <meta property="og:site_name" content="Zettelkasten">
     <meta property="og:url" content="https://wonkodv.github.io/bookmarklets/">
-    <meta name="description" content="Use `javascript:` bookmarks to enhance website functionality (but be careful where you get them from)">
-    <meta name="og:description" content="Use `javascript:` bookmarks to enhance website functionality (but be careful where you get them from)">
+    <meta name="description" content="Use `javascript:` bookmarks to enhance website functionality (or get your identity stolen)">
+    <meta name="og:description" content="Use `javascript:` bookmarks to enhance website functionality (or get your identity stolen)">
     <meta property="og:image" content="https://wonkodv.github.io/favicon.png">
 
 
@@ -135,19 +135,19 @@ The changed url has some additional javascript, where I could do all kinds of sh
 <p>Firefox (v123) will show you the &quot;Add Bookmark&quot; dialog for javascript urls, but by being so honest about it all, this doesn't surprise you.
 The evil part comes after enough whitespaces, that you don't see it.</p>
 <h2 id="is-this-a-bug">Is this a Bug ?</h2>
-<p>I actually stumbled over this while <a href="https://wonkodv.github.io/videos-of-a-youtube-channel/">writing about the YT Playlist button</a>.
-I opened security bugs for firefox and chromium.</p>
+<p>I actually stumbled over this while <a href="https://wonkodv.github.io/videos-of-a-youtube-channel/">writing about the YT Playlist button</a>,
+so I opened security bugs for firefox and chromium.</p>
 <h3 id="chromium">Chromium</h3>
 <p><a rel="noopener" target="_blank" href="https://issues.chromium.org/issues/40059144?pli=1">https://issues.chromium.org/issues/40059144?pli=1</a>
 As this was filed as a security issue, the bug report is not publicly visible.</p>
-<p>The severity of the vulnerability was set to low, as this xss involves user interaction and users could be &quot;social engeneered&quot; into dragging a <code>javascript:</code> link directly.
+<p>The severity of the vulnerability was set to low, as this XSS involves user interaction and users could be &quot;social engineered&quot; into dragging a <code>javascript:</code> link directly.
 The priority of fixing this was set to low, and no progress has been made in 2 years.</p>
 <h3 id="firefox">Firefox</h3>
 <p><a rel="noopener" target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=1760392">https://bugzilla.mozilla.org/show_bug.cgi?id=1760392</a>
 The bug is closed, and marked as a duplicate of &quot;Don't allow dragging javascript: links&quot;, where the gist is, that the &quot;Add Bookmark&quot; dialog is enough to make users aware of the javascript part.</p>
 <h2 id="so">So...</h2>
-<p>I recently though of this, and wanted to check up on what became of my reports. Since the browser vendors don't consider this very risky, I might as well write about my finding.</p>
-<p>Could I have tricked you into executing my javascript code in your youtube session?</p>
+<p>Since the browser vendors don't consider this very risky, I might as well write about my finding.
+Could I have tricked you into executing my javascript code in your youtube session?</p>
 
 
 </article>
@@ -169,7 +169,7 @@ The bug is closed, and marked as a duplicate of &quot;Don't allow dragging javas
                 <a href="https://github.com/wonkodv/wonkodv.github.io/blob/main/content/bookmarklets.md">Source</a> /
                 <a href="https://github.com/wonkodv/wonkodv.github.io/edit/main/content/bookmarklets.md">Change</a>
                     &middot;
-                    <a href="https://github.com/wonkodv/wonkodv.github.io/discussions/new?category=general&title=About%20%22Bookmarklets%20are%20Cool%22&body=%0A%0A%0A%0A%0A%3C%21--%20please%20keep%20this%20footer%20--%3E%0A-----%0ALink%20to%20Post%0a%3Chttps%3A&#x2F;&#x2F;wonkodv.github.io&#x2F;bookmarklets&#x2F;%3E">Discuss</a>
+                    <a href="https://github.com/wonkodv/wonkodv.github.io/discussions/new?category=general&title=About%20%22Security%20of%20Bookmarklets%22&body=%0A%0A%0A%0A%0A%3C%21--%20please%20keep%20this%20footer%20--%3E%0A-----%0ALink%20to%20Post%0a%3Chttps%3A&#x2F;&#x2F;wonkodv.github.io&#x2F;bookmarklets&#x2F;%3E">Discuss</a>
                 
                 
             </nav>

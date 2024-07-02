@@ -46,7 +46,7 @@ someone new to the project, because they know best what information would have h
 </content>
 	</entry>
 	<entry xml:lang="en">
-		<title>Bookmarklets are Cool</title>
+		<title>Security of Bookmarklets</title>
 		<published>2024-03-07T00:00:00+00:00</published>
 		<updated>2024-03-07T00:00:00+00:00</updated>
 		<link href="https://wonkodv.github.io/bookmarklets/" type="text/html"/>
@@ -79,19 +79,19 @@ The changed url has some additional javascript, where I could do all kinds of sh
 &lt;p&gt;Firefox (v123) will show you the &amp;quot;Add Bookmark&amp;quot; dialog for javascript urls, but by being so honest about it all, this doesn&#x27;t surprise you.
 The evil part comes after enough whitespaces, that you don&#x27;t see it.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;is-this-a-bug&quot;&gt;Is this a Bug ?&lt;&#x2F;h2&gt;
-&lt;p&gt;I actually stumbled over this while &lt;a href=&quot;https:&#x2F;&#x2F;wonkodv.github.io&#x2F;videos-of-a-youtube-channel&#x2F;&quot;&gt;writing about the YT Playlist button&lt;&#x2F;a&gt;.
-I opened security bugs for firefox and chromium.&lt;&#x2F;p&gt;
+&lt;p&gt;I actually stumbled over this while &lt;a href=&quot;https:&#x2F;&#x2F;wonkodv.github.io&#x2F;videos-of-a-youtube-channel&#x2F;&quot;&gt;writing about the YT Playlist button&lt;&#x2F;a&gt;,
+so I opened security bugs for firefox and chromium.&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;chromium&quot;&gt;Chromium&lt;&#x2F;h3&gt;
 &lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;issues.chromium.org&#x2F;issues&#x2F;40059144?pli=1&quot;&gt;https:&#x2F;&#x2F;issues.chromium.org&#x2F;issues&#x2F;40059144?pli=1&lt;&#x2F;a&gt;
 As this was filed as a security issue, the bug report is not publicly visible.&lt;&#x2F;p&gt;
-&lt;p&gt;The severity of the vulnerability was set to low, as this xss involves user interaction and users could be &amp;quot;social engeneered&amp;quot; into dragging a &lt;code&gt;javascript:&lt;&#x2F;code&gt; link directly.
+&lt;p&gt;The severity of the vulnerability was set to low, as this XSS involves user interaction and users could be &amp;quot;social engineered&amp;quot; into dragging a &lt;code&gt;javascript:&lt;&#x2F;code&gt; link directly.
 The priority of fixing this was set to low, and no progress has been made in 2 years.&lt;&#x2F;p&gt;
 &lt;h3 id=&quot;firefox&quot;&gt;Firefox&lt;&#x2F;h3&gt;
 &lt;p&gt;&lt;a rel=&quot;noopener&quot; target=&quot;_blank&quot; href=&quot;https:&#x2F;&#x2F;bugzilla.mozilla.org&#x2F;show_bug.cgi?id=1760392&quot;&gt;https:&#x2F;&#x2F;bugzilla.mozilla.org&#x2F;show_bug.cgi?id=1760392&lt;&#x2F;a&gt;
 The bug is closed, and marked as a duplicate of &amp;quot;Don&#x27;t allow dragging javascript: links&amp;quot;, where the gist is, that the &amp;quot;Add Bookmark&amp;quot; dialog is enough to make users aware of the javascript part.&lt;&#x2F;p&gt;
 &lt;h2 id=&quot;so&quot;&gt;So...&lt;&#x2F;h2&gt;
-&lt;p&gt;I recently though of this, and wanted to check up on what became of my reports. Since the browser vendors don&#x27;t consider this very risky, I might as well write about my finding.&lt;&#x2F;p&gt;
-&lt;p&gt;Could I have tricked you into executing my javascript code in your youtube session?&lt;&#x2F;p&gt;
+&lt;p&gt;Since the browser vendors don&#x27;t consider this very risky, I might as well write about my finding.
+Could I have tricked you into executing my javascript code in your youtube session?&lt;&#x2F;p&gt;
 </content>
 	</entry>
 	<entry xml:lang="en">

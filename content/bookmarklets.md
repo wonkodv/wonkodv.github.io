@@ -1,6 +1,6 @@
 +++
-title               = "Bookmarklets are Cool"
-description         = "Use `javascript:` bookmarks to enhance website functionality (but be careful where you get them from)"
+title               = "Security of Bookmarklets"
+description         = "Use `javascript:` bookmarks to enhance website functionality (or get your identity stolen)"
 date                = 2024-03-07
 # updated           = 2023-07-29
 taxonomies.category = ["Web"]
@@ -40,8 +40,8 @@ The evil part comes after enough whitespaces, that you don't see it.
 
 ## Is this a Bug ?
 
-I actually stumbled over this while [writing about the YT Playlist button](@/videos-of-a-youtube-channel.md).
-I opened security bugs for firefox and chromium.
+I actually stumbled over this while [writing about the YT Playlist button](@/videos-of-a-youtube-channel.md),
+so I opened security bugs for firefox and chromium.
 
 
 ### Chromium
@@ -49,7 +49,7 @@ I opened security bugs for firefox and chromium.
 <https://issues.chromium.org/issues/40059144?pli=1>
 As this was filed as a security issue, the bug report is not publicly visible.
 
-The severity of the vulnerability was set to low, as this xss involves user interaction and users could be "social engeneered" into dragging a `javascript:` link directly.
+The severity of the vulnerability was set to low, as this XSS involves user interaction and users could be "social engineered" into dragging a `javascript:` link directly.
 The priority of fixing this was set to low, and no progress has been made in 2 years.
 
 ### Firefox
@@ -59,7 +59,5 @@ The bug is closed, and marked as a duplicate of "Don't allow dragging javascript
 
 ## So...
 
-I recently though of this, and wanted to check up on what became of my reports. Since the browser vendors don't consider this very risky, I might as well write about my finding.
-
-
+Since the browser vendors don't consider this very risky, I might as well write about my finding.
 Could I have tricked you into executing my javascript code in your youtube session?
