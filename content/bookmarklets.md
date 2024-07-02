@@ -7,14 +7,14 @@ taxonomies.category = ["Web"]
 taxonomies.tags     = ["javascript", "web", "security"]
 +++
 
-# Bookmarklets Are Cool
+# Security of Bookmarklets
 
 
 Bookmarklets are bookmarks that start with `javascript:`.
 Power users like them, to add functionality to a site.
 
 Here, I'm listing the ones that I usually have with me.
-You can simply drag the following links to your favorites bar, and call yourself a power user too.
+You can simply drag the following links to your browser's favorites bar and call yourself a power user too.
 
 
 *   <a href= "javascript:window.open('http://chart.apis.google.com/chart?cht=qr&chs=500x500&chl='+encodeURIComponent(document.location.href), '_blank', 'innerHeight=550,innerWidth=550,menubar=no,scrollbars=no,status=no'); void(0);">Qr Code</a> Open a window with the QR Code of the current url (sends the url to google)
@@ -31,7 +31,8 @@ You can simply drag the following links to your favorites bar, and call yourself
 When you use the last one, you get the desired effect.
 But I also put an error entry in your browser's debugging console with your YT cookies. How did that happen?
 The url changes in the `onmosedown` event. The changed url is put in the Bookmark. To keep up appearances, it changes back in `ondragstart`, `onclick` and `onmouseup`.
-The changed url has some additional javascript, where I could do all kinds of shenanigans.
+The changed url has some additional javascript, where I could do all kinds of shenanigans, like steal
+your YT session.
 
 Chromium (v122) will just accept this.
 

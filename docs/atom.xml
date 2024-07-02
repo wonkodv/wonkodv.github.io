@@ -51,11 +51,11 @@ someone new to the project, because they know best what information would have h
 		<updated>2024-03-07T00:00:00+00:00</updated>
 		<link href="https://wonkodv.github.io/bookmarklets/" type="text/html"/>
 		<id>https://wonkodv.github.io/bookmarklets/</id>
-		<content type="html">&lt;h1 id=&quot;bookmarklets-are-cool&quot;&gt;Bookmarklets Are Cool&lt;&#x2F;h1&gt;
+		<content type="html">&lt;h1 id=&quot;security-of-bookmarklets&quot;&gt;Security of Bookmarklets&lt;&#x2F;h1&gt;
 &lt;p&gt;Bookmarklets are bookmarks that start with &lt;code&gt;javascript:&lt;&#x2F;code&gt;.
 Power users like them, to add functionality to a site.&lt;&#x2F;p&gt;
 &lt;p&gt;Here, I&#x27;m listing the ones that I usually have with me.
-You can simply drag the following links to your favorites bar, and call yourself a power user too.&lt;&#x2F;p&gt;
+You can simply drag the following links to your browser&#x27;s favorites bar and call yourself a power user too.&lt;&#x2F;p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href= &quot;javascript:window.open(&#x27;http:&#x2F;&#x2F;chart.apis.google.com&#x2F;chart?cht=qr&amp;chs=500x500&amp;chl=&#x27;+encodeURIComponent(document.location.href), &#x27;_blank&#x27;, &#x27;innerHeight=550,innerWidth=550,menubar=no,scrollbars=no,status=no&#x27;); void(0);&quot;&gt;Qr Code&lt;&#x2F;a&gt; Open a window with the QR Code of the current url (sends the url to google)&lt;&#x2F;p&gt;
@@ -74,7 +74,8 @@ But this is the enhanced version.&lt;&#x2F;p&gt;
 &lt;p&gt;When you use the last one, you get the desired effect.
 But I also put an error entry in your browser&#x27;s debugging console with your YT cookies. How did that happen?
 The url changes in the &lt;code&gt;onmosedown&lt;&#x2F;code&gt; event. The changed url is put in the Bookmark. To keep up appearances, it changes back in &lt;code&gt;ondragstart&lt;&#x2F;code&gt;, &lt;code&gt;onclick&lt;&#x2F;code&gt; and &lt;code&gt;onmouseup&lt;&#x2F;code&gt;.
-The changed url has some additional javascript, where I could do all kinds of shenanigans.&lt;&#x2F;p&gt;
+The changed url has some additional javascript, where I could do all kinds of shenanigans, like steal
+your YT session.&lt;&#x2F;p&gt;
 &lt;p&gt;Chromium (v122) will just accept this.&lt;&#x2F;p&gt;
 &lt;p&gt;Firefox (v123) will show you the &amp;quot;Add Bookmark&amp;quot; dialog for javascript urls, but by being so honest about it all, this doesn&#x27;t surprise you.
 The evil part comes after enough whitespaces, that you don&#x27;t see it.&lt;&#x2F;p&gt;
