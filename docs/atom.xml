@@ -979,7 +979,12 @@ blinks and you push it.&lt;&#x2F;p&gt;
 		<content type="html">&lt;h1 id=&quot;video-on-measuring-increasing-performance-of-code&quot;&gt;Video on Measuring &#x2F; Increasing Performance of Code&lt;&#x2F;h1&gt;
 &lt;p&gt;Emery Berger talks about performance improvements that work &#x2F; don&#x27;t work.&lt;&#x2F;p&gt;
 &lt;div &gt;
-    &lt;iframe src=&quot;https:&#x2F;&#x2F;www.youtube-nocookie.com&#x2F;embed&#x2F;r-TLSBdHe1A&quot; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;&#x2F;iframe&gt;
+    &lt;iframe
+        src=&quot;https:&#x2F;&#x2F;www.youtube.com&#x2F;embed&#x2F;r-TLSBdHe1A&quot;
+        webkitallowfullscreen
+        mozallowfullscreen
+        allowfullscreen&gt;
+    &lt;&#x2F;iframe&gt;
 &lt;&#x2F;div&gt;
 &lt;h2 id=&quot;key-points&quot;&gt;Key Points&lt;&#x2F;h2&gt;
 &lt;ul&gt;
